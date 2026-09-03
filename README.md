@@ -60,7 +60,7 @@ pnpm build
 pnpm preview
 ```
 
-The Vite app lives in `apps/web`. JSON content at the repository root is copied into the web app during `dev` and `build`.
+The Vite app lives in `src/web`. JSON content at the repository root is copied into the web app during `dev` and `build`.
 
 ---
 
@@ -115,7 +115,7 @@ Edit `data/presentations.json` to manage the numbered presentation list shown im
 
 ```json
 {
-  "member": "Ali Ahmadi",
+  "member": "Matin Ghanbari",
   "title": "Presentation title",
   "date": "Monday, 7 September",
   "time": "10:00",
