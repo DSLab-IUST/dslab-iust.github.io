@@ -1,53 +1,92 @@
 [
   {
-    "id": "prj_seed_ledger",
-    "title": { "fa": "دفتر توزیع‌شده‌ی آزمایشگاه", "en": "Lab distributed ledger" },
-    "summary": {
-      "fa": "پیاده‌سازی مرجع Raft برای آموزش و آزمایش سناریوهای افراز شبکه.",
-      "en": "A reference Raft implementation used for teaching and for exercising network-partition scenarios."
-    },
-    "status": "active",
-    "repositoryUrl": "https://github.com/DSLab-IUST",
-    "demoUrl": "",
-    "memberIds": ["mbr_seed_mousavi", "mbr_seed_karimi"],
-    "tags": ["Go", "Raft", "testing"],
-    "startedAt": "2025-02-01",
-    "createdAt": "2026-09-01T08:00:00.000Z",
-    "updatedAt": "2026-09-01T08:00:00.000Z",
-    "updatedBy": "dslab"
+    "title": "Phoenix — Performance-Aware Thread and Page Table Placement in NUMA Systems",
+    "type": "Journal paper",
+    "status": "Published",
+    "description": "A technique for performance-aware orchestration of thread and page table placement in NUMA systems. SN Computer Science, Springer, Vol. 7, June 2026.",
+    "tags": ["High Performance Computing", "Operating Systems", "NUMA"],
+    "members": ["Prof. Mohsen Sharifi", "Seyed Alireza Sanaee"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1007/s42979-026-05157-4",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
   },
   {
-    "id": "prj_seed_edgebench",
-    "title": { "fa": "EdgeBench", "en": "EdgeBench" },
-    "summary": {
-      "fa": "چارچوب محک‌زنی برای سنجش تأخیر و مصرف انرژی روی گره‌های لبه.",
-      "en": "A benchmarking harness that measures latency and energy draw across edge nodes."
-    },
-    "status": "active",
-    "repositoryUrl": "https://github.com/DSLab-IUST",
-    "demoUrl": "",
-    "memberIds": ["mbr_seed_ahmadi"],
-    "tags": ["Python", "benchmark", "edge"],
-    "startedAt": "2025-09-15",
-    "createdAt": "2026-09-01T08:00:00.000Z",
-    "updatedAt": "2026-09-01T08:00:00.000Z",
-    "updatedBy": "dslab"
+    "title": "Reinforcement Learning for Dynamic Load Balancing in HPC Systems",
+    "type": "Journal paper",
+    "status": "Published",
+    "description": "A reinforcement learning-based mechanism for managing dynamic and interactive events that affect load balancing in HPC systems. Expert Systems with Applications, Elsevier, Vol. 255, December 2024.",
+    "tags": ["High Performance Computing", "Load Balancing"],
+    "members": ["Prof. Mohsen Sharifi", "Ehsan Mousavi Khaneghah"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1016/j.eswa.2024.124818",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
   },
   {
-    "id": "prj_seed_tracelab",
-    "title": { "fa": "TraceLab", "en": "TraceLab" },
-    "summary": {
-      "fa": "سامانه‌ی جمع‌آوری و تحلیل ردهای توزیع‌شده برای سرویس‌های دانشکده.",
-      "en": "Collection and analysis pipeline for distributed traces of faculty services."
-    },
-    "status": "completed",
-    "repositoryUrl": "https://github.com/DSLab-IUST",
-    "demoUrl": "",
-    "memberIds": ["mbr_seed_karimi"],
-    "tags": ["OpenTelemetry", "TypeScript"],
-    "startedAt": "2024-05-01",
-    "createdAt": "2026-09-01T08:00:00.000Z",
-    "updatedAt": "2026-09-01T08:00:00.000Z",
-    "updatedBy": "dslab"
+    "title": "Service Placement in Fog–Cloud Computing Environments",
+    "type": "Journal paper",
+    "status": "Published",
+    "description": "A comprehensive literature review of service placement in fog–cloud computing environments. The Journal of Supercomputing, Springer, Vol. 80, pp. 17790–17822, May 2024.",
+    "tags": ["Cloud Computing", "Fog Computing"],
+    "members": ["Prof. Mohsen Sharifi"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1007/s11227-024-06151-4",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
+  },
+  {
+    "title": "GT-Scheduler for Distributed Data Stream Processing",
+    "type": "Journal paper",
+    "status": "Published",
+    "description": "A hybrid graph-partitioning and tabu-search based task scheduler for distributed data stream processing systems. Cluster Computing, Springer, Vol. 27, pp. 5815–5832, February 2024.",
+    "tags": ["Complex Event Processing", "Stream Processing", "Scheduling"],
+    "members": ["Prof. Mohsen Sharifi"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1007/s10586-023-04260-y",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
+  },
+  {
+    "title": "Reconciling Accuracy, Cost and Latency of Inference Serving",
+    "type": "Conference paper",
+    "status": "Published",
+    "description": "Work on reconciling high accuracy, cost-efficiency, and low latency of inference serving systems. Proceedings of EuroMLSys 2023, co-located with EuroSys 2023, Rome, pp. 78–86, May 2023.",
+    "tags": ["Cloud Computing", "Inference Serving"],
+    "members": ["Prof. Mohsen Sharifi", "Seyed Alireza Sanaee"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1145/3578356.3592578",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
+  },
+  {
+    "title": "Elastic Traffic-Aware Scheduler for Heterogeneous Clusters",
+    "type": "Journal paper",
+    "status": "Published",
+    "description": "An elastic and traffic-aware scheduler for distributed data stream processing in heterogeneous clusters. The Journal of Supercomputing, Springer, Vol. 79, pp. 461–498, 2023.",
+    "tags": ["Stream Processing", "High Performance Computing", "Scheduling"],
+    "members": ["Prof. Mohsen Sharifi"],
+    "links": [
+      {
+        "url": "https://doi.org/10.1007/s11227-022-04669-z",
+        "label": "DOI",
+        "icon": "external-link"
+      }
+    ]
   }
 ]

@@ -1,0 +1,23 @@
+/* IUST Distributed Systems Lab — design tokens
+   See SKILL.md for rationale behind each token. */
+
+:root {
+  /* Core palette */
+  --color-fabric: #10141F;   /* dark bg: header, footer, hero */
+  --color-paper:  #F5F6F8;   /* light bg: main content */
+  --color-wire:   #5B6478;   /* secondary text, dividers, graph edges */
+  --color-quorum: #D6A93B;   /* active / consensus-reached accent */
+  --color-link:   #2FA6A6;   /* connection / reference accent */
+  --color-fault:  #C0533E;   /* error / partition state — use sparingly */
+
+  /* Text-safe darker variants (for text/icons on --color-paper) */
+  --color-quorum-ink: #8A661F;
+  --color-link-ink:   #1C7A75;
+
+  /* Type */
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Radius: interactive controls only — structural blocks stay sharp */
+  --radius-control: 2px;
+}

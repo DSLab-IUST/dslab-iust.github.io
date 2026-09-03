@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10141F" />
+    <script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("dslab:theme");
+          document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+    <meta
+      name="description"
+      content="DSLab IUST — Distributed Systems Lab at Iran University of Science and Technology. Research in distributed operating systems, high-performance computing, cloud environments, complex event processing, wireless sensor-actor networks, and computer security."
+    />
+    <meta property="og:title" content="DSLab IUST — Distributed Systems Lab" />
+    <meta property="og:description" content="Distributed Systems Lab at Iran University of Science and Technology, directed by Prof. Mohsen Sharifi." />
+    <meta property="og:type" content="website" />
+    <title>DSLab IUST — Distributed Systems Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Vazirmatn:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

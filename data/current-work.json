@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Distributed kernelware",
+    "status": "In progress",
+    "description": "The lab's long-running aim is to engineer a truly distributed operating system — a kernelware — with embedded cells and primitives for foreseen and unforeseen computations on heterogeneous platforms.",
+    "tags": ["Distributed Operating Systems", "Kernelware"],
+    "members": ["Prof. Mohsen Sharifi"]
+  },
+  {
+    "title": "ExaScale HPC middleware",
+    "status": "In progress",
+    "description": "Middleware for fully distributed, scalable, possibly virtualized and dynamically reconfigurable high-performance systems, including enclave management, scheduling and resource discovery.",
+    "tags": ["High Performance Computing", "Exascale Computing", "Virtualization"],
+    "members": ["Prof. Mohsen Sharifi", "Ehsan Mousavi Khaneghah", "Seyedeh Leili Mirtaheri"]
+  },
+  {
+    "title": "Distributed complex event processing",
+    "status": "In progress",
+    "description": "Scaling CEP beyond a single engine so high-rate event streams can be processed across a distributed event-processing network, with middleware for federated CEP systems.",
+    "tags": ["Complex Event Processing", "Stream Processing"],
+    "members": ["Prof. Mohsen Sharifi", "Mehdi Talebi", "Zahra Jalalian", "Mohammad Ali Fard Bastani"]
+  },
+  {
+    "title": "Cloud virtualization and VM scheduling",
+    "status": "In progress",
+    "description": "Virtualization-aware resource management for clouds and clusters: VM scheduling, virtual clusters, and VMM-level I/O, networking and application-aware control.",
+    "tags": ["Cloud Computing Environments", "Virtualization"],
+    "members": ["Prof. Mohsen Sharifi", "Esmail Asyabi", "Majid Hajibaba", "Hadi Salimi"]
+  }
+]

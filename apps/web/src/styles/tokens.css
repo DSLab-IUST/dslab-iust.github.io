@@ -1,0 +1,16 @@
+/* IUST Distributed Systems Lab — design tokens
+   See design/SKILL.md for rationale behind each token. */
+
+:root {
+  --color-fabric: #10141F;
+  --color-paper: #F5F6F8;
+  --color-wire: #5B6478;
+  --color-quorum: #D6A93B;
+  --color-link: #2FA6A6;
+  --color-fault: #C0533E;
+  --color-quorum-ink: #8A661F;
+  --color-link-ink: #1C7A75;
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --radius-control: 2px;
+}

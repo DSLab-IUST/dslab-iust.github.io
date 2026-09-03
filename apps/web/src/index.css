@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+@import "./styles/dslab.css";
+
+@theme {
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-fabric: #10141f;
+  --color-paper: #f5f6f8;
+  --color-wire: #5b6478;
+  --color-quorum: #d6a93b;
+  --color-quorum-ink: #8a661f;
+  --color-link: #2fa6a6;
+  --color-link-ink: #1c7a75;
+  --color-fault: #c0533e;
+  --radius-control: 2px;
+}
+
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
