@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+/* The theme is driven by an attribute, not by the OS preference alone. */
+@custom-variant dark (&:where(html[data-theme='dark'], html[data-theme='dark'] *));
+
+@import './tokens.css';
+@import './animations.css';
+@import './base.css';
+@import './components.css';

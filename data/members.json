@@ -1,0 +1,59 @@
+[
+  {
+    "id": "mbr_seed_mousavi",
+    "name": { "fa": "دکتر سارا موسوی", "en": "Dr. Sara Mousavi" },
+    "role": { "fa": "سرپرست آزمایشگاه", "en": "Lab director" },
+    "bio": {
+      "fa": "پژوهش روی هماهنگی توزیع‌شده، سامانه‌های تحمل‌پذیر خطا و ارزیابی کارایی زیرساخت ابری.",
+      "en": "Works on distributed coordination, fault-tolerant systems and performance evaluation of cloud infrastructure."
+    },
+    "degree": "faculty",
+    "lead": true,
+    "avatarUrl": "",
+    "email": "",
+    "githubUsername": "",
+    "scholarUrl": "",
+    "interests": ["اجماع", "تحمل‌پذیری خطا"],
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  },
+  {
+    "id": "mbr_seed_karimi",
+    "name": { "fa": "امیرحسین کریمی", "en": "Amirhossein Karimi" },
+    "role": { "fa": "پژوهشگر دکتری", "en": "PhD researcher" },
+    "bio": {
+      "fa": "رصدپذیری سامانه‌های سرویس‌گرا و ردیابی توزیع‌شده در مقیاس تولید.",
+      "en": "Observability of service-oriented systems and distributed tracing at production scale."
+    },
+    "degree": "phd",
+    "lead": true,
+    "avatarUrl": "",
+    "email": "",
+    "githubUsername": "",
+    "scholarUrl": "",
+    "interests": ["رصدپذیری", "ردیابی توزیع‌شده"],
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  },
+  {
+    "id": "mbr_seed_ahmadi",
+    "name": { "fa": "نگار احمدی", "en": "Negar Ahmadi" },
+    "role": { "fa": "دانشجوی کارشناسی ارشد", "en": "MSc student" },
+    "bio": {
+      "fa": "زمان‌بندی آگاه از انرژی برای بارهای کاری لبه.",
+      "en": "Energy-aware scheduling for edge workloads."
+    },
+    "degree": "msc",
+    "lead": false,
+    "avatarUrl": "",
+    "email": "",
+    "githubUsername": "",
+    "scholarUrl": "",
+    "interests": ["رایانش لبه", "زمان‌بندی"],
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  }
+]

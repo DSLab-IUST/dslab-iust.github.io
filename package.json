@@ -1,0 +1,42 @@
+{
+  "name": "dslab-iust",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site for the Distributed Systems Lab, Iran University of Science and Technology.",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{ts,tsx,css,json,md}\"",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "i18next": "^25.6.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-i18next": "^16.2.3",
+    "react-router-dom": "^7.9.6",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tailwindcss/vite": "^4.1.16",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.1.12"
+  }
+}

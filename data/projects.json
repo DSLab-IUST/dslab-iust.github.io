@@ -1,0 +1,53 @@
+[
+  {
+    "id": "prj_seed_ledger",
+    "title": { "fa": "دفتر توزیع‌شده‌ی آزمایشگاه", "en": "Lab distributed ledger" },
+    "summary": {
+      "fa": "پیاده‌سازی مرجع Raft برای آموزش و آزمایش سناریوهای افراز شبکه.",
+      "en": "A reference Raft implementation used for teaching and for exercising network-partition scenarios."
+    },
+    "status": "active",
+    "repositoryUrl": "https://github.com/DSLab-IUST",
+    "demoUrl": "",
+    "memberIds": ["mbr_seed_mousavi", "mbr_seed_karimi"],
+    "tags": ["Go", "Raft", "testing"],
+    "startedAt": "2025-02-01",
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  },
+  {
+    "id": "prj_seed_edgebench",
+    "title": { "fa": "EdgeBench", "en": "EdgeBench" },
+    "summary": {
+      "fa": "چارچوب محک‌زنی برای سنجش تأخیر و مصرف انرژی روی گره‌های لبه.",
+      "en": "A benchmarking harness that measures latency and energy draw across edge nodes."
+    },
+    "status": "active",
+    "repositoryUrl": "https://github.com/DSLab-IUST",
+    "demoUrl": "",
+    "memberIds": ["mbr_seed_ahmadi"],
+    "tags": ["Python", "benchmark", "edge"],
+    "startedAt": "2025-09-15",
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  },
+  {
+    "id": "prj_seed_tracelab",
+    "title": { "fa": "TraceLab", "en": "TraceLab" },
+    "summary": {
+      "fa": "سامانه‌ی جمع‌آوری و تحلیل ردهای توزیع‌شده برای سرویس‌های دانشکده.",
+      "en": "Collection and analysis pipeline for distributed traces of faculty services."
+    },
+    "status": "completed",
+    "repositoryUrl": "https://github.com/DSLab-IUST",
+    "demoUrl": "",
+    "memberIds": ["mbr_seed_karimi"],
+    "tags": ["OpenTelemetry", "TypeScript"],
+    "startedAt": "2024-05-01",
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "updatedAt": "2026-09-01T08:00:00.000Z",
+    "updatedBy": "dslab"
+  }
+]
