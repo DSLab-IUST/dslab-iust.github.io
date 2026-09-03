@@ -158,3 +158,7 @@ graphify-out/
 /GRAPH_REPORT.md
 
 DESIGN.md
+
+# Copied site data (generated into the Vite public dir)
+src/web/public/data/
+src/web/public/assets/
