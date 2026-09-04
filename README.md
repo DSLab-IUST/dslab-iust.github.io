@@ -222,11 +222,11 @@ The public site exposes **aggregate metrics only**:
 
 Private repository names, URLs, descriptions and source contents are never written to `data/github-stats.json`. Contributor activity in the 90-day window is limited to GitHub usernames listed on members.
 
-Repository secrets/vars (preferred names; legacy `DINA_*` names still work as a fallback):
+Repository secrets/vars:
 
-- `DSLAB_GITHUB_TOKEN` / `DINA_GITHUB_TOKEN`
-- `DSLAB_GITHUB_ORG` / `DINA_GITHUB_ORG`
-- `DSLAB_EXCLUDE_REPOS` / `DINA_EXCLUDE_REPOS`
+- `DSLAB_GITHUB_TOKEN`
+- `DSLAB_GITHUB_ORG`
+- `DSLAB_EXCLUDE_REPOS`
 
 ---
 

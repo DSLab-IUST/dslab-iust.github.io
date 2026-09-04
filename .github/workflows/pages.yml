@@ -43,12 +43,11 @@ jobs:
 
       - name: Refresh organization stats
         env:
-          # Prefer DSLAB_* names; fall back to legacy DINA_* until secrets/vars are renamed.
-          GITHUB_ORG: ${{ vars.DSLAB_GITHUB_ORG || vars.DINA_GITHUB_ORG }}
-          DSLAB_GITHUB_TOKEN: ${{ secrets.DSLAB_GITHUB_TOKEN || secrets.DINA_GITHUB_TOKEN }}
+          GITHUB_ORG: ${{ vars.DSLAB_GITHUB_ORG }}
+          DSLAB_GITHUB_TOKEN: ${{ secrets.DSLAB_GITHUB_TOKEN }}
           ACTIVITY_WINDOW_DAYS: 90
           # Optional: comma-separated repositories to omit from lab metrics.
-          EXCLUDE_REPOS: ${{ vars.DSLAB_EXCLUDE_REPOS || vars.DINA_EXCLUDE_REPOS }}
+          EXCLUDE_REPOS: ${{ vars.DSLAB_EXCLUDE_REPOS }}
         run: node scripts/update-github-stats.mjs
 
       - name: Build site

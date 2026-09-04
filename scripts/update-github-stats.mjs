@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const ORG = process.env.GITHUB_ORG || "YOUR_GITHUB_ORG";
-const TOKEN = process.env.DSLAB_GITHUB_TOKEN || process.env.DINA_GITHUB_TOKEN || "";
+const TOKEN = process.env.DSLAB_GITHUB_TOKEN || "";
 const API = "https://api.github.com";
 const API_VERSION = "2026-03-10";
 const WINDOW_DAYS = Number(process.env.ACTIVITY_WINDOW_DAYS || 90);
