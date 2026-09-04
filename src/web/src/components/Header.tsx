@@ -1,13 +1,15 @@
 import { Icon } from "@/components/icons";
 import { useLab } from "@/context/LabContext";
 import { useTheme } from "@/hooks/useTheme";
+import { Link } from "@/lib/router";
+import { PATHS } from "@/lib/site";
 
 const NAV = [
-  { href: "#research", label: "Research" },
-  { href: "#people", label: "People" },
-  { href: "#activity", label: "Activity" },
-  { href: "#presentations", label: "Presentations" },
-  { href: "#projects", label: "Publications" },
+  { href: PATHS.lab, label: "Lab" },
+  { href: PATHS.people, label: "People" },
+  { href: PATHS.university, label: "University" },
+  { href: "/#research", label: "Research" },
+  { href: "/#projects", label: "Publications" },
 ];
 
 export function Header() {
@@ -17,17 +19,17 @@ export function Header() {
   return (
     <header className="site-header" id="top">
       <div className="site-header-inner">
-        <a className="brand" href="#top" aria-label="DSLab IUST home">
+        <Link className="brand" to={PATHS.home} ariaLabel="DSLab IUST home">
           <span className="brand-mark">DS</span>
           <span className="brand-copy">
             <strong>DSLab IUST</strong>
             <small>Distributed systems research</small>
           </span>
-        </a>
+        </Link>
 
         <nav className="nav-links" aria-label="Primary navigation">
           {NAV.map((item) => (
-            <a key={item.href} href={item.href}>{item.label}</a>
+            <Link key={item.href} to={item.href}>{item.label}</Link>
           ))}
         </nav>
 

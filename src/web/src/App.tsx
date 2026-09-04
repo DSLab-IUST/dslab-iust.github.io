@@ -1,38 +1,31 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { Manifesto } from "@/components/Manifesto";
-import { MemberModal, People } from "@/components/People";
-import { Presentations } from "@/components/Presentations";
-import { Research } from "@/components/Research";
-import { NowBuilding, Projects } from "@/components/Work";
+import { MemberModal } from "@/components/People";
 import { LabProvider } from "@/context/LabContext";
+import { Router, useRoute } from "@/lib/router";
+import { HomePage } from "@/pages/HomePage";
+import { LabPage } from "@/pages/LabPage";
+import { MemberPage } from "@/pages/MemberPage";
+import { NotFoundPage } from "@/pages/NotFoundPage";
+import { PeopleIndexPage } from "@/pages/PeopleIndexPage";
+import { UniversityPage } from "@/pages/UniversityPage";
 
-function Shell() {
-  return (
-    <>
-      <Header />
-      <div className="chrome-band">
-        <Hero />
-      </div>
-      <main>
-        <Research />
-        <People />
-        <NowBuilding />
-        <Presentations />
-        <Projects />
-        <Manifesto />
-      </main>
-      <Footer />
-      <MemberModal />
-    </>
-  );
+function Routes() {
+  const { route } = useRoute();
+
+  if (route.name === "lab") return <LabPage />;
+  if (route.name === "university") return <UniversityPage />;
+  if (route.name === "people") return <PeopleIndexPage />;
+  if (route.name === "member") return <MemberPage slug={route.slug} />;
+  if (route.name === "notfound") return <NotFoundPage />;
+  return <HomePage />;
 }
 
 export default function App() {
   return (
     <LabProvider>
-      <Shell />
+      <Router>
+        <Routes />
+        <MemberModal />
+      </Router>
     </LabProvider>
   );
 }

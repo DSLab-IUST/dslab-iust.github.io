@@ -11,16 +11,32 @@ export const CONFIG = {
 export const THEME_STORAGE_KEY = "dslab:theme";
 export const STATS_CACHE_KEY = "dslab:last-good-github-stats";
 
+export const SITE = {
+  origin: "https://dslab-iust.github.io",
+  locale: "en",
+  localeFa: "fa_IR",
+} as const;
+
 export const LAB = {
   name: "DSLab IUST",
   fullName: "Distributed Systems Lab",
+  nameFa: "آزمایشگاه سیستم‌های توزیعی",
   school: "School of Computer Engineering",
+  schoolFa: "دانشکده مهندسی کامپیوتر",
   university: "Iran University of Science and Technology",
+  universityShort: "IUST",
+  universityFa: "دانشگاه علم و صنعت ایران",
   director: "Prof. Mohsen Sharifi",
+  directorFa: "پروفسور محسن شریفی",
   quote: "Next Generation Operating Systems will be Aware and Distributed by Nature at the Kernel Level…",
   email: "msharifi@iust.ac.ir",
   phone: "+98 21 7322 53 07",
   postalCode: "1684613114",
+  foundingYear: 2002,
+  city: "Tehran",
+  country: "Iran",
+  latitude: 35.742,
+  longitude: 51.506,
   address: [
     "School of Computer Engineering",
     "Iran University of Science and Technology",
@@ -30,6 +46,10 @@ export const LAB = {
   homepage: "https://webpages.iust.ac.ir/msharifi/",
   dslabPage: "https://webpages.iust.ac.ir/msharifi/public/dslab.html",
   github: "https://github.com/DSLab-IUST",
+  universityUrl: "https://www.iust.ac.ir/",
+  universityWiki: "https://en.wikipedia.org/wiki/Iran_University_of_Science_and_Technology",
+  universityWikiFa: "https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87_%D8%B9%D9%84%D9%85_%D9%88_%D8%B5%D9%86%D8%B9%D8%AA_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86",
+  schoolUrl: "https://ce.iust.ac.ir/",
 } as const;
 
 export const RESEARCH = [

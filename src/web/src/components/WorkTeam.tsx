@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Icon } from "@/components/icons";
 import { useLab } from "@/context/LabContext";
 import { classNames } from "@/lib/format";
-import { memberPhoto, resolveTeam } from "@/lib/members";
+import { memberPath, memberPhoto, resolveTeam } from "@/lib/members";
+import { Link } from "@/lib/router";
 import type { Member } from "@/types";
 
 function StackAvatar({ member }: { member: Member }) {
@@ -52,7 +53,12 @@ export function WorkTeam({ memberRefs = [], compact = false }: { memberRefs?: st
       <div className="team-copy">
         <span>{team.length === 1 ? "Researcher" : `${team.length} researchers`}</span>
         <strong>
-          {team.slice(0, 3).map((member) => member.name).join(", ")}
+          {team.slice(0, 3).map((member, index) => (
+            <span key={member.name}>
+              {index ? ", " : ""}
+              <Link to={memberPath(member.name)}>{member.name}</Link>
+            </span>
+          ))}
           {team.length > 3 ? `, +${team.length - 3}` : ""}
         </strong>
       </div>

@@ -4,7 +4,9 @@ import { Icon } from "@/components/icons";
 import { MemberPhoto } from "@/components/MemberPhoto";
 import { ProfileLinks } from "@/components/ProfileLinks";
 import { useLab } from "@/context/LabContext";
-import { cardFooterLabel, memberBio, profileFor } from "@/lib/members";
+import { cardFooterLabel, memberBio, memberPath, profileFor } from "@/lib/members";
+import { Link } from "@/lib/router";
+import { PATHS } from "@/lib/site";
 import type { AlumniGroup, Member } from "@/types";
 
 const ALUMNI_GROUPS: Array<{ id: AlumniGroup; heading: string; note: string }> = [
@@ -22,7 +24,11 @@ function DirectorCard({ member }: { member: Member }) {
       <MemberPhoto member={member} className="portrait" />
       <div className="director-info">
         <span className="member-role">Lab director</span>
-        <h3>{member.name}</h3>
+        <h3>
+          <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
+            {member.name}
+          </Link>
+        </h3>
         <p>{bio}</p>
         <div className="focus-chips">
           {(member.focus || []).map((tag) => <span key={tag}>{tag}</span>)}
@@ -56,7 +62,11 @@ function MemberCard({ member, isLead = false }: { member: Member; isLead?: boole
         <div className="member-head">
           <MemberPhoto member={member} />
           <div>
-            <div className="member-name">{member.name}</div>
+            <div className="member-name">
+              <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
+                {member.name}
+              </Link>
+            </div>
             <div className="member-title">{member.role}</div>
           </div>
         </div>
@@ -94,7 +104,11 @@ function RosterRow({ member }: { member: Member }) {
       }}
     >
       <div className="roster-identity">
-        <strong>{member.name}</strong>
+        <strong>
+          <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
+            {member.name}
+          </Link>
+        </strong>
         <span>{member.role}</span>
       </div>
       <p>{detail}</p>
@@ -151,13 +165,16 @@ export function MemberModal() {
             {(member.focus || []).map((tag) => <span key={tag}>{tag}</span>)}
           </div>
           <div className="modal-actions">
+            <Link className="button button-primary" to={memberPath(member.name)} onClick={closeMember}>
+              <Icon name="arrow-up-right" /> Full profile
+            </Link>
             {member.homepage ? (
-              <a className="button button-primary" target="_blank" rel="noreferrer" href={member.homepage}>
+              <a className="button button-soft" target="_blank" rel="noreferrer" href={member.homepage}>
                 <Icon name="globe" /> Faculty page
               </a>
             ) : null}
             {member.email ? (
-              <a className={member.homepage ? "button button-soft" : "button button-primary"} href={`mailto:${member.email}`}>
+              <a className="button button-soft" href={`mailto:${member.email}`}>
                 <Icon name="mail" /> Email
               </a>
             ) : null}
@@ -198,7 +215,13 @@ export function People() {
           <span className="section-kicker">People</span>
           <h2>The research group.</h2>
         </div>
-        <p>Director, current members and alumni of the Distributed Systems Lab at Iran University of Science and Technology.</p>
+        <p>
+          Director, current members and alumni of the {" "}
+          <Link to={PATHS.lab}>Distributed Systems Lab</Link>
+          {" at "}
+          <Link to={PATHS.university}>Iran University of Science and Technology</Link>
+          . Open a card for a quick view, or follow a name to the dedicated profile.
+        </p>
       </div>
 
       <div className="director-stage">

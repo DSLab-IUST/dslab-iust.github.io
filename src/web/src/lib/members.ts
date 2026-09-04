@@ -1,7 +1,27 @@
-import type { DegreeInfo, GithubStats, Member } from "@/types";
+import type { DegreeInfo, GithubStats, Member } from "../types";
 
 export function normalizeMemberRef(value?: string) {
   return String(value || "").trim().toLocaleLowerCase();
+}
+
+export function memberSlug(name: string) {
+  return String(name || "")
+    .normalize("NFKD")
+    .replace(/^(prof\.?|dr\.?|professor)\s+/i, "")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function memberPath(name: string) {
+  return `/people/${memberSlug(name)}`;
+}
+
+export function findMemberBySlug(members: Member[], slug: string) {
+  const wanted = normalizeMemberRef(slug);
+  if (!wanted) return null;
+  return members.find((member) => memberSlug(member.name) === wanted) ?? null;
 }
 
 export function resolveMember(members: Member[], ref?: string) {

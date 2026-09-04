@@ -3,6 +3,9 @@ import { TopologyGraph } from "@/components/TopologyGraph";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { formatDate, formatNumber } from "@/lib/format";
+import { memberPath } from "@/lib/members";
+import { Link } from "@/lib/router";
+import { PATHS } from "@/lib/site";
 import { coffeeStats } from "@/lib/stats";
 
 function StatsRibbon() {
@@ -51,12 +54,12 @@ export function Hero() {
           </div>
           <h1>Distributed by nature, at the kernel.</h1>
           <p className="hero-description">
-            <strong>DSLab IUST</strong>
+            <Link to={PATHS.lab}><strong>DSLab IUST</strong></Link>
             {" "}
-            is led by {LAB.director}. The lab engineers system software for distributed computing, wireless sensor-actor networks, cloud environments, and computer security — with special focus on distributed operating systems and high-performance computing.
+            is led by <Link to={memberPath(LAB.director)}>{LAB.director}</Link>. The lab engineers system software for distributed computing, wireless sensor-actor networks, cloud environments, and computer security — with special focus on distributed operating systems and high-performance computing, at the <Link to={PATHS.university}>{LAB.university}</Link>.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#research">
+            <a className="button button-primary" href="/#research">
               View research <Icon name="arrow-down-right" />
             </a>
             <a className="button button-soft" href={LAB.homepage} target="_blank" rel="noreferrer">
@@ -67,8 +70,8 @@ export function Hero() {
             </a>
           </div>
           <div className="micro-line">
-            <span>Directed by <strong>{LAB.director}</strong></span>
-            <span>{LAB.school}, IUST</span>
+            <span>Directed by <Link to={memberPath(LAB.director)}><strong>{LAB.director}</strong></Link></span>
+            <span><Link to={PATHS.university}>{LAB.school}, IUST</Link></span>
           </div>
         </div>
       </div>

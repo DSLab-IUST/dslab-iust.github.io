@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
+import { seoPrerender } from "./seo-prerender";
 
 const repoRoot = resolve(__dirname, "../..");
 
@@ -33,7 +34,8 @@ function copyRepoStatic(): Plugin {
 
 export default defineConfig({
   base: "/",
-  plugins: [copyRepoStatic(), react(), tailwindcss()],
+  appType: "spa",
+  plugins: [copyRepoStatic(), react(), tailwindcss(), seoPrerender()],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
