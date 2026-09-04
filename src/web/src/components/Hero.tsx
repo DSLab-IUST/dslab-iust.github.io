@@ -62,6 +62,9 @@ export function Hero() {
             <a className="button button-soft" href={LAB.homepage} target="_blank" rel="noreferrer">
               Faculty page <Icon name="external-link" />
             </a>
+            <a className="button button-soft" href={LAB.github} target="_blank" rel="noreferrer">
+              GitHub <Icon name="github" />
+            </a>
           </div>
           <div className="micro-line">
             <span>Directed by <strong>{LAB.director}</strong></span>

@@ -72,6 +72,35 @@ async function readMembers() {
   }
 }
 
+const AVATAR_DIR = "assets/images/avatars";
+
+async function cacheAvatar(login, remoteUrl) {
+  if (!login || !remoteUrl || !/^https?:\/\//.test(remoteUrl)) {
+    return remoteUrl || "";
+  }
+
+  await fs.mkdir(AVATAR_DIR, { recursive: true });
+  const ext = remoteUrl.toLowerCase().includes(".png") ? "png" : "jpg";
+  const fileName = `${login}.${ext}`;
+  const diskPath = `${AVATAR_DIR}/${fileName}`;
+  const publicPath = `${AVATAR_DIR}/${fileName}`;
+
+  try {
+    const response = await fetch(remoteUrl);
+    if (!response.ok) return "";
+    const buffer = Buffer.from(await response.arrayBuffer());
+    await fs.writeFile(diskPath, buffer);
+    return publicPath;
+  } catch {
+    try {
+      await fs.access(diskPath);
+      return publicPath;
+    } catch {
+      return "";
+    }
+  }
+}
+
 async function fetchProfiles(members) {
   const usernames = [...new Set(members.map(m => m.github).filter(Boolean))];
   const profiles = {};
@@ -82,7 +111,7 @@ async function fetchProfiles(members) {
       profiles[username] = {
         login: data.login,
         name: data.name,
-        avatar_url: data.avatar_url,
+        avatar_url: await cacheAvatar(data.login, data.avatar_url),
         html_url: data.html_url,
         bio: data.bio,
         company: data.company,
@@ -165,9 +194,12 @@ async function main() {
       const existing = activity.get(login.toLowerCase()) || {
         login,
         name: profiles[login]?.name || login,
-        avatar_url: contributor.author?.avatar_url || profiles[login]?.avatar_url || "",
+        avatar_url: profiles[login]?.avatar_url || "",
         commits: 0,
       };
+      if (!existing.avatar_url && contributor.author?.avatar_url) {
+        existing.avatar_url = await cacheAvatar(login, contributor.author.avatar_url);
+      }
       existing.commits += recent;
       activity.set(login.toLowerCase(), existing);
     }

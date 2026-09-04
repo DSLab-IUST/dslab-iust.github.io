@@ -269,6 +269,7 @@ Typography: **Vazirmatn** for UI and body, **JetBrains Mono** for real data (dat
 | Email | [msharifi@iust.ac.ir](mailto:msharifi@iust.ac.ir) |
 | Tel/Fax | +98 21 7322 53 07 |
 | Faculty page | [webpages.iust.ac.ir/msharifi](https://webpages.iust.ac.ir/msharifi/) |
+| GitHub | [github.com/DSLab-IUST](https://github.com/DSLab-IUST) |
 | Official DSLab page | [dslab.html](https://webpages.iust.ac.ir/msharifi/public/dslab.html) |
 | Address | School of Computer Engineering, Iran University of Science and Technology, University Road, Hengam Street, Resalat Square, Narmak, Tehran, Iran (postal code 1684613114) |
 

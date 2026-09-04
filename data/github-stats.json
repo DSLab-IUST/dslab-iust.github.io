@@ -8,7 +8,7 @@
     {
       "login": "MatinGhanbari",
       "name": "Matin Ghanbari",
-      "avatar_url": "https://avatars.githubusercontent.com/u/85116522?v=4",
+      "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
       "commits": 12
     }
   ],
@@ -17,7 +17,7 @@
     "MatinGhanbari": {
       "login": "MatinGhanbari",
       "name": "Matin Ghanbari",
-      "avatar_url": "https://avatars.githubusercontent.com/u/85116522?v=4",
+      "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
       "html_url": "https://github.com/MatinGhanbari",
       "bio": "Software Engineer | Backend developer",
       "company": null,

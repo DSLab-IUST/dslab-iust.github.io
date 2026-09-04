@@ -25,10 +25,8 @@ export function safeUrl(value = "") {
 }
 
 export function githubOrgHref(org?: string, fallback = "DSLab-IUST") {
-  const name = org || fallback;
-  return name && name !== fallback
-    ? `https://github.com/${encodeURIComponent(name)}`
-    : "https://github.com";
+  const name = (org || fallback || "DSLab-IUST").trim();
+  return `https://github.com/${encodeURIComponent(name)}`;
 }
 
 export function classNames(...parts: Array<string | false | null | undefined>) {

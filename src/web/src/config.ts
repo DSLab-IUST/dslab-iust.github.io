@@ -29,6 +29,7 @@ export const LAB = {
   ],
   homepage: "https://webpages.iust.ac.ir/msharifi/",
   dslabPage: "https://webpages.iust.ac.ir/msharifi/public/dslab.html",
+  github: "https://github.com/DSLab-IUST",
 } as const;
 
 export const RESEARCH = [
