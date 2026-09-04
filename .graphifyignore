@@ -1,4 +1,0 @@
-# Graphify already honors .gitignore. Extra exclusions:
-LICENSE
-.cursor/hooks/
-.githooks/
