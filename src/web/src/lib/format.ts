@@ -6,7 +6,7 @@ export function formatNumber(n: number) {
 }
 
 export function formatDate(iso?: string | null) {
-  if (!iso) return "Run the stats workflow to populate live data";
+  if (!iso) return "No snapshot date in github-stats.json";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "Unknown";
   const diffHours = Math.round((d.getTime() - Date.now()) / 3_600_000);

@@ -1,9 +1,9 @@
 import fs from "node:fs/promises";
 
-const ORG = process.env.GITHUB_ORG || "YOUR_GITHUB_ORG";
-const TOKEN = process.env.DSLAB_GITHUB_TOKEN || "";
+const ORG = process.env.GITHUB_ORG || "DSLab-IUST";
+const TOKEN = process.env.DSLAB_GITHUB_TOKEN || process.env.GITHUB_TOKEN || "";
 const API = "https://api.github.com";
-const API_VERSION = "2026-03-10";
+const API_VERSION = "2022-11-28";
 const WINDOW_DAYS = Number(process.env.ACTIVITY_WINDOW_DAYS || 90);
 const EXCLUDE_REPOS = new Set(
   (process.env.EXCLUDE_REPOS || `${ORG}.github.io`)
@@ -13,18 +13,14 @@ const EXCLUDE_REPOS = new Set(
 );
 
 if (!ORG || ORG === "YOUR_GITHUB_ORG") {
-  throw new Error("Set GITHUB_ORG in the workflow/repository variable before running this script.");
-}
-
-if (!TOKEN) {
-  throw new Error("DSLAB_GITHUB_TOKEN is required for private repository statistics.");
+  throw new Error("Set GITHUB_ORG before running this script.");
 }
 
 const headers = {
   Accept: "application/vnd.github+json",
   "X-GitHub-Api-Version": API_VERSION,
-  "User-Agent": "DSLab-IUST-private-metadata-stats",
-  Authorization: `Bearer ${TOKEN}`,
+  "User-Agent": "DSLab-IUST-public-stats",
+  ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
 };
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -56,9 +52,8 @@ async function paginate(path) {
 }
 
 async function listRepos() {
-  return paginate(`/orgs/${encodeURIComponent(ORG)}/repos?type=all&sort=updated&direction=desc`);
+  return paginate(`/orgs/${encodeURIComponent(ORG)}/repos?type=public&sort=updated&direction=desc`);
 }
-
 
 async function readPreviousStats() {
   try {
@@ -127,7 +122,7 @@ function commitsInsideWindow(weeks = [], cutoffMs) {
 }
 
 async function main() {
-  console.log(`Collecting privacy-preserving aggregate GitHub statistics for ${ORG} ...`);
+  console.log(`Collecting public GitHub statistics for ${ORG}${TOKEN ? " (authenticated)" : " (unauthenticated)"} ...`);
 
   const previousStats = await readPreviousStats();
   const allRepos = await listRepos();
@@ -146,8 +141,7 @@ async function main() {
   let reposWithStats = 0;
 
   for (let i = 0; i < repos.length; i += 1) {
-    // Intentionally do not print private repository names into public Actions logs.
-    console.log(`[${i + 1}/${repos.length}] Reading repository statistics ...`);
+    console.log(`[${i + 1}/${repos.length}] Reading statistics for ${repos[i].name} ...`);
 
     let stats = [];
     try {
@@ -181,12 +175,10 @@ async function main() {
 
   const activeContributors = [...activity.values()].sort((a, b) => b.commits - a.commits);
 
-  // GitHub's repository-statistics endpoints can temporarily return 202/empty data while
-  // their cache is being rebuilt. Never replace a known-good public snapshot with zeros.
   const previousCommitTotal = Number(previousStats?.totalCommits || 0);
   const previousRepoCount = Number(previousStats?.repoCount || 0);
   if (repos.length === 0 && previousRepoCount > 0) {
-    throw new Error("GitHub returned zero repositories; refusing to overwrite the last good statistics snapshot.");
+    throw new Error("GitHub returned zero public repositories; refusing to overwrite the last good statistics snapshot.");
   }
   if (totalCommits === 0 && previousCommitTotal > 0) {
     console.warn("Contributor statistics were temporarily empty; preserving the last known commit total.");
@@ -200,25 +192,24 @@ async function main() {
     repoCount: repos.length,
     totalCommits,
     activeContributors,
-    // Deliberately empty: private repository names, URLs and descriptions are never published to Pages.
     repositories: [],
     profiles,
     privacy: {
       repositoryDetailsPublished: false,
       sourceContentsPermissionRequired: false,
-      statsMode: "metadata-only",
+      statsMode: "public-metadata-only",
       repositoriesWithStats: reposWithStats,
     },
     notes: {
-      totalCommits: "Sum of GitHub contributor-stat totals across included repositories. GitHub repository statistics exclude merge commits; contributor statistics also exclude empty commits.",
+      totalCommits: "Sum of GitHub contributor-stat totals across included public repositories. GitHub repository statistics exclude merge commits; contributor statistics also exclude empty commits.",
       activeContributors: `Configured DSLab members with contributor-stat activity in weekly buckets overlapping the last ${WINDOW_DAYS} days.`,
-      repositories: "Private repository names, URLs, descriptions and source contents are not written to the public JSON output.",
+      repositories: "Repository names, URLs, descriptions and source contents are not written to the public JSON output.",
     },
   };
 
   await fs.mkdir("data", { recursive: true });
   await fs.writeFile("data/github-stats.json", JSON.stringify(output, null, 2) + "\n");
-  console.log(`Done: ${repos.length} repositories counted, ${totalCommits} tracked commits, ${activeContributors.length} active configured members.`);
+  console.log(`Done: ${repos.length} public repositories counted, ${totalCommits} tracked commits, ${activeContributors.length} active configured members.`);
 }
 
 main().catch(err => {

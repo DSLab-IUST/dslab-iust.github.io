@@ -41,12 +41,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Refresh organization stats
+      - name: Refresh public organization stats
         env:
           GITHUB_ORG: ${{ vars.DSLAB_GITHUB_ORG }}
-          DSLAB_GITHUB_TOKEN: ${{ secrets.DSLAB_GITHUB_TOKEN }}
           ACTIVITY_WINDOW_DAYS: 90
-          # Optional: comma-separated repositories to omit from lab metrics.
           EXCLUDE_REPOS: ${{ vars.DSLAB_EXCLUDE_REPOS }}
         run: node scripts/update-github-stats.mjs
 

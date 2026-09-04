@@ -95,13 +95,13 @@ pnpm build
 pnpm preview
 ```
 
-Refresh GitHub stats locally (requires `GITHUB_ORG` and `DSLAB_GITHUB_TOKEN`):
+Refresh public GitHub stats locally (no token required; optional `GITHUB_ORG` override, default `DSLab-IUST`):
 
 ```bash
 pnpm stats
 ```
 
-The workspace is `src/*` (`pnpm-workspace.yaml`). CI builds with Node 24 and pnpm 11, then deploys `src/web/dist` to GitHub Pages.
+The workspace is `src/*` (`pnpm-workspace.yaml`). A GitHub Actions workflow (push to `main`, manual dispatch, and every 6 hours) refreshes public org stats, then builds with Node 24 and pnpm 11 and deploys `src/web/dist` to GitHub Pages.
 
 ---
 
@@ -115,7 +115,7 @@ data/
 ├── current-work.json   # Active research threads (Now Building)
 ├── presentations.json  # Upcoming talks; empty object list when none are scheduled
 ├── projects.json       # Selected publications, tags, contributors and DOI links
-└── github-stats.json   # Aggregate GitHub activity (written by the stats script)
+└── github-stats.json   # Aggregate public GitHub activity (written by the stats script)
 ```
 
 Photos referenced as `"photo": "assets/name.jpg"` should be placed in the root `assets/` folder.
@@ -211,21 +211,20 @@ The list is currently empty (`"presentations": []`). Add objects inside `present
 
 ## GitHub analytics
 
-A GitHub Actions workflow (push to `main`, manual dispatch, and every 6 hours) runs `scripts/update-github-stats.mjs`, then builds and deploys Pages.
+A GitHub Actions workflow (push to `main`, manual dispatch, and every 6 hours) runs `scripts/update-github-stats.mjs` against the public GitHub API, then builds and deploys Pages. No personal access token or repository secret is required.
 
 The public site exposes **aggregate metrics only**:
 
-- repository count (non-archived, non-fork, after exclusions)
+- public repository count (non-archived, non-fork, after exclusions)
 - organization-wide commit activity
 - last statistics update (or a last-known-good snapshot)
 - Research Coffee Meter (1 coffee per 20 commits)
 
-Private repository names, URLs, descriptions and source contents are never written to `data/github-stats.json`. Contributor activity in the 90-day window is limited to GitHub usernames listed on members.
+Repository names, URLs, descriptions and source contents are never written to `data/github-stats.json`. Contributor activity in the 90-day window is limited to GitHub usernames listed on members.
 
-Repository secrets/vars:
+Optional repository variables:
 
-- `DSLAB_GITHUB_TOKEN`
-- `DSLAB_GITHUB_ORG`
+- `DSLAB_GITHUB_ORG` (defaults to `DSLab-IUST`)
 - `DSLAB_EXCLUDE_REPOS`
 
 ---
@@ -242,7 +241,7 @@ Repository secrets/vars:
 | Automation | GitHub Actions |
 | Hosting | GitHub Pages |
 | Icons | lucide-react |
-| GitHub data | GitHub REST API (metadata-only stats) |
+| GitHub data | Public GitHub REST API (metadata-only stats) |
 
 ---
 
