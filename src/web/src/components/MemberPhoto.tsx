@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { classNames } from "@/lib/format";
 import { memberPhoto } from "@/lib/members";
 import { useLab } from "@/context/LabContext";
@@ -15,6 +15,10 @@ export function MemberPhoto({
   const src = memberPhoto(member, githubStats);
   const [failed, setFailed] = useState(false);
   const missing = !src || failed;
+
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
 
   return (
     <div

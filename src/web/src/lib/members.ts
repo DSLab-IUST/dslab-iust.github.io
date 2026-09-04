@@ -64,9 +64,19 @@ export function profileFor(member?: MemberIdentity | null, githubStats?: GithubS
   return key ? profiles[key] : {};
 }
 
+/** Root-absolute src so photos work on nested routes like /people/:slug. */
+export function publicAssetSrc(path?: string) {
+  const src = String(path || "").trim();
+  if (!src) return "";
+  if (/^(https?:)?\/\//i.test(src) || src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+  return src.startsWith("/") ? src : `/${src}`;
+}
+
 export function memberPhoto(member?: MemberIdentity | null, githubStats?: GithubStats | null) {
   const profile = profileFor(member, githubStats);
-  return member?.photo || profile.avatar_url || "";
+  return publicAssetSrc(member?.photo || profile.avatar_url || "");
 }
 
 export function memberBio(member?: MemberIdentity | null, githubStats?: GithubStats | null, fallback = "No bio yet.") {
