@@ -275,6 +275,12 @@ Typography: **Vazirmatn** for UI and body, **JetBrains Mono** for real data (dat
 
 ---
 
+## Special thanks
+
+Thanks to [Ali Ahmadi (@AliAhmadi-Software)](https://github.com/AliAhmadi-Software) for the original idea and code contributions that helped shape this project.
+
+---
+
 <div align="center">
 
 ### DSLab IUST
