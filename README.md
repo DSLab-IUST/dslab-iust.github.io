@@ -48,7 +48,7 @@ Six connected problem spaces, as shown on the site:
 
 ## Website
 
-The official site is a React 19 + TypeScript app in `src/web`, built with Vite, Turborepo and Tailwind CSS v4. Content is JSON at the repository root; photos live in `assets/`. Both are copied into the web app during `dev` and `build`.
+The official site is a React 19 + TypeScript app in `src/web`, built with Vite, Turborepo and Tailwind CSS v4. Content is JSON at the repository root; member photos live in `assets/images/` (favicon in `assets/`). Both are copied into the web app during `dev` and `build`.
 
 Live: [dslab-iust.github.io](https://dslab-iust.github.io/)
 
@@ -74,7 +74,7 @@ Degree badges (`B.Sc` / `M.Sc` / `Ph.D`) appear on member cards. Member names in
 │   ├── presentations.json
 │   ├── projects.json
 │   └── github-stats.json      # generated; do not hand-edit in normal use
-├── assets/                    # member photos and favicon
+├── assets/                    # favicon and images/ (member photos)
 ├── src/web/                   # Vite + React app (@dslab/web)
 ├── scripts/update-github-stats.mjs
 ├── design/                    # visual language (tokens + design skill)
@@ -118,7 +118,7 @@ data/
 └── github-stats.json   # Aggregate public GitHub activity (written by the stats script)
 ```
 
-Photos referenced as `"photo": "assets/name.jpg"` should be placed in the root `assets/` folder.
+Photos referenced as `"photo": "assets/images/name.jpg"` should be placed in `assets/images/`.
 
 ### People (`members.json`)
 
@@ -140,7 +140,7 @@ The file is a JSON array of member objects. `leadership` controls where someone 
   "leadership": "member",
   "github": "optional-login",
   "linkedin": "https://www.linkedin.com/in/example/",
-  "photo": "assets/example.jpg",
+  "photo": "assets/images/example.jpg",
   "bio": "Short research bio.",
   "degree": "phd",
   "focus": ["Distributed Systems"]

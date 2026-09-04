@@ -11,7 +11,7 @@
     "scopus": "https://www.scopus.com/authid/detail.uri?authorId=7006324593",
     "dblp": "https://dblp.uni-trier.de/pers/hd/s/Sharifi:Mohsen",
     "homepage": "https://webpages.iust.ac.ir/msharifi/",
-    "photo": "assets/mohsen-sharifi.jpg",
+    "photo": "assets/images/mohsen-sharifi.jpg",
     "bio": "Professor of System Software Engineering at the School of Computer Engineering, Iran University of Science and Technology. Director of the Distributed Systems Research Laboratory since 2002, and of the Operating System and Software Engineering Laboratories since 1996. PhD in Computer Science (System Software) from the Victoria University of Manchester (1991), with an MSc in Computer Science (System Design, 1987) and a BSc in Computer Science and Accounting (1982) from the same university. Research focuses on distributed operating systems, high-performance computing, and the engineering of a truly distributed kernelware.",
     "focus": ["Distributed Systems", "Operating Systems", "High Performance Computing", "Cloud Computing"]
   },
@@ -22,7 +22,7 @@
     "leadership": "lead",
     "github": "MatinGhanbari",
     "linkedin": "https://www.linkedin.com/in/matin-ghanbari-3a620b208/",
-    "photo": "assets/arman-aghdashi.jpg",
+    "photo": "assets/images/arman-aghdashi.jpg",
     "bio": "Add a short research bio here.",
     "degree": "phd",
     "focus": ["Distributed Systems"]
@@ -34,7 +34,7 @@
     "leadership": "member",
     "github": "MatinGhanbari",
     "linkedin": "https://www.linkedin.com/in/matin-ghanbari-3a620b208/",
-    "photo": "assets/matin-ghanbari.jpg",
+    "photo": "assets/images/matin-ghanbari.jpg",
     "bio": "Add a short research bio here.",
     "degree": "msc",
     "focus": ["Distributed Systems"]
