@@ -6,7 +6,7 @@ export function formatNumber(n: number) {
 }
 
 export function formatDate(iso?: string | null) {
-  if (!iso) return "No snapshot date in github-stats.json";
+  if (!iso) return "Run the stats script to populate live data";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "Unknown";
   const diffHours = Math.round((d.getTime() - Date.now()) / 3_600_000);
@@ -24,7 +24,7 @@ export function safeUrl(value = "") {
   }
 }
 
-export function githubOrgHref(org?: string, fallback = "YOUR_GITHUB_ORG") {
+export function githubOrgHref(org?: string, fallback = "DSLab-IUST") {
   const name = org || fallback;
   return name && name !== fallback
     ? `https://github.com/${encodeURIComponent(name)}`

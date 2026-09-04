@@ -1,5 +1,5 @@
 export const CONFIG = {
-  githubOrg: "YOUR_GITHUB_ORG",
+  githubOrg: "DSLab-IUST",
   statsUrl: "/data/github-stats.json",
   membersUrl: "/data/members.json",
   currentWorkUrl: "/data/current-work.json",

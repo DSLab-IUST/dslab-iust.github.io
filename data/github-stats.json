@@ -1,11 +1,40 @@
 {
   "organization": "DSLab-IUST",
-  "generatedAt": null,
-  "repoCount": 3,
-  "totalCommits": 714,
-  "activeContributors": [],
-  "repositories": [],
-  "profiles": {},
+  "generatedAt": "2026-09-04T00:12:11.841Z",
   "windowDays": 90,
-  "snapshot": "last-known-good"
+  "repoCount": 1,
+  "totalCommits": 12,
+  "activeContributors": [
+    {
+      "login": "MatinGhanbari",
+      "name": "Matin Ghanbari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/85116522?v=4",
+      "commits": 12
+    }
+  ],
+  "repositories": [],
+  "profiles": {
+    "MatinGhanbari": {
+      "login": "MatinGhanbari",
+      "name": "Matin Ghanbari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/85116522?v=4",
+      "html_url": "https://github.com/MatinGhanbari",
+      "bio": "Software Engineer | Backend developer",
+      "company": null,
+      "location": "Tehran, Iran",
+      "blog": "",
+      "public_repos": 31
+    }
+  },
+  "privacy": {
+    "repositoryDetailsPublished": false,
+    "sourceContentsPermissionRequired": false,
+    "statsMode": "public-metadata-only",
+    "repositoriesWithStats": 1
+  },
+  "notes": {
+    "totalCommits": "Sum of GitHub contributor-stat totals across included public repositories. GitHub repository statistics exclude merge commits; contributor statistics also exclude empty commits.",
+    "activeContributors": "Configured DSLab members with contributor-stat activity in weekly buckets overlapping the last 90 days.",
+    "repositories": "Repository names, URLs, descriptions and source contents are not written to the public JSON output."
+  }
 }

@@ -225,7 +225,7 @@ Repository names, URLs, descriptions and source contents are never written to `d
 Optional repository variables:
 
 - `DSLAB_GITHUB_ORG` (defaults to `DSLab-IUST`)
-- `DSLAB_EXCLUDE_REPOS`
+- `DSLAB_EXCLUDE_REPOS` (comma-separated public repo names to omit, e.g. the Pages site)
 
 ---
 

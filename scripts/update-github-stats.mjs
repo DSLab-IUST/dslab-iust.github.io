@@ -6,7 +6,7 @@ const API = "https://api.github.com";
 const API_VERSION = "2022-11-28";
 const WINDOW_DAYS = Number(process.env.ACTIVITY_WINDOW_DAYS || 90);
 const EXCLUDE_REPOS = new Set(
-  (process.env.EXCLUDE_REPOS || `${ORG}.github.io`)
+  (process.env.EXCLUDE_REPOS || "")
     .split(",")
     .map(x => x.trim().toLowerCase())
     .filter(Boolean)
