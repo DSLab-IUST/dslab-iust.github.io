@@ -11,13 +11,13 @@ Researching distributed operating systems, high-performance computing, and cloud
 <br>
 
 [![Site](https://img.shields.io/badge/Site-dslab--iust.github.io-111827?style=for-the-badge&logo=github&logoColor=FFFFFF)](https://dslab-iust.github.io/)
+
+
 ![React](https://img.shields.io/badge/React-111827?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-111827?style=for-the-badge&logo=typescript&logoColor=3178C6)
 ![Vite](https://img.shields.io/badge/Vite-111827?style=for-the-badge&logo=vite&logoColor=646CFF)
 ![Turborepo](https://img.shields.io/badge/Turborepo-111827?style=for-the-badge&logo=turborepo&logoColor=EF4444)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-111827?style=for-the-badge&logo=tailwindcss&logoColor=38BDF8)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-111827?style=for-the-badge&logo=githubactions&logoColor=2088FF)
-![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-111827?style=for-the-badge&logo=github&logoColor=FFFFFF)
 
 </div>
 
