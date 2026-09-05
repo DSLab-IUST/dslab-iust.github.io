@@ -40,6 +40,16 @@
     "focus": ["Distributed Systems"]
   },
   {
+    "name": "Amir Mohammad Kahfi",
+    "role": "Researcher",
+    "cardFooter": "Researcher",
+    "leadership": "member",
+    "photo": "assets/images/amir-kahfi.jpg",
+    "bio": "Master's researcher working on self-healing mechanisms in federated learning, so distributed training can detect faults and recover without a single point of failure.",
+    "degree": "msc",
+    "focus": ["Federated Learning", "Self-Healing Systems", "Distributed Systems"]
+  },
+  {
     "name": "Sina Mahmoodi",
     "role": "PhD Student",
     "cardFooter": "2009 – Present",
