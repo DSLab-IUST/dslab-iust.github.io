@@ -9,11 +9,12 @@ export const PATHS = {
   people: "/people",
 } as const;
 
+/** Canonical absolute URL. Home keeps a trailing slash; other paths never have one. */
 export function absoluteUrl(path = "/") {
-  const normalized = path.startsWith("http")
-    ? path
-    : `${SITE.origin}${path.startsWith("/") ? path : `/${path}`}`;
-  return normalized.replace(/\/+$/, "") || SITE.origin;
+  if (/^https?:\/\//i.test(path)) return path;
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  if (normalized === "/") return `${SITE.origin}/`;
+  return `${SITE.origin}${normalized.replace(/\/+$/, "")}`;
 }
 
 export function assetUrl(path?: string) {

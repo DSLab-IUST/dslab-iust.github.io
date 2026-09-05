@@ -1,5 +1,7 @@
+import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { LAB, SITE } from "./src/config";
 import { memberPath, memberSlug } from "./src/lib/members";
@@ -12,6 +14,8 @@ import {
   universityGraph,
 } from "./src/lib/schema";
 import {
+  absoluteUrl,
+  assetUrl,
   homeMeta,
   labMeta,
   memberMeta,
@@ -21,6 +25,8 @@ import {
 } from "./src/lib/site";
 import type { Member } from "./src/types";
 
+const repoRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
@@ -29,17 +35,41 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
+function escapeXml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+/** Honest lastmod from git (YYYY-MM-DD). Omit when history is unavailable. */
+function gitLastmod(...relativePaths: string[]): string | undefined {
+  try {
+    const out = execFileSync(
+      "git",
+      ["log", "-1", "--format=%cs", "--", ...relativePaths],
+      { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function injectHead(html: string, meta: PageMeta, jsonLd: unknown, article: string) {
+  const canonical = absoluteUrl(meta.path);
   const tags = [
     `<title>${escapeHtml(meta.title)}</title>`,
     `<meta name="description" content="${escapeHtml(meta.description)}" />`,
     `<meta name="keywords" content="${escapeHtml((meta.keywords || []).join(", "))}" />`,
     `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />`,
-    `<link rel="canonical" href="${SITE.origin}${meta.path === "/" ? "/" : meta.path}" />`,
+    `<link rel="canonical" href="${canonical}" />`,
     `<meta property="og:title" content="${escapeHtml(meta.title)}" />`,
     `<meta property="og:description" content="${escapeHtml(meta.description)}" />`,
     `<meta property="og:type" content="${meta.type === "profile" ? "profile" : "website"}" />`,
-    `<meta property="og:url" content="${SITE.origin}${meta.path === "/" ? "/" : meta.path}" />`,
+    `<meta property="og:url" content="${canonical}" />`,
     `<meta property="og:site_name" content="${LAB.name}" />`,
     `<meta property="og:locale" content="en_US" />`,
     `<meta property="og:locale:alternate" content="${SITE.localeFa}" />`,
@@ -78,12 +108,66 @@ function writePage(dist: string, filePath: string, html: string) {
   writeFileSync(full, html);
 }
 
-function sitemapXml(paths: string[]) {
-  const urls = paths.map((path) => {
-    const loc = path === "/" ? `${SITE.origin}/` : `${SITE.origin}${path}`;
-    return `  <url><loc>${loc}</loc><changefreq>weekly</changefreq></url>`;
+interface SitemapImage {
+  loc: string;
+  title?: string;
+}
+
+interface SitemapEntry {
+  path: string;
+  lastmod?: string;
+  images?: SitemapImage[];
+}
+
+/**
+ * Google-oriented sitemap:
+ * - absolute canonical locs only
+ * - honest lastmod (omit when unknown)
+ * - no priority / changefreq (Google ignores both)
+ * - optional image extension for profile photos
+ * - XML entity-escaped values
+ */
+function sitemapXml(entries: SitemapEntry[]) {
+  const hasImages = entries.some((entry) => entry.images?.length);
+  const rootAttrs = hasImages
+    ? [
+        'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+        'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"',
+      ].join(" ")
+    : 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+
+  const urls = entries.map((entry) => {
+    const lines = [
+      "  <url>",
+      `    <loc>${escapeXml(absoluteUrl(entry.path))}</loc>`,
+    ];
+    if (entry.lastmod) {
+      lines.push(`    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`);
+    }
+    for (const image of entry.images || []) {
+      lines.push("    <image:image>");
+      lines.push(`      <image:loc>${escapeXml(image.loc)}</image:loc>`);
+      if (image.title) {
+        lines.push(`      <image:title>${escapeXml(image.title)}</image:title>`);
+      }
+      lines.push("    </image:image>");
+    }
+    lines.push("  </url>");
+    return lines.join("\n");
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    `<urlset ${rootAttrs}>`,
+    ...urls,
+    "</urlset>",
+    "",
+  ].join("\n");
+}
+
+/** Text sitemap fallback — useful when GSC fails to parse XML on some hosts. */
+function sitemapTxt(entries: SitemapEntry[]) {
+  return `${entries.map((entry) => absoluteUrl(entry.path)).join("\n")}\n`;
 }
 
 function robotsTxt() {
@@ -107,8 +191,45 @@ function robotsTxt() {
     "Allow: /",
     "",
     `Sitemap: ${SITE.origin}/sitemap.xml`,
+    `Sitemap: ${SITE.origin}/sitemap.txt`,
     "",
   ].join("\n");
+}
+
+function buildSitemapEntries(members: Member[]): SitemapEntry[] {
+  const homeLastmod = gitLastmod(
+    "data/members.json",
+    "data/projects.json",
+    "data/current-work.json",
+    "data/presentations.json",
+    "data/github-stats.json",
+    "src/web/src/config.ts",
+  );
+  const labLastmod = gitLastmod("src/web/src/config.ts", "src/web/src/pages/LabPage.tsx");
+  const universityLastmod = gitLastmod("src/web/src/config.ts", "src/web/src/pages/UniversityPage.tsx");
+  const peopleLastmod = gitLastmod("data/members.json", "src/web/src/pages/PeopleIndexPage.tsx", "src/web/src/pages/MemberPage.tsx");
+
+  const director = members.find((member) => member.leadership === "director");
+  const homeImage = director?.photo
+    ? [{ loc: assetUrl(director.photo), title: director.name }]
+    : undefined;
+
+  return [
+    { path: "/", lastmod: homeLastmod, images: homeImage },
+    { path: "/lab", lastmod: labLastmod, images: homeImage },
+    { path: "/university", lastmod: universityLastmod },
+    { path: "/people", lastmod: peopleLastmod },
+    ...members.map((member) => {
+      const images = member.photo
+        ? [{ loc: assetUrl(member.photo), title: member.name }]
+        : undefined;
+      return {
+        path: memberPath(member.name),
+        lastmod: peopleLastmod,
+        images,
+      };
+    }),
+  ];
 }
 
 function llmsTxt(members: Member[]) {
@@ -201,13 +322,11 @@ export function seoPrerender(): Plugin {
       writeFileSync(resolve(dist, "404.html"), template);
       writeFileSync(resolve(dist, ".nojekyll"), "");
       writeFileSync(resolve(dist, "robots.txt"), robotsTxt());
-      writeFileSync(resolve(dist, "sitemap.xml"), sitemapXml([
-        "/",
-        "/lab",
-        "/university",
-        "/people",
-        ...members.map((member) => memberPath(member.name)),
-      ]));
+
+      const sitemapEntries = buildSitemapEntries(members);
+      // UTF-8 without BOM — required by the sitemaps protocol / Google.
+      writeFileSync(resolve(dist, "sitemap.xml"), sitemapXml(sitemapEntries), "utf8");
+      writeFileSync(resolve(dist, "sitemap.txt"), sitemapTxt(sitemapEntries), "utf8");
       writeFileSync(resolve(dist, "llms.txt"), llmsTxt(members));
     },
   };
