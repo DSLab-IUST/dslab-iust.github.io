@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/BrandLogo";
 import { Icon } from "@/components/icons";
 import { useLab } from "@/context/LabContext";
 import { useTheme } from "@/hooks/useTheme";
@@ -20,11 +21,7 @@ export function Header() {
     <header className="site-header" id="top">
       <div className="site-header-inner">
         <Link className="brand" to={PATHS.home} ariaLabel="DSLab IUST home">
-          <span className="brand-mark">DS</span>
-          <span className="brand-copy">
-            <strong>DSLab IUST</strong>
-            <small>Distributed systems research</small>
-          </span>
+          <BrandLogo />
         </Link>
 
         <nav className="nav-links" aria-label="Primary navigation">

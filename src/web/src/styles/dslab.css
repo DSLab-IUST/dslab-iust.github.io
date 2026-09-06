@@ -90,7 +90,7 @@ code {
 .site-header-inner {
   width: min(1120px, calc(100% - 48px));
   margin-inline: auto;
-  min-height: 64px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,21 +100,13 @@ code {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-.brand-mark {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgb(245 246 248 / 0.18);
-  background: transparent;
-  color: var(--color-quorum);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+.brand-logo {
+  height: 68px;
+  width: auto;
+  /* Header/footer chrome is navy; lift the dark-blue wordmark to a light mark. */
+  filter: invert(1) hue-rotate(180deg) brightness(1.55) saturate(0.7);
 }
 
 .brand-copy {
@@ -1262,8 +1254,11 @@ html[data-theme="light"] .theme-icon-moon { opacity: 1; transform: none; }
 
 .footer-brand {
   display: flex;
-  gap: 12px;
   align-items: center;
+}
+
+.footer-logo {
+  height: 112px;
 }
 
 .footer-brand .brand-copy {

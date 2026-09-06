@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/BrandLogo";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { memberPath } from "@/lib/members";
@@ -12,11 +13,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="footer section-shell">
         <div className="footer-brand">
-          <span className="brand-mark">DS</span>
-          <div className="brand-copy">
-            <strong>{LAB.name}</strong>
-            <small>{LAB.fullName}, IUST</small>
-          </div>
+          <BrandLogo className="brand-logo footer-logo" />
         </div>
         <address className="footer-contact">
           {LAB.address.map((line) => <span key={line}>{line}</span>)}
