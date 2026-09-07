@@ -620,6 +620,7 @@ html[data-theme="light"] .theme-icon-moon { opacity: 1; transform: none; }
 
 .hero-quote {
   --quote-gleam: color-mix(in srgb, var(--color-quorum) 16%, var(--color-paper));
+  padding: 0 5px;
   margin: 0 0 18px;
   max-width: 40em;
   color: var(--muted);
