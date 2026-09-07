@@ -1,3 +1,4 @@
+import { AffiliationLine } from "@/components/AffiliationLine";
 import { DegreeBadge } from "@/components/DegreeBadge";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -8,7 +9,7 @@ import { Seo } from "@/components/Seo";
 import { Breadcrumbs, EntityLinks, FaqList } from "@/components/EntityPage";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
-import { findMemberBySlug, memberBio, profileFor } from "@/lib/members";
+import { findMemberBySlug, isAlumni, memberBio, memberNowLine, profileFor } from "@/lib/members";
 import { Link } from "@/lib/router";
 import { memberFaqs, memberGraph } from "@/lib/schema";
 import { PATHS, memberAffiliation, memberAnswer, memberMeta } from "@/lib/site";
@@ -61,7 +62,9 @@ export function MemberPage({ slug }: { slug: string }) {
                 <p className="entity-lead">{memberAnswer(member)}</p>
                 <div className="member-page-meta">
                   <DegreeBadge member={member} />
-                  <span>{memberAffiliation(member)}</span>
+                  {isAlumni(member) && memberNowLine(member)
+                    ? <AffiliationLine member={member} />
+                    : <span>{memberAffiliation(member)}</span>}
                 </div>
               </div>
             </div>
@@ -82,6 +85,24 @@ export function MemberPage({ slug }: { slug: string }) {
               <div>
                 <dt>Years</dt>
                 <dd dir="ltr">{member.years}</dd>
+              </div>
+            ) : null}
+            {member.position ? (
+              <div>
+                <dt>Current role</dt>
+                <dd>{member.position}</dd>
+              </div>
+            ) : null}
+            {member.affiliation ? (
+              <div>
+                <dt>Organization</dt>
+                <dd>{member.affiliation}</dd>
+              </div>
+            ) : null}
+            {member.location ? (
+              <div>
+                <dt>Location</dt>
+                <dd>{member.location}</dd>
               </div>
             ) : null}
             {member.thesis ? (
@@ -108,7 +129,7 @@ export function MemberPage({ slug }: { slug: string }) {
             ) : null}
           </section>
 
-          <ProfileLinks member={member} className="profile-links member-page-links" />
+          <ProfileLinks member={member} labeled className="profile-link-pills member-page-links" />
 
           <div className="entity-actions">
             {member.homepage ? (

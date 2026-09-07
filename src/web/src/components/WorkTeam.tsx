@@ -1,26 +1,29 @@
-import { useState } from "react";
 import { Icon } from "@/components/icons";
+import { InitialsMark, useMemberPhoto } from "@/components/MemberPhoto";
 import { useLab } from "@/context/LabContext";
 import { classNames } from "@/lib/format";
-import { memberPath, memberPhoto, resolveTeam } from "@/lib/members";
+import { memberAvatarTone, memberPath, resolveTeam } from "@/lib/members";
 import { Link } from "@/lib/router";
 import type { Member } from "@/types";
 
 function StackAvatar({ member }: { member: Member }) {
-  const { githubStats, openMember } = useLab();
-  const src = memberPhoto(member, githubStats);
-  const [failed, setFailed] = useState(false);
-  const missing = !src || failed;
+  const { openMember } = useLab();
+  const { src, missing, onError } = useMemberPhoto(member);
 
   return (
     <button
       className={classNames("stack-avatar", missing && "photo-missing")}
+      data-tone={missing ? memberAvatarTone(member.name) : undefined}
       type="button"
       title={member.name}
       aria-label={`Open ${member.name} profile`}
       onClick={() => openMember(member)}
     >
-      {src && !failed ? <img src={src} alt="" onError={() => setFailed(true)} /> : null}
+      {src ? (
+        <img src={src} alt="" referrerPolicy="no-referrer" onError={onError} />
+      ) : (
+        <InitialsMark name={member.name} />
+      )}
     </button>
   );
 }

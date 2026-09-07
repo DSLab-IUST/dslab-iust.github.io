@@ -9,7 +9,7 @@ import {
   sameAsFor,
   universitySameAs,
 } from "./site";
-import { memberPath, memberPhotoPath } from "./members";
+import { isAlumni, memberNowLine, memberPath, memberPhotoPath } from "./members";
 import type { Member, ProjectItem } from "../types";
 
 function labAddress() {
@@ -84,19 +84,33 @@ function websiteNode() {
 function personNode(member: Member) {
   const url = absoluteUrl(memberPath(member.name));
   const isDirector = member.leadership === "director";
+  const alumni = isAlumni(member);
+  const aliases = [
+    ...(isDirector ? [LAB.director, LAB.directorFa, "دکتر محسن شریفی", "محسن شریفی"] : []),
+    member.aka,
+  ].filter((value, index, list): value is string => Boolean(value) && list.indexOf(value) === index);
+  const currentOrg = member.affiliation
+    ? { "@type": "Organization", name: member.affiliation }
+    : undefined;
+
   return {
     "@type": "Person",
     "@id": `${url}#person`,
     name: member.name,
-    alternateName: isDirector ? [LAB.director, LAB.directorFa, "دکتر محسن شریفی", "محسن شریفی"] : undefined,
-    jobTitle: isDirector ? `${member.role}; Lab Director` : member.role,
+    alternateName: aliases.length ? aliases : undefined,
+    jobTitle: isDirector
+      ? `${member.role}; Lab Director`
+      : (memberNowLine(member) || member.position || member.role),
     description: memberAnswer(member),
     url,
     image: assetUrl(memberPhotoPath(member)) || undefined,
     email: member.email || undefined,
-    affiliation: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
-    worksFor: member.leadership === "alumni" ? undefined : { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
-    alumniOf: member.leadership === "alumni"
+    homeLocation: member.location || undefined,
+    affiliation: alumni && currentOrg ? currentOrg : { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
+    worksFor: alumni
+      ? currentOrg
+      : { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
+    alumniOf: alumni
       ? { "@id": `${absoluteUrl(PATHS.lab)}#lab` }
       : { "@id": universityId },
     knowsAbout: member.focus?.length ? member.focus : undefined,

@@ -1,30 +1,35 @@
 import { Icon } from "@/components/icons";
 import type { Member } from "@/types";
 
-export function ProfileLinks({
-  member,
-  mini = false,
-  className = "mini-links",
-}: {
-  member: Member;
-  mini?: boolean;
-  className?: string;
-}) {
-  const links = [
-    member.homepage
-      ? { href: member.homepage, icon: "globe", label: `${member.name} faculty page` }
-      : null,
-    member.email
-      ? { href: `mailto:${member.email}`, icon: "mail", label: `Email ${member.name}` }
-      : null,
+const MINI_ICONS = new Set(["github", "linkedin", "scholar"]);
+
+const PILL_NAMES: Record<string, string> = {
+  globe: "Homepage",
+  mail: "Email",
+  github: "GitHub",
+  scholar: "Scholar",
+  linkedin: "LinkedIn",
+  researchgate: "ResearchGate",
+  scopus: "Scopus",
+  dblp: "DBLP",
+};
+
+function linksFor(member: Member) {
+  return [
     member.github
       ? { href: `https://github.com/${encodeURIComponent(member.github)}`, icon: "github", label: `${member.name} on GitHub` }
+      : null,
+    member.linkedin
+      ? { href: member.linkedin, icon: "linkedin", label: `${member.name} on LinkedIn` }
       : null,
     member.scholar
       ? { href: member.scholar, icon: "scholar", label: `${member.name} on Google Scholar` }
       : null,
-    member.linkedin
-      ? { href: member.linkedin, icon: "linkedin", label: `${member.name} on LinkedIn` }
+    member.homepage
+      ? { href: member.homepage, icon: "globe", label: `${member.name} homepage` }
+      : null,
+    member.email
+      ? { href: `mailto:${member.email}`, icon: "mail", label: `Email ${member.name}` }
       : null,
     member.researchgate
       ? { href: member.researchgate, icon: "researchgate", label: `${member.name} on ResearchGate` }
@@ -36,15 +41,29 @@ export function ProfileLinks({
       ? { href: member.dblp, icon: "dblp", label: `${member.name} on DBLP` }
       : null,
   ].filter(Boolean) as Array<{ href: string; icon: string; label: string }>;
+}
 
-  const shown = mini ? links.filter((link) => ["github", "linkedin", "scholar"].includes(link.icon)).slice(0, 3) : links;
+export function ProfileLinks({
+  member,
+  mini = false,
+  labeled = false,
+  className,
+}: {
+  member: Member;
+  mini?: boolean;
+  labeled?: boolean;
+  className?: string;
+}) {
+  const links = linksFor(member);
+  const shown = mini ? links.filter((link) => MINI_ICONS.has(link.icon)) : links;
+  const rootClass = className || (labeled ? "profile-link-pills" : mini ? "mini-links" : "profile-links");
 
   if (!shown.length && !mini) {
     return <span className="t-mono" style={{ color: "var(--muted)" }}>Add profile links</span>;
   }
 
   return (
-    <div className={className} onClick={(event) => event.stopPropagation()}>
+    <div className={rootClass} onClick={(event) => event.stopPropagation()}>
       {shown.map((link) => (
         <a
           key={link.href}
@@ -52,8 +71,10 @@ export function ProfileLinks({
           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
           rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
           aria-label={link.label}
+          title={link.label}
         >
           <Icon name={link.icon} />
+          {labeled ? <span>{PILL_NAMES[link.icon] || link.icon}</span> : null}
         </a>
       ))}
     </div>

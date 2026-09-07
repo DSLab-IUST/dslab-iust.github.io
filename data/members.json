@@ -86,10 +86,12 @@
     "alumniGroup": "phd",
     "years": "2012 – 2018",
     "degree": "phd",
-    "bio": "PhD alumnus in complex event processing at DSLab CE-IUST.",
+    "bio": "PhD alumnus of DSLab CE-IUST in complex event processing. Publishes as Mohammadmehdi Talebi; co-author with Prof. Mohsen Sharifi on PARS and ACEP.",
     "focus": [
       "Complex Event Processing"
-    ]
+    ],
+    "aka": "Mohammadmehdi Talebi",
+    "homepage": "https://www.csauthors.net/mohammadmehdi-talebi/"
   },
   {
     "name": "Mohammad Ali Fard Bastani",
@@ -130,6 +132,7 @@
     "location": "United States",
     "github": "showanasyabi",
     "linkedin": "https://www.linkedin.com/in/easyabi/",
+    "scholar": "https://scholar.google.com/citations?user=wMEcK5sAAAAJ&hl=en",
     "homepage": "https://showanasyabi.github.io/",
     "photo": "assets/images/esmail-asyabi.jpg"
   },
@@ -205,16 +208,17 @@
     "years": "2009 – 2015",
     "degree": "phd",
     "thesis": "Online Crawling of Farsi Blogs for Continuous Web Monitoring",
-    "bio": "PhD alumnus of DSLab CE-IUST. Dissertation on online crawling of Farsi blogs for continuous web monitoring. Faculty member at Amirkabir University of Technology.",
+    "bio": "PhD alumnus of DSLab CE-IUST. Dissertation on online crawling of Farsi blogs for continuous web monitoring. Assistant Professor of Software Engineering at Imam Hossein Comprehensive University.",
     "focus": [
       "Web Engineering",
       "Computer Security",
       "Information Retrieval"
     ],
-    "position": "Faculty member",
-    "affiliation": "Amirkabir University of Technology",
+    "position": "Assistant Professor of Software Engineering",
+    "affiliation": "Imam Hossein Comprehensive University",
     "location": "Tehran, Iran",
-    "linkedin": "https://www.linkedin.com/in/mehdi-naghavi-721468325/"
+    "linkedin": "https://www.linkedin.com/in/mehdi-naghavi-721468325/",
+    "homepage": "https://en.civilica.com/p/284724/"
   },
   {
     "name": "Ehsan Mousavi Khaneghah",
@@ -254,7 +258,7 @@
     ],
     "position": "Assistant Professor",
     "affiliation": "University of Calabria",
-    "location": "Italy",
+    "location": "Rende, Italy",
     "linkedin": "https://www.linkedin.com/in/leili-mirtaheri-09242727/",
     "scholar": "https://scholar.google.com/citations?user=iADV0EkAAAAJ&hl=en",
     "homepage": "https://khu.ac.ir/cv/283/en",
@@ -324,7 +328,9 @@
     "location": "Tehran, Iran",
     "email": "sedighian@kntu.ac.ir",
     "linkedin": "https://www.linkedin.com/in/saeed-sedighian-kashi-9a670429/",
-    "scholar": "https://scholar.google.com/citations?user=dInWh7AAAAAJ&hl=en"
+    "scholar": "https://scholar.google.com/citations?user=dInWh7AAAAAJ&hl=en",
+    "homepage": "https://wp.kntu.ac.ir/sedighian/",
+    "photo": "assets/images/saeed-sedighian-kashi.jpg"
   },
   {
     "name": "Saeed Pashazadeh",
@@ -356,11 +362,18 @@
     "alumniGroup": "master",
     "years": "2017 – 2020",
     "degree": "msc",
-    "bio": "Master alumnus in containers and OS-level virtualization at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in containers and OS-level virtualization. Software engineer at BITAARTS in Tehran; previously lead backend at Kuknos.",
     "focus": [
       "Containers",
-      "OS-Level Virtualization"
-    ]
+      "OS-Level Virtualization",
+      "Distributed Systems"
+    ],
+    "position": "Software Engineer",
+    "affiliation": "BITAARTS",
+    "location": "Tehran, Iran",
+    "github": "abolfazlamini",
+    "linkedin": "https://www.linkedin.com/in/abolfazl-amini-0046a882/",
+    "photo": "assets/images/abolfazl-amini.jpg"
   },
   {
     "name": "Sirus Shahini",
@@ -370,10 +383,20 @@
     "alumniGroup": "master",
     "years": "2016 – 2019",
     "degree": "msc",
-    "bio": "Master alumnus in information security at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in information security. Security researcher at Microsoft after a PhD in computer science at the University of Utah Flux Research Group.",
     "focus": [
-      "Information Security"
-    ]
+      "Information Security",
+      "Operating Systems",
+      "Network Security"
+    ],
+    "position": "Security Researcher",
+    "affiliation": "Microsoft",
+    "location": "United States",
+    "github": "0xsirus",
+    "linkedin": "https://www.linkedin.com/in/sirus-shahini-040a6162/",
+    "homepage": "http://www.flux.utah.edu/profile/sirus",
+    "email": "sirus.shahini@gmail.com",
+    "photo": "assets/images/sirus-shahini.jpg"
   },
   {
     "name": "Sina Nourian",
@@ -383,11 +406,19 @@
     "alumniGroup": "master",
     "years": "2016 – 2019",
     "degree": "msc",
-    "bio": "Master alumnus in stream processing and complex event processing at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in stream processing and complex event processing. Engineering team lead and principal backend engineer at Backbase in Utrecht.",
     "focus": [
       "Stream Processing",
-      "Complex Event Processing"
-    ]
+      "Complex Event Processing",
+      "Distributed Systems"
+    ],
+    "position": "Engineering Team Lead",
+    "affiliation": "Backbase",
+    "location": "Utrecht, Netherlands",
+    "github": "nrsina",
+    "linkedin": "https://www.linkedin.com/in/sinanourian/",
+    "homepage": "https://snourian.com",
+    "photo": "assets/images/sina-nourian.jpg"
   },
   {
     "name": "Seyed Alireza Sanaee",
@@ -460,10 +491,14 @@
     "alumniGroup": "master",
     "years": "2014 – 2017",
     "degree": "msc",
-    "bio": "Master alumnus in cloud computing at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in cloud computing. TypeScript team lead at Tenhil in Munich.",
     "focus": [
       "Cloud Computing"
-    ]
+    ],
+    "position": "TypeScript Team Lead",
+    "affiliation": "Tenhil GmbH",
+    "location": "Munich, Germany",
+    "linkedin": "https://www.linkedin.com/in/habibkhademhosseini/"
   },
   {
     "name": "Ali Moradi Alamdarloo",
@@ -508,11 +543,15 @@
     "years": "2013 – 2016",
     "degree": "msc",
     "thesis": "A Mechanism for Organization and Execution of High Performance Virtual Clusters",
-    "bio": "Master alumnus of DSLab CE-IUST. Master's thesis on organization and execution of high-performance virtual clusters; worked on the IUST Super Computing Center HPC cluster.",
+    "bio": "Master alumnus of DSLab CE-IUST. Master's thesis on organization and execution of high-performance virtual clusters; worked on the IUST Super Computing Center HPC cluster. Head of DWBI and Big Data at Hamrahe Aval (MCI).",
     "focus": [
       "High Performance Computing",
-      "Virtualization"
+      "Virtualization",
+      "Data Engineering"
     ],
+    "position": "Head of DWBI and Big Data",
+    "affiliation": "Hamrahe Aval (MCI)",
+    "location": "Tehran, Iran",
     "linkedin": "https://www.linkedin.com/in/mostafa-zamani/"
   },
   {
@@ -539,10 +578,18 @@
     "years": "2012 – 2015",
     "degree": "msc",
     "thesis": "A Technique for Time Estimation of Distributed Development of Application Software Based on Usecase Point Method",
-    "bio": "Master's thesis: A Technique for Time Estimation of Distributed Development of Application Software Based on Usecase Point Method.",
+    "bio": "Master alumnus of DSLab CE-IUST in distributed software effort estimation. CEO of Migaloo Future Technology; also founder of PunchCard.ir.",
     "focus": [
-      "Software Engineering"
-    ]
+      "Software Engineering",
+      "Distributed Systems"
+    ],
+    "position": "CEO",
+    "affiliation": "Migaloo Future Technology",
+    "location": "Dubai, United Arab Emirates",
+    "github": "mbs220",
+    "linkedin": "https://www.linkedin.com/in/mohammadbagherseifollahi/",
+    "homepage": "http://www.mb-seifollahi.ir",
+    "photo": "assets/images/mohammad-bagher-seifollahi.jpg"
   },
   {
     "name": "Michel Gokan",
@@ -598,11 +645,18 @@
     "years": "2011 – 2015",
     "degree": "bsc",
     "thesis": "Design and Implementation of a Mechanism for Reducing I/O Delays in Xen Virtual Machine Monitor",
-    "bio": "Undergraduate project: Design and Implementation of a Mechanism for Reducing I/O Delays in Xen Virtual Machine Monitor.",
+    "bio": "Undergraduate alumnus of DSLab CE-IUST. Senior-year work on reducing I/O delays in the Xen VMM. Staff software engineer at Samsung Semiconductor US after a PhD at Syracuse University.",
     "focus": [
       "Virtualization",
       "Operating Systems"
-    ]
+    ],
+    "position": "Staff Software Engineer",
+    "affiliation": "Samsung Semiconductor US",
+    "location": "San Jose, United States",
+    "github": "aminfallahi",
+    "linkedin": "https://www.linkedin.com/in/aminfallahi/",
+    "homepage": "https://aminfallahi.com",
+    "photo": "assets/images/amin-fallahi-khoshknab.jpg"
   },
   {
     "name": "Saeed Karimi",

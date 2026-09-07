@@ -37,6 +37,7 @@ function ResearchRow({
 
 export function Research({ preview = false }: { preview?: boolean }) {
   const extraId = useId();
+  const extraRef = useRef<HTMLDivElement>(null);
   const extraInnerRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   const [extraHeight, setExtraHeight] = useState(0);
@@ -45,14 +46,24 @@ export function Research({ preview = false }: { preview?: boolean }) {
   const canExpand = extra.length > 0;
 
   useLayoutEffect(() => {
-    const el = extraInnerRef.current;
-    if (!el) return;
+    const extraEl = extraRef.current;
+    const inner = extraInnerRef.current;
+    if (!extraEl || !inner) return;
 
-    const measure = () => setExtraHeight(el.scrollHeight);
+    const measure = () => {
+      extraEl.style.transition = "none";
+      extraEl.style.visibility = "hidden";
+      extraEl.style.height = "auto";
+      const next = extraEl.offsetHeight;
+      extraEl.style.height = "";
+      extraEl.style.visibility = "";
+      extraEl.style.transition = "";
+      setExtraHeight((prev) => (prev === next ? prev : next));
+    };
+
     measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(el);
-    return () => observer.disconnect();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, [canExpand]);
 
   return (
@@ -70,6 +81,7 @@ export function Research({ preview = false }: { preview?: boolean }) {
         ))}
         {canExpand ? (
           <div
+            ref={extraRef}
             className={`research-extra${expanded ? " is-open" : ""}`}
             id={extraId}
             role="region"

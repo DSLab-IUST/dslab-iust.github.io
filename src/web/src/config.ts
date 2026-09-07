@@ -7,6 +7,7 @@ export const CONFIG = {
   currentWorkUrl: "/data/current-work.json",
   projectsUrl: "/data/projects.json",
   presentationsUrl: "/data/presentations.json",
+  linkedinPhotosUrl: "/data/linkedin-photos.json",
 } as const;
 
 export const THEME_STORAGE_KEY = "dslab:theme";

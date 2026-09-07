@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { LAB, SITE } from "./src/config";
-import { memberPath, memberPhotoPath, memberSlug } from "./src/lib/members";
+import { memberPath, memberPhotoPath, memberSlug, applyAlumniLinkedinPhotos } from "./src/lib/members";
 import {
   homeGraph,
   labGraph,
@@ -25,7 +25,7 @@ import {
   researchMeta,
   type PageMeta,
 } from "./src/lib/site";
-import type { GithubStats, Member, ProjectItem } from "./src/types";
+import type { GithubStats, LinkedinPhotoIndex, Member, ProjectItem } from "./src/types";
 
 const repoRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
 

@@ -20,7 +20,12 @@ export interface Member {
   dblp?: string;
   homepage?: string;
   photo?: string;
+  linkedinPhoto?: string;
   bio?: string;
+  aka?: string;
+  affiliation?: string;
+  position?: string;
+  location?: string;
   degree?: string;
   educationLevel?: string;
   studyLevel?: string;
@@ -37,6 +42,11 @@ export interface GithubProfile {
   location?: string;
   blog?: string;
   public_repos?: number;
+}
+
+export interface LinkedinPhotoIndex {
+  generatedAt?: string | null;
+  photos?: Record<string, string>;
 }
 
 export interface GithubStats {

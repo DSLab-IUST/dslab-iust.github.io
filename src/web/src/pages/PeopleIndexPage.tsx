@@ -15,7 +15,7 @@ function NameRow({ member, index }: { member: Member; index: number }) {
   return (
     <li className="enter" style={enterDelay(index, "dense")}>
       <Link to={memberPath(member.name)}>{member.name}</Link>
-      <span>{member.role}</span>
+      <span>{member.affiliation ? `Now at ${member.affiliation}` : member.role}</span>
     </li>
   );
 }

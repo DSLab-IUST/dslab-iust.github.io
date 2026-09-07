@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
+import { AffiliationLine } from "@/components/AffiliationLine";
 import { DegreeBadge } from "@/components/DegreeBadge";
 import { Icon } from "@/components/icons";
 import { MemberPhoto } from "@/components/MemberPhoto";
 import { ProfileLinks } from "@/components/ProfileLinks";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
-import { cardFooterLabel, memberBio, memberPath, profileFor } from "@/lib/members";
-import { Link } from "@/lib/router";
+import { cardFooterLabel, memberBio, memberNowLine, memberPath, profileFor } from "@/lib/members";
+import { Link, navigate } from "@/lib/router";
 import { PATHS } from "@/lib/site";
 import type { AlumniGroup, Member } from "@/types";
 
@@ -19,14 +20,28 @@ const ALUMNI_GROUPS: Array<{ id: AlumniGroup; heading: string; note: string }> =
 function DirectorCard({ member }: { member: Member }) {
   const { githubStats } = useLab();
   const bio = memberBio(member, githubStats, "");
+  const href = memberPath(member.name);
+  const openProfile = () => navigate(href);
 
   return (
-    <article className="director-card">
+    <article
+      className="director-card"
+      tabIndex={0}
+      role="link"
+      aria-label={`Open profile for ${member.name}`}
+      onClick={openProfile}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openProfile();
+        }
+      }}
+    >
       <MemberPhoto member={member} className="portrait" />
       <div className="director-info">
         <span className="member-role">Lab director</span>
         <h3>
-          <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
+          <Link to={href} onClick={(event) => event.stopPropagation()}>
             {member.name}
           </Link>
         </h3>
@@ -36,6 +51,55 @@ function DirectorCard({ member }: { member: Member }) {
         </div>
       </div>
       <ProfileLinks member={member} className="profile-links" />
+    </article>
+  );
+}
+
+function AlumniCard({ member }: { member: Member }) {
+  const { openMember } = useLab();
+  const footerLabel = cardFooterLabel(member);
+
+  return (
+    <article
+      className="member-card alumni-card"
+      tabIndex={0}
+      role="button"
+      aria-label={`Open profile for ${member.name}`}
+      onClick={() => openMember(member)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openMember(member);
+        }
+      }}
+    >
+      <div className="member-inner">
+        <div className="member-head">
+          <MemberPhoto member={member} />
+          <div>
+            <div className="member-name">
+              <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
+                {member.name}
+              </Link>
+            </div>
+            <div className="member-title">{member.role}</div>
+            <AffiliationLine member={member} />
+          </div>
+        </div>
+        {member.thesis ? (
+          <p className="member-card-thesis">{member.thesis}</p>
+        ) : null}
+        <div className="member-tags">
+          {(member.focus || []).slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}
+        </div>
+        <div className="member-footer">
+          <div className="member-footer-left">
+            <small>{footerLabel}</small>
+            <DegreeBadge member={member} />
+          </div>
+          <ProfileLinks member={member} mini />
+        </div>
+      </div>
     </article>
   );
 }
@@ -123,9 +187,14 @@ export function MemberModal() {
             <div>
               <span className="member-role">{member.role}</span>
               <h3>{member.name}</h3>
-              <span className="t-mono" style={{ color: "var(--muted)" }}>
-                {member.years || profile.company || LAB.name}
-              </span>
+              <AffiliationLine member={member} />
+              {member.years ? (
+                <span className="t-mono" style={{ color: "var(--muted)" }}>{member.years}</span>
+              ) : !memberNowLine(member) ? (
+                <span className="t-mono" style={{ color: "var(--muted)" }}>
+                  {profile.company || LAB.name}
+                </span>
+              ) : null}
             </div>
           </div>
           {member.thesis ? <p className="member-thesis">{member.thesis}</p> : null}
@@ -133,6 +202,7 @@ export function MemberModal() {
           <div className="member-tags">
             {(member.focus || []).map((tag) => <span key={tag}>{tag}</span>)}
           </div>
+          <ProfileLinks member={member} labeled />
           <div className="modal-actions">
             <Link className="button button-primary" to={memberPath(member.name)} onClick={closeMember}>
               <Icon name="arrow-up-right" /> Full profile
@@ -145,21 +215,6 @@ export function MemberModal() {
             {member.email ? (
               <a className="button button-soft" href={`mailto:${member.email}`}>
                 <Icon name="mail" /> Email
-              </a>
-            ) : null}
-            {member.github ? (
-              <a className="button button-soft" target="_blank" rel="noreferrer" href={`https://github.com/${encodeURIComponent(member.github)}`}>
-                <Icon name="github" /> GitHub
-              </a>
-            ) : null}
-            {member.scholar ? (
-              <a className="button button-soft" target="_blank" rel="noreferrer" href={member.scholar}>
-                <Icon name="scholar" /> Scholar
-              </a>
-            ) : null}
-            {member.linkedin ? (
-              <a className="button button-soft" target="_blank" rel="noreferrer" href={member.linkedin}>
-                <Icon name="linkedin" /> LinkedIn
               </a>
             ) : null}
           </div>
@@ -245,7 +300,7 @@ export function People() {
                   <span>{group.note}</span>
                 </div>
                 <div className="member-grid enter">
-                  {groupMembers.map((member) => <MemberCard key={member.name} member={member} />)}
+                  {groupMembers.map((member) => <AlumniCard key={member.name} member={member} />)}
                 </div>
               </div>
             );

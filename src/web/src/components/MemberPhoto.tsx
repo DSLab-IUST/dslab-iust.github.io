@@ -1,33 +1,57 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { classNames } from "@/lib/format";
-import { memberPhoto } from "@/lib/members";
+import { memberAvatarTone, memberInitials, memberPhotoSources } from "@/lib/members";
 import { useLab } from "@/context/LabContext";
 import type { Member } from "@/types";
+
+type PhotoMember = Pick<Member, "name" | "photo" | "github" | "linkedin" | "leadership" | "linkedinPhoto">;
+
+export function InitialsMark({ name }: { name: string }) {
+  return (
+    <span className="photo-initials" aria-hidden="true">
+      {memberInitials(name)}
+    </span>
+  );
+}
+
+export function useMemberPhoto(member: PhotoMember) {
+  const { githubStats } = useLab();
+  const sources = useMemo(() => memberPhotoSources(member, githubStats), [member, githubStats]);
+  const sourceKey = sources.join("\n");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [sourceKey]);
+
+  const src = sources[index] || "";
+  return {
+    src,
+    missing: !src,
+    onError: () => setIndex((current) => current + 1),
+  };
+}
 
 export function MemberPhoto({
   member,
   className = "member-avatar",
 }: {
-  member: Pick<Member, "name" | "photo" | "github">;
+  member: PhotoMember;
   className?: string;
 }) {
-  const { githubStats } = useLab();
-  const src = memberPhoto(member, githubStats);
-  const [failed, setFailed] = useState(false);
-  const missing = !src || failed;
-
-  useEffect(() => {
-    setFailed(false);
-  }, [src]);
+  const { src, missing, onError } = useMemberPhoto(member);
 
   return (
     <div
       className={classNames(className, missing && "photo-missing")}
+      data-tone={missing ? memberAvatarTone(member.name) : undefined}
       aria-label={missing ? member.name : undefined}
     >
-      {src && !failed ? (
-        <img src={src} alt={member.name} onError={() => setFailed(true)} />
-      ) : null}
+      {src ? (
+        <img src={src} alt={member.name} referrerPolicy="no-referrer" onError={onError} />
+      ) : (
+        <InitialsMark name={member.name} />
+      )}
     </div>
   );
 }

@@ -38,9 +38,9 @@ type Palette = {
 const HUB_SHORT = "DSRL";
 const PERSPECTIVE = 2.65;
 const AUTO_SPIN = 0.2;
-const DRAG_RANGE_PX = 78;
-const SPRING = 46;
-const DAMPING = 9.2;
+const DRAG_RANGE_PX = 120;
+const RETURN_SPRING = 62;
+const RETURN_DAMPING = 8.6;
 const BOB = 0.036;
 const PITCH_MIN = -0.58;
 const PITCH_MAX = 0.66;
@@ -279,7 +279,9 @@ function pointerXY(canvas: HTMLCanvasElement, event: PointerEvent) {
   return { x: event.clientX - box.left, y: event.clientY - box.top };
 }
 
-export function attachTopologyGraph(canvas: HTMLCanvasElement) {
+type SafeRect = { x: number; y: number; w: number; h: number };
+
+export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLElement) {
   const raw = canvas.getContext("2d", { alpha: true, desynchronized: true })
     ?? canvas.getContext("2d", { alpha: true });
   if (!raw) return () => undefined;
@@ -310,6 +312,7 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
   let zoom = 120;
   let cx = 0;
   let cy = 0;
+  let safe: SafeRect = { x: 0, y: 0, w: 1, h: 1 };
   let hoverNode: GraphNode | null = null;
 
   const projected = new Map<GraphNode, Projected>();
@@ -332,6 +335,17 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
     if (!raf && running()) raf = requestAnimationFrame(frame);
   }
 
+  function measureSafe(): SafeRect {
+    const canvasBox = canvas.getBoundingClientRect();
+    const stageBox = safeArea.getBoundingClientRect();
+    return {
+      x: stageBox.left - canvasBox.left,
+      y: stageBox.top - canvasBox.top,
+      w: Math.max(1, stageBox.width),
+      h: Math.max(1, stageBox.height),
+    };
+  }
+
   function resize() {
     const box = canvas.getBoundingClientRect();
     cssW = Math.max(1, box.width);
@@ -343,9 +357,12 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
     if (canvas.width !== nextW) canvas.width = nextW;
     if (canvas.height !== nextH) canvas.height = nextH;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cx = cssW * 0.5;
-    cy = cssH * 0.52;
-    zoom = Math.min(cssW, cssH) * 0.36;
+    const nextSafe = measureSafe();
+    if (nextSafe.w >= 8 && nextSafe.h >= 8) safe = nextSafe;
+    else safe = { x: 0, y: 0, w: cssW, h: cssH };
+    cx = safe.x + safe.w * 0.5;
+    cy = safe.y + safe.h * 0.52;
+    zoom = Math.min(safe.w, safe.h) * 0.36;
   }
 
   function depthAlpha(z: number) {
@@ -393,9 +410,9 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
 
     for (const node of nodes) {
       if (drag.kind === "tug" && drag.node === node) continue;
-      node.vel.x += (-SPRING * node.offset.x - DAMPING * node.vel.x) * dt;
-      node.vel.y += (-SPRING * node.offset.y - DAMPING * node.vel.y) * dt;
-      node.vel.z += (-SPRING * node.offset.z - DAMPING * node.vel.z) * dt;
+      node.vel.x += (-RETURN_SPRING * node.offset.x - RETURN_DAMPING * node.vel.x) * dt;
+      node.vel.y += (-RETURN_SPRING * node.offset.y - RETURN_DAMPING * node.vel.y) * dt;
+      node.vel.z += (-RETURN_SPRING * node.offset.z - RETURN_DAMPING * node.vel.z) * dt;
       node.offset.x += node.vel.x * dt;
       node.offset.y += node.vel.y * dt;
       node.offset.z += node.vel.z * dt;
@@ -497,9 +514,9 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
   function endDrag() {
     if (drag.kind === "tug") {
       drag.node.heldBob = null;
-      drag.node.vel.x = 0;
-      drag.node.vel.y = 0;
-      drag.node.vel.z = 0;
+      drag.node.vel.x = -drag.node.offset.x * 3.4;
+      drag.node.vel.y = -drag.node.offset.y * 3.4;
+      drag.node.vel.z = -drag.node.offset.z * 3.4;
     }
     drag = { kind: "none" };
     canvas.classList.remove("is-grabbing");
@@ -642,6 +659,7 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
     draw();
   });
   ro.observe(canvas);
+  ro.observe(safeArea);
 
   const io = new IntersectionObserver((entries) => {
     inView = entries.some((entry) => entry.isIntersecting);

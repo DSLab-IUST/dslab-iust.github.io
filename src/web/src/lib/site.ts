@@ -1,5 +1,5 @@
 import { LAB, SITE } from "../config";
-import { memberPath, memberPhotoPath, memberSlug } from "./members";
+import { isAlumni, memberNowLine, memberPath, memberPhotoPath, memberSlug } from "./members";
 import type { Member, GithubStats } from "../types";
 
 export const PATHS = {
@@ -119,7 +119,17 @@ export function memberMeta(member: Member, githubStats?: GithubStats | null): Pa
     path: memberPath(member.name),
     image: assetUrl(memberPhotoPath(member, githubStats)) || undefined,
     type: "profile",
-    keywords: [member.name, member.role, LAB.name, LAB.university, LAB.universityShort, ...focus.split(", ").filter(Boolean)],
+    keywords: [
+      member.name,
+      member.aka,
+      member.role,
+      member.position,
+      member.affiliation,
+      LAB.name,
+      LAB.university,
+      LAB.universityShort,
+      ...focus.split(", ").filter(Boolean),
+    ].filter((value): value is string => Boolean(value)),
   };
 }
 
@@ -132,8 +142,11 @@ export function notFoundMeta(): PageMeta {
 }
 
 export function memberAffiliation(member: Member) {
-  if (member.leadership === "alumni") {
-    return `Alumnus of ${LAB.fullName} at ${LAB.university}`;
+  if (isAlumni(member)) {
+    const now = memberNowLine(member);
+    const place = member.location ? ` in ${member.location}` : "";
+    const current = now ? `${now}${place}. ` : "";
+    return `${current}Alumnus of ${LAB.fullName} at ${LAB.university}`;
   }
   if (member.leadership === "director") {
     return `Director, ${LAB.fullName}, ${LAB.school}, ${LAB.university}`;
@@ -145,7 +158,14 @@ export function memberAnswer(member: Member) {
   const focus = member.focus?.length ? ` Research focus: ${member.focus.join(", ")}.` : "";
   const years = member.years ? ` Years at the lab: ${member.years}.` : "";
   const thesis = member.thesis ? ` Thesis: ${member.thesis}.` : "";
-  return `${member.name} is a ${member.role} at the ${LAB.fullName} (${LAB.name}) in the ${LAB.school}, ${LAB.university}. The lab is directed by ${LAB.director}.${focus}${years}${thesis}`;
+  const aka = member.aka ? ` Also known as ${member.aka}.` : "";
+  if (isAlumni(member)) {
+    const now = memberNowLine(member);
+    const place = member.location ? ` in ${member.location}` : "";
+    const current = now ? ` Now ${now}${place}.` : "";
+    return `${member.name} is a ${member.role} of the ${LAB.fullName} (${LAB.name}) at ${LAB.university}.${aka}${current}${focus}${years}${thesis}`;
+  }
+  return `${member.name} is a ${member.role} at the ${LAB.fullName} (${LAB.name}) in the ${LAB.school}, ${LAB.university}. The lab is directed by ${LAB.director}.${aka}${focus}${years}${thesis}`;
 }
 
 export { memberPath, memberSlug };

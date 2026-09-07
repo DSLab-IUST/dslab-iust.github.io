@@ -1,3 +1,4 @@
+import { useId, useState } from "react";
 import { LAB } from "@/config";
 import { enterDelay } from "@/lib/motion";
 import { Link } from "@/lib/router";
@@ -19,6 +20,39 @@ export function Breadcrumbs({ items }: { items: Array<{ label: string; href?: st
   );
 }
 
+function FaqItem({
+  item,
+  index,
+}: {
+  item: { question: string; answer: string };
+  index: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+
+  return (
+    <div className={`faq-item enter${open ? " is-open" : ""}`} style={enterDelay(index, "rows")}>
+      <dt>
+        <button
+          type="button"
+          className="faq-toggle"
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span>{item.question}</span>
+          <span className="faq-marker" aria-hidden="true" />
+        </button>
+      </dt>
+      <dd id={panelId} inert={!open}>
+        <div className="faq-answer">
+          <p className="faq-answer-body">{item.answer}</p>
+        </div>
+      </dd>
+    </div>
+  );
+}
+
 export function FaqList({ items }: { items: Array<{ question: string; answer: string }> }) {
   return (
     <section className="entity-faq" aria-labelledby="faq-heading">
@@ -28,10 +62,7 @@ export function FaqList({ items }: { items: Array<{ question: string; answer: st
       </div>
       <dl>
         {items.map((item, index) => (
-          <div key={item.question} className="faq-item enter" style={enterDelay(index, "rows")}>
-            <dt>{item.question}</dt>
-            <dd>{item.answer}</dd>
-          </div>
+          <FaqItem key={item.question} item={item} index={index} />
         ))}
       </dl>
     </section>

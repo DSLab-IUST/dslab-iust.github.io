@@ -2,7 +2,7 @@ import { createReadStream, cpSync, existsSync, mkdirSync, statSync } from "node:
 import { extname, relative, resolve, sep } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { seoPrerender } from "./seo-prerender";
 
 const repoRoot = resolve(__dirname, "../..");
@@ -23,9 +23,9 @@ function isInside(root: string, file: string) {
   return Boolean(rel) && rel !== ".." && !rel.startsWith(`..${sep}`);
 }
 
-function serveRepoDir(urlPrefix: string, dir: string): Plugin["configureServer"] {
+function serveRepoDir(urlPrefix: string, dir: string) {
   const root = resolve(dir);
-  return (server) => {
+  return (server: ViteDevServer) => {
     server.middlewares.use((req, res, next) => {
       const url = req.url?.split("?")[0] ?? "";
       if (url !== urlPrefix && !url.startsWith(`${urlPrefix}/`)) {
@@ -71,8 +71,8 @@ function copyRepoStatic(): Plugin {
     buildStart: sync,
     configureServer(server) {
       sync();
-      serveRepoDir("/data", dataDir)?.(server);
-      serveRepoDir("/assets", assetsDir)?.(server);
+      serveRepoDir("/data", dataDir)(server);
+      serveRepoDir("/assets", assetsDir)(server);
     },
   };
 }

@@ -149,7 +149,9 @@ The file is a JSON array of member objects. `leadership` controls where someone 
 }
 ```
 
-`degree` may be `bsc`, `msc`, or `phd` (aliases such as `bachelor` / `master` also work). Optional profile fields: `email`, `scholar`, `researchgate`, `scopus`, `dblp`, `homepage`, `years`, `thesis`.
+`degree` may be `bsc`, `msc`, or `phd` (aliases such as `bachelor` / `master` also work). Optional profile fields: `email`, `scholar`, `researchgate`, `scopus`, `dblp`, `homepage`, `years`, `thesis`, `aka`, `affiliation`, `position`, `location`.
+
+For alumni, `role` stays the lab status (`PhD Alumnus`). Current workplace goes in `position` + `affiliation` (+ optional `location`).
 
 ### Current work
 

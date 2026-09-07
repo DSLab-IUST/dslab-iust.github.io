@@ -1,5 +1,6 @@
 import { CONFIG, STATS_CACHE_KEY } from "@/config";
-import type { GithubStats, LabWork, Member, PresentationData, ProjectItem, WorkItem } from "@/types";
+import { applyAlumniLinkedinPhotos } from "@/lib/members";
+import type { GithubStats, LabWork, LinkedinPhotoIndex, Member, PresentationData, ProjectItem, WorkItem } from "@/types";
 
 async function getJson<T>(url: string): Promise<T> {
   const res = await fetch(`${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`, { cache: "no-store" });
@@ -71,6 +72,15 @@ export async function loadLabData() {
     members = await getJson<Member[]>(CONFIG.membersUrl);
   } catch (error) {
     console.error(error);
+  }
+
+  try {
+    members = applyAlumniLinkedinPhotos(
+      members,
+      await getJson<LinkedinPhotoIndex>(CONFIG.linkedinPhotosUrl),
+    );
+  } catch (error) {
+    console.warn("[DSLab] LinkedIn photo index could not be loaded; alumni keep their local photos.", error);
   }
 
   const githubStats = await loadGithubStats();

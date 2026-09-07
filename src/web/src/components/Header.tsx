@@ -105,7 +105,7 @@ export function Header() {
     >
       <div className="site-header-inner">
         <Link className="brand" to={PATHS.home} ariaLabel={`${LAB.name} home`}>
-          <BrandLogo on={isLanding && !detached && isLight ? "light" : "dark"} />
+          <BrandLogo />
         </Link>
 
         <nav className="nav-links" aria-label="Primary navigation">
