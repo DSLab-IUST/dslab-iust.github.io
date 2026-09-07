@@ -565,9 +565,15 @@ html[data-theme="light"] .theme-icon-moon { opacity: 1; transform: none; }
 
 .hero-copy,
 .hero-lead,
-.hero-follow,
-.topo {
+.hero-follow {
   pointer-events: auto;
+}
+
+.topo,
+.topo-frame,
+.topo-stage {
+  /* Empty layout boxes sit above the canvas (in-flow or via the hero portal). */
+  pointer-events: none;
 }
 
 .topo {
@@ -703,6 +709,7 @@ html[data-theme="light"] .hero-quote {
 
 .topo-canvas {
   display: block;
+  pointer-events: auto;
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
