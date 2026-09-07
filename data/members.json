@@ -99,10 +99,16 @@
     "alumniGroup": "phd",
     "years": "2012 – 2018",
     "degree": "phd",
-    "bio": "PhD alumnus in complex event processing at DSLab CE-IUST.",
+    "bio": "PhD alumnus of DSLab CE-IUST in scalable complex event processing. General Manager of Enterprise Support Systems at Hamrahe Aval (MCI).",
     "focus": [
-      "Complex Event Processing"
-    ]
+      "Complex Event Processing",
+      "Business Process Monitoring"
+    ],
+    "aka": "Mohammad Ali Fardbastani",
+    "position": "General Manager, Enterprise Support Systems",
+    "affiliation": "Hamrahe Aval (MCI)",
+    "location": "Iran",
+    "linkedin": "https://www.linkedin.com/in/fardbastani/"
   },
   {
     "name": "Esmail Asyabi",
@@ -112,10 +118,20 @@
     "alumniGroup": "phd",
     "years": "2011 – 2017",
     "degree": "phd",
-    "bio": "PhD alumnus in cloud computing environments at DSLab CE-IUST.",
+    "bio": "PhD alumnus of DSLab CE-IUST in cloud computing environments. Now Senior Member of Technical Staff at Oracle, working on the I/O path of cloud-scale block storage behind Exadata. Also known as Showan Asyabi.",
     "focus": [
-      "Cloud Computing Environments"
-    ]
+      "Cloud Computing Environments",
+      "Cloud Storage",
+      "Operating Systems"
+    ],
+    "aka": "Showan Asyabi",
+    "position": "Senior Member of Technical Staff",
+    "affiliation": "Oracle",
+    "location": "United States",
+    "github": "showanasyabi",
+    "linkedin": "https://www.linkedin.com/in/easyabi/",
+    "homepage": "https://showanasyabi.github.io/",
+    "photo": "assets/images/esmail-asyabi.jpg"
   },
   {
     "name": "Zahra Jalalian",
@@ -125,10 +141,19 @@
     "alumniGroup": "phd",
     "years": "2012 – 2017",
     "degree": "phd",
-    "bio": "PhD alumna in complex event processing at DSLab CE-IUST.",
+    "bio": "PhD alumna of DSLab CE-IUST in complex event processing and big-data task scheduling. Assistant Professor of Electrical and Computer Engineering at Kharazmi University.",
     "focus": [
-      "Complex Event Processing"
-    ]
+      "Complex Event Processing",
+      "Big Data",
+      "Task Scheduling"
+    ],
+    "aka": "Zahra Djalalian",
+    "position": "Assistant Professor",
+    "affiliation": "Kharazmi University",
+    "location": "Tehran, Iran",
+    "linkedin": "https://www.linkedin.com/in/zahra-jalalian-b9aa83301/",
+    "homepage": "https://khu.ac.ir/cv/313/en",
+    "email": "jalalian@khu.ac.ir"
   },
   {
     "name": "Majid Hajibaba",
@@ -138,10 +163,18 @@
     "alumniGroup": "phd",
     "years": "2012 – 2017",
     "degree": "phd",
-    "bio": "PhD alumnus in cloud computing environments at DSLab CE-IUST.",
+    "bio": "PhD alumnus of DSLab CE-IUST in cloud computing. Senior Developer at Parsian E-Commerce, working on distributed systems and big-data platforms.",
     "focus": [
-      "Cloud Computing Environments"
-    ]
+      "Cloud Computing Environments",
+      "Distributed Systems",
+      "Big Data"
+    ],
+    "position": "Senior Developer",
+    "affiliation": "Parsian E-Commerce",
+    "location": "Tehran, Iran",
+    "github": "mhajibaba",
+    "linkedin": "https://www.linkedin.com/in/mhajibaba/",
+    "photo": "assets/images/majid-hajibaba.jpg"
   },
   {
     "name": "Sina Mahmoodi",
@@ -151,10 +184,17 @@
     "alumniGroup": "phd",
     "years": "2009 – 2016",
     "degree": "phd",
-    "bio": "PhD alumnus in high-performance computing at DSLab CE-IUST.",
+    "bio": "PhD alumnus of DSLab CE-IUST in high-performance virtual clusters. Tech Lead Software Engineer and architect at Agile Robots SE in Munich.",
     "focus": [
-      "High Performance Computing"
-    ]
+      "High Performance Computing",
+      "Virtualization",
+      "Robotics Software"
+    ],
+    "aka": "Sina Mahmoodi Khorandi",
+    "position": "Tech Lead Software Engineer",
+    "affiliation": "Agile Robots SE",
+    "location": "Munich, Germany",
+    "linkedin": "https://www.linkedin.com/in/sina-mahmoodi-khorandi-71040728/"
   },
   {
     "name": "Mehdi Naghavi",
@@ -165,11 +205,16 @@
     "years": "2009 – 2015",
     "degree": "phd",
     "thesis": "Online Crawling of Farsi Blogs for Continuous Web Monitoring",
-    "bio": "PhD dissertation: Online Crawling of Farsi Blogs for Continuous Web Monitoring.",
+    "bio": "PhD alumnus of DSLab CE-IUST. Dissertation on online crawling of Farsi blogs for continuous web monitoring. Faculty member at Amirkabir University of Technology.",
     "focus": [
       "Web Engineering",
-      "Computer Security"
-    ]
+      "Computer Security",
+      "Information Retrieval"
+    ],
+    "position": "Faculty member",
+    "affiliation": "Amirkabir University of Technology",
+    "location": "Tehran, Iran",
+    "linkedin": "https://www.linkedin.com/in/mehdi-naghavi-721468325/"
   },
   {
     "name": "Ehsan Mousavi Khaneghah",
@@ -180,11 +225,17 @@
     "years": "2009 – 2014",
     "degree": "phd",
     "thesis": "A Runtime System Software for General Dynamic Reconfiguration of Exascale HPC Clusters",
-    "bio": "PhD dissertation: A Runtime System Software for General Dynamic Reconfiguration of Exascale HPC Clusters.",
+    "bio": "PhD alumnus of DSLab CE-IUST in exascale HPC runtime systems. Faculty member in Computer Engineering at Shahed University.",
     "focus": [
       "High Performance Computing",
-      "Exascale Computing"
-    ]
+      "Exascale Computing",
+      "Distributed Systems"
+    ],
+    "position": "Faculty member",
+    "affiliation": "Shahed University",
+    "location": "Tehran, Iran",
+    "linkedin": "https://www.linkedin.com/in/ehsan-mousavi-a96204420/",
+    "scholar": "https://scholar.google.com/citations?user=PkCHy2QAAAAJ&hl=en"
   },
   {
     "name": "Seyedeh Leili Mirtaheri",
@@ -195,11 +246,19 @@
     "years": "2009 – 2014",
     "degree": "phd",
     "thesis": "A Framework for Distributed Management of Heterogeneous Compute Resources in Exascale Distributed P2P Systems",
-    "bio": "PhD dissertation: A Framework for Distributed Management of Heterogeneous Compute Resources in Exascale Distributed P2P Systems.",
+    "bio": "PhD alumna of DSLab CE-IUST in exascale and peer-to-peer systems. Assistant Professor at the University of Calabria; previously faculty at Kharazmi University.",
     "focus": [
       "Exascale Computing",
-      "Peer to Peer Computing"
-    ]
+      "Peer to Peer Computing",
+      "High Performance Computing"
+    ],
+    "position": "Assistant Professor",
+    "affiliation": "University of Calabria",
+    "location": "Italy",
+    "linkedin": "https://www.linkedin.com/in/leili-mirtaheri-09242727/",
+    "scholar": "https://scholar.google.com/citations?user=iADV0EkAAAAJ&hl=en",
+    "homepage": "https://khu.ac.ir/cv/283/en",
+    "email": "mirtaheri@khu.ac.ir"
   },
   {
     "name": "Hadi Salimi",
@@ -210,11 +269,17 @@
     "years": "2007 – 2012",
     "degree": "phd",
     "thesis": "Power-Aware Virtual Machine Scheduling in Support of Cloud Computing Environments",
-    "bio": "PhD dissertation: Power-Aware Virtual Machine Scheduling in Support of Cloud Computing Environments.",
+    "bio": "PhD alumnus of DSLab CE-IUST in power-aware virtual machine scheduling. R&D Engineer at Siemens Digital Industries Software, previously HPC research engineer at Inria Rennes.",
     "focus": [
       "Cloud Computing Environments",
-      "Virtualization"
-    ]
+      "Virtualization",
+      "High Performance Computing"
+    ],
+    "position": "R&D Engineer",
+    "affiliation": "Siemens Digital Industries Software",
+    "location": "France",
+    "linkedin": "https://www.linkedin.com/in/hadi-salimi/",
+    "homepage": "https://team.inria.fr/kerdata/hadi-salimi/"
   },
   {
     "name": "Hossein Momeni",
@@ -225,11 +290,19 @@
     "years": "2006 – 2012",
     "degree": "phd",
     "thesis": "Task Assignment and Scheduling in Wireless Sensor-Actor Network in Support of Real-Time Applications",
-    "bio": "PhD dissertation: Task Assignment and Scheduling in Wireless Sensor-Actor Network in Support of Real-Time Applications.",
+    "bio": "PhD alumnus of DSLab CE-IUST in wireless sensor-actor networks. Assistant Professor of Software Engineering at Golestan University.",
     "focus": [
       "Wireless Sensor Actor Networks",
-      "Real-Time Systems"
-    ]
+      "Real-Time Systems",
+      "Cloud Computing"
+    ],
+    "position": "Assistant Professor",
+    "affiliation": "Golestan University",
+    "location": "Gorgan, Iran",
+    "email": "h.momeni@gu.ac.ir",
+    "linkedin": "https://www.linkedin.com/in/hossein-momeni-63825a24b/",
+    "scholar": "https://scholar.google.com/citations?user=sFAFQmsAAAAJ&hl=en",
+    "homepage": "https://gu.ac.ir/en/faculty/h-momeni"
   },
   {
     "name": "Saeed Sedighian Kashi",
@@ -240,10 +313,18 @@
     "years": "2005 – 2012",
     "degree": "phd",
     "thesis": "Coordination in Weakly Connected Wireless Sensor Actor Networks",
-    "bio": "PhD dissertation: Coordination in Weakly Connected Wireless Sensor Actor Networks.",
+    "bio": "PhD alumnus of DSLab CE-IUST in wireless sensor-actor network coordination. Assistant Professor at K. N. Toosi University of Technology.",
     "focus": [
-      "Wireless Sensor Actor Networks"
-    ]
+      "Wireless Sensor Actor Networks",
+      "Cloud Computing",
+      "Software Engineering"
+    ],
+    "position": "Assistant Professor",
+    "affiliation": "K. N. Toosi University of Technology",
+    "location": "Tehran, Iran",
+    "email": "sedighian@kntu.ac.ir",
+    "linkedin": "https://www.linkedin.com/in/saeed-sedighian-kashi-9a670429/",
+    "scholar": "https://scholar.google.com/citations?user=dInWh7AAAAAJ&hl=en"
   },
   {
     "name": "Saeed Pashazadeh",
@@ -254,11 +335,18 @@
     "years": "2003 – 2010",
     "degree": "phd",
     "thesis": "Priority-Based Quality of Service Support at Middleware Level for Acoustic Target Tracking in Wireless Sensor Networks",
-    "bio": "PhD dissertation: Priority-Based Quality of Service Support at Middleware Level for Acoustic Target Tracking in Wireless Sensor Networks.",
+    "bio": "PhD alumnus of DSLab CE-IUST in wireless sensor networks and middleware. Professor of Computer Engineering at the University of Tabriz.",
     "focus": [
       "Wireless Sensor Networks",
-      "Middleware"
-    ]
+      "Middleware",
+      "Distributed Systems"
+    ],
+    "aka": "Saeid Pashazadeh",
+    "position": "Professor",
+    "affiliation": "University of Tabriz",
+    "location": "Tabriz, Iran",
+    "scholar": "https://scholar.google.com/citations?user=Ktz2RfwAAAAJ&hl=en",
+    "homepage": "http://asatid.tabrizu.ac.ir/en/pages/default.aspx?pashazadeh"
   },
   {
     "name": "Abolfazl Amini",
@@ -309,11 +397,21 @@
     "alumniGroup": "master",
     "years": "2016 – 2018",
     "degree": "msc",
-    "bio": "Master alumnus in operating systems and virtualized environments at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in operating systems and virtualized environments. Systems researcher at the University of Cambridge, also known as Ryan Sana.",
     "focus": [
       "Operating Systems",
-      "Virtualized Environments"
-    ]
+      "Virtualized Environments",
+      "Datacenter Networking"
+    ],
+    "aka": "Ryan Sana",
+    "position": "Systems Researcher",
+    "affiliation": "University of Cambridge",
+    "location": "Cambridge, United Kingdom",
+    "github": "sarsanaee",
+    "linkedin": "https://www.linkedin.com/in/alireza-sanaee/",
+    "scholar": "https://scholar.google.com/citations?user=SKU_VGgAAAAJ&hl=en",
+    "homepage": "https://sarsanaee.github.io",
+    "photo": "assets/images/seyed-alireza-sanaee.jpg"
   },
   {
     "name": "Erfan Sharafzadeh",
@@ -323,11 +421,22 @@
     "alumniGroup": "master",
     "years": "2016 – 2018",
     "degree": "msc",
-    "bio": "Master alumnus in cloud computing and operating systems at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in cloud computing and operating systems. Research Scientist at Meta after a Computer Science PhD at Johns Hopkins University.",
     "focus": [
       "Cloud Computing",
-      "Operating Systems"
-    ]
+      "Operating Systems",
+      "Host Networking",
+      "Datacenter Networks"
+    ],
+    "position": "Research Scientist",
+    "affiliation": "Meta",
+    "location": "New York, United States",
+    "github": "erfan111",
+    "linkedin": "https://www.linkedin.com/in/erfansharafzadeh/",
+    "scholar": "https://scholar.google.com/citations?user=58Y69owAAAAJ&hl=en",
+    "homepage": "https://cs.jhu.edu/~erfan/",
+    "email": "e.sharafzadeh@outlook.com",
+    "photo": "assets/images/erfan-sharafzadeh.jpg"
   },
   {
     "name": "Zahed Golabi",
@@ -364,11 +473,16 @@
     "alumniGroup": "master",
     "years": "2015 – 2017",
     "degree": "msc",
-    "bio": "Master alumnus in exascale and power-constrained computing at DSLab CE-IUST.",
+    "bio": "Master alumnus of DSLab CE-IUST in exascale and power-constrained computing. Software engineer based in Tehran.",
     "focus": [
       "Exascale Computing",
       "Power-Constrained Computing"
-    ]
+    ],
+    "position": "Software Engineer",
+    "location": "Tehran, Iran",
+    "github": "timndus",
+    "linkedin": "https://www.linkedin.com/in/alimoradialamdarloo/",
+    "photo": "assets/images/ali-moradi-alamdarloo.jpg"
   },
   {
     "name": "Arash Setayeshi",
@@ -394,11 +508,12 @@
     "years": "2013 – 2016",
     "degree": "msc",
     "thesis": "A Mechanism for Organization and Execution of High Performance Virtual Clusters",
-    "bio": "Master's thesis: A Mechanism for Organization and Execution of High Performance Virtual Clusters.",
+    "bio": "Master alumnus of DSLab CE-IUST. Master's thesis on organization and execution of high-performance virtual clusters; worked on the IUST Super Computing Center HPC cluster.",
     "focus": [
       "High Performance Computing",
       "Virtualization"
-    ]
+    ],
+    "linkedin": "https://www.linkedin.com/in/mostafa-zamani/"
   },
   {
     "name": "Arash Ghafuri",
@@ -438,11 +553,20 @@
     "years": "2013 – 2015",
     "degree": "msc",
     "thesis": "SLA-Aware Virtual Machines CPU Scheduling in Cloud Environments",
-    "bio": "Master's thesis: SLA-Aware Virtual Machines CPU Scheduling in Cloud Environments.",
+    "bio": "Master alumnus of DSLab CE-IUST in SLA-aware VM scheduling. Co-founder and CEO of Softwarify in Stockholm; previously postdoctoral fellow at KTH.",
     "focus": [
       "Cloud Computing Environments",
-      "Scheduling"
-    ]
+      "Scheduling",
+      "Machine Learning"
+    ],
+    "aka": "Michel Gokan Khan",
+    "position": "Co-founder and CEO",
+    "affiliation": "Softwarify",
+    "location": "Stockholm, Sweden",
+    "github": "michelgokan",
+    "linkedin": "https://www.linkedin.com/in/michelgokan/",
+    "homepage": "https://michelgokan.github.io/",
+    "photo": "assets/images/michel-gokan.jpg"
   },
   {
     "name": "Bahman Rashidi",
@@ -453,10 +577,17 @@
     "years": "2012 – 2014",
     "degree": "msc",
     "thesis": "An Information Exchange for Cloud Computing Environment",
-    "bio": "Master's thesis: An Information Exchange for Cloud Computing Environment.",
+    "bio": "Master alumnus of DSLab CE-IUST in cloud interoperability. Senior Director of Cybersecurity at Comcast, after a PhD at Virginia Commonwealth University.",
     "focus": [
-      "Cloud Computing Environments"
-    ]
+      "Cloud Computing Environments",
+      "Cybersecurity",
+      "Privacy Engineering"
+    ],
+    "position": "Senior Director, Cybersecurity",
+    "affiliation": "Comcast",
+    "location": "Greater Philadelphia, United States",
+    "linkedin": "https://www.linkedin.com/in/bahman-rashidi/",
+    "scholar": "https://scholar.google.com/citations?user=v_sv5LMAAAAJ&hl=en"
   },
   {
     "name": "Amin Fallahi Khoshknab",
