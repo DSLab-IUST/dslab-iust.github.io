@@ -1,15 +1,15 @@
 {
   "organization": "DSLab-IUST",
-  "generatedAt": "2026-09-07T18:19:15.181Z",
+  "generatedAt": "2026-09-07T18:30:01.849Z",
   "windowDays": 90,
   "repoCount": 1,
-  "totalCommits": 52,
+  "totalCommits": 54,
   "activeContributors": [
     {
       "login": "MatinGhanbari",
       "name": "Matin Ghanbari",
       "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
-      "commits": 46
+      "commits": 48
     },
     {
       "login": "SArshiaK",
