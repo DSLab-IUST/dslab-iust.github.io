@@ -10,8 +10,9 @@ import {
   labGraph,
   memberGraph,
   peopleIndexGraph,
+  publicationsGraph,
+  researchGraph,
   serializeJsonLd,
-  universityGraph,
 } from "./src/lib/schema";
 import {
   absoluteUrl,
@@ -20,10 +21,11 @@ import {
   labMeta,
   memberMeta,
   peopleIndexMeta,
-  universityMeta,
+  publicationsMeta,
+  researchMeta,
   type PageMeta,
 } from "./src/lib/site";
-import type { Member } from "./src/types";
+import type { Member, ProjectItem } from "./src/types";
 
 const repoRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
 
@@ -206,7 +208,8 @@ function buildSitemapEntries(members: Member[]): SitemapEntry[] {
     "src/web/src/config.ts",
   );
   const labLastmod = gitLastmod("src/web/src/config.ts", "src/web/src/pages/LabPage.tsx");
-  const universityLastmod = gitLastmod("src/web/src/config.ts", "src/web/src/pages/UniversityPage.tsx");
+  const researchLastmod = gitLastmod("src/web/src/config.ts", "src/web/src/pages/ResearchPage.tsx", "src/web/src/components/Research.tsx");
+  const publicationsLastmod = gitLastmod("data/projects.json", "src/web/src/pages/PublicationsPage.tsx", "src/web/src/components/Work.tsx");
   const peopleLastmod = gitLastmod("data/members.json", "src/web/src/pages/PeopleIndexPage.tsx", "src/web/src/pages/MemberPage.tsx");
 
   const director = members.find((member) => member.leadership === "director");
@@ -217,7 +220,8 @@ function buildSitemapEntries(members: Member[]): SitemapEntry[] {
   return [
     { path: "/", lastmod: homeLastmod, images: homeImage },
     { path: "/lab", lastmod: labLastmod, images: homeImage },
-    { path: "/university", lastmod: universityLastmod },
+    { path: "/research", lastmod: researchLastmod },
+    { path: "/publications", lastmod: publicationsLastmod },
     { path: "/people", lastmod: peopleLastmod },
     ...members.map((member) => {
       const images = member.photo
@@ -241,7 +245,8 @@ function llmsTxt(members: Member[]) {
 ## Site
 - [Home](${SITE.origin}/)
 - [Lab](${SITE.origin}/lab): ${LAB.fullName} / ${LAB.nameFa}
-- [University](${SITE.origin}/university): ${LAB.university} / ${LAB.universityFa}
+- [Research](${SITE.origin}/research)
+- [Publications](${SITE.origin}/publications)
 - [People](${SITE.origin}/people)
 
 ## People
@@ -262,6 +267,9 @@ export function seoPrerender(): Plugin {
       const members = JSON.parse(
         readFileSync(resolve(__dirname, "../../data/members.json"), "utf8"),
       ) as Member[];
+      const projects = JSON.parse(
+        readFileSync(resolve(__dirname, "../../data/projects.json"), "utf8"),
+      ) as ProjectItem[];
       const template = readFileSync(resolve(dist, "index.html"), "utf8");
 
       const pages: Array<{ file: string; meta: PageMeta; jsonLd: unknown; article: string }> = [
@@ -271,7 +279,8 @@ export function seoPrerender(): Plugin {
           jsonLd: homeGraph(members),
           article: article(homeMeta().title, homeMeta().description, [
             { href: "/lab", label: LAB.fullName },
-            { href: "/university", label: LAB.university },
+            { href: "/research", label: "Research" },
+            { href: "/publications", label: "Publications" },
             { href: "/people", label: "People" },
           ]),
         },
@@ -280,18 +289,34 @@ export function seoPrerender(): Plugin {
           meta: labMeta(),
           jsonLd: labGraph(members),
           article: article(labMeta().title, labMeta().description, [
-            { href: "/university", label: LAB.university },
+            { href: "/research", label: "Research" },
+            { href: "/publications", label: "Publications" },
             { href: "/people", label: "People" },
             ...members.slice(0, 12).map((member) => ({ href: memberPath(member.name), label: member.name })),
           ]),
         },
         {
-          file: "university/index.html",
-          meta: universityMeta(),
-          jsonLd: universityGraph(members),
-          article: article(universityMeta().title, universityMeta().description, [
+          file: "research/index.html",
+          meta: researchMeta(),
+          jsonLd: researchGraph(members),
+          article: article(researchMeta().title, researchMeta().description, [
             { href: "/lab", label: LAB.fullName },
+            { href: "/publications", label: "Publications" },
             { href: "/people", label: "People" },
+          ]),
+        },
+        {
+          file: "publications/index.html",
+          meta: publicationsMeta(),
+          jsonLd: publicationsGraph(members, projects),
+          article: article(publicationsMeta().title, publicationsMeta().description, [
+            { href: "/lab", label: LAB.fullName },
+            { href: "/research", label: "Research" },
+            { href: "/people", label: "People" },
+            ...projects.slice(0, 8).map((item) => ({
+              href: item.links?.[0]?.url || "/publications",
+              label: item.title || "Publication",
+            })),
           ]),
         },
         {
@@ -309,7 +334,8 @@ export function seoPrerender(): Plugin {
           jsonLd: memberGraph(member, members),
           article: article(memberMeta(member).title, memberMeta(member).description, [
             { href: "/lab", label: LAB.fullName },
-            { href: "/university", label: LAB.university },
+            { href: "/research", label: "Research" },
+            { href: "/publications", label: "Publications" },
             { href: "/people", label: "People" },
           ]),
         })),

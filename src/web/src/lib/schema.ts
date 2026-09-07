@@ -10,7 +10,7 @@ import {
   universitySameAs,
 } from "./site";
 import { memberPath } from "./members";
-import type { Member } from "../types";
+import type { Member, ProjectItem } from "../types";
 
 function labAddress() {
   return {
@@ -22,13 +22,15 @@ function labAddress() {
   };
 }
 
+const universityId = `${LAB.universityUrl}#university`;
+
 function universityNode() {
   return {
     "@type": "CollegeOrUniversity",
-    "@id": `${absoluteUrl(PATHS.university)}#university`,
+    "@id": universityId,
     name: LAB.university,
     alternateName: [LAB.universityShort, LAB.universityFa, "Iran Univ. of Science and Technology"],
-    url: absoluteUrl(PATHS.university),
+    url: LAB.universityUrl,
     sameAs: universitySameAs(),
     address: labAddress(),
     department: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
@@ -43,7 +45,7 @@ function labNode(members: Member[] = []) {
     name: LAB.fullName,
     alternateName: [LAB.name, LAB.nameFa, "DSLab", "Distributed Systems Research Laboratory"],
     url: absoluteUrl(PATHS.lab),
-    parentOrganization: { "@id": `${absoluteUrl(PATHS.university)}#university` },
+    parentOrganization: { "@id": universityId },
     department: LAB.school,
     email: LAB.email,
     telephone: LAB.phone,
@@ -74,7 +76,7 @@ function websiteNode() {
     publisher: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
     about: [
       { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
-      { "@id": `${absoluteUrl(PATHS.university)}#university` },
+      { "@id": universityId },
     ],
   };
 }
@@ -96,7 +98,7 @@ function personNode(member: Member) {
     worksFor: member.leadership === "alumni" ? undefined : { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
     alumniOf: member.leadership === "alumni"
       ? { "@id": `${absoluteUrl(PATHS.lab)}#lab` }
-      : { "@id": `${absoluteUrl(PATHS.university)}#university` },
+      : { "@id": universityId },
     knowsAbout: member.focus?.length ? member.focus : undefined,
     sameAs: sameAsFor(member),
     identifier: member.github ? { "@type": "PropertyValue", propertyID: "github", value: member.github } : undefined,
@@ -133,15 +135,16 @@ function graph(nodes: unknown[]) {
   };
 }
 
+/** English FAQs shown on the homepage and lab page. */
 export function homeFaqs() {
   return [
     {
-      question: "What is DSLab IUST?",
-      answer: `${LAB.fullName} (${LAB.name}, ${LAB.nameFa}) is a research laboratory at the ${LAB.school}, ${LAB.university} (${LAB.universityFa}). It has been directed by ${LAB.director} since ${LAB.foundingYear} and works on distributed operating systems, high-performance computing, cloud environments, complex event processing, wireless sensor-actor networks, and computer security.`,
+      question: `What is ${LAB.name}?`,
+      answer: `${LAB.fullName} (${LAB.name}) is a research laboratory at the ${LAB.school}, ${LAB.university}. It has been directed by ${LAB.director} since ${LAB.foundingYear} and works on distributed operating systems, high-performance computing, cloud environments, complex event processing, wireless sensor-actor networks, and computer security.`,
     },
     {
       question: `Who is ${LAB.director}?`,
-      answer: `${LAB.director} (${LAB.directorFa}) is Professor of System Software Engineering at ${LAB.university} and director of ${LAB.fullName}. His research focuses on distributed operating systems, high-performance computing, and distributed kernelware.`,
+      answer: `${LAB.director} is Professor of System Software Engineering at ${LAB.university} and director of ${LAB.fullName}. His research focuses on distributed operating systems, high-performance computing, and distributed kernelware.`,
     },
     {
       question: `Where is ${LAB.fullName} located?`,
@@ -154,30 +157,18 @@ export function homeFaqs() {
   ];
 }
 
-export function labFaqs() {
-  return homeFaqs().concat([
+/** Persian FAQ entries for JSON-LD only (not shown in visible FAQ UI). */
+export function labFaqsSchemaOnly() {
+  return [
     {
       question: `${LAB.nameFa} چیست؟`,
       answer: `${LAB.nameFa} همان ${LAB.fullName} در ${LAB.schoolFa}، ${LAB.universityFa} است و از سال ${LAB.foundingYear} تحت هدایت ${LAB.directorFa} فعالیت می‌کند.`,
     },
-  ]);
+  ];
 }
 
-export function universityFaqs() {
-  return [
-    {
-      question: `What is ${LAB.university}?`,
-      answer: `${LAB.university} (${LAB.universityShort}, ${LAB.universityFa}) is a public research university in Tehran, Iran. The ${LAB.school} hosts ${LAB.fullName} (${LAB.name}), directed by ${LAB.director}.`,
-    },
-    {
-      question: `Where is the Distributed Systems Lab at ${LAB.universityShort}?`,
-      answer: `${LAB.fullName} is in the ${LAB.school} at ${LAB.university}, Narmak, Tehran. Official lab site: ${SITE.origin}.`,
-    },
-    {
-      question: `${LAB.universityFa} کجاست؟`,
-      answer: `${LAB.universityFa} در نارمک تهران است. ${LAB.nameFa} در ${LAB.schoolFa} این دانشگاه قرار دارد و مدیر آن ${LAB.directorFa} است.`,
-    },
-  ];
+export function labFaqs() {
+  return homeFaqs();
 }
 
 export function memberFaqs(member: Member) {
@@ -222,29 +213,67 @@ export function labGraph(members: Member[]) {
       { name: LAB.name, path: PATHS.home },
       { name: LAB.fullName, path: PATHS.lab },
     ]),
-    faq(labFaqs()),
+    faq([...labFaqs(), ...labFaqsSchemaOnly()]),
   ]);
 }
 
-export function universityGraph(members: Member[]) {
+export function researchGraph(members: Member[]) {
   return graph([
     {
-      "@type": "AboutPage",
-      "@id": `${absoluteUrl(PATHS.university)}#page`,
-      url: absoluteUrl(PATHS.university),
-      name: LAB.university,
+      "@type": "CollectionPage",
+      "@id": `${absoluteUrl(PATHS.research)}#page`,
+      url: absoluteUrl(PATHS.research),
+      name: `Research — ${LAB.name}`,
       isPartOf: { "@id": `${SITE.origin}/#website` },
-      about: { "@id": `${absoluteUrl(PATHS.university)}#university` },
-      mainEntity: { "@id": `${absoluteUrl(PATHS.university)}#university` },
+      about: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: RESEARCH.length,
+        itemListElement: RESEARCH.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          description: item.text,
+        })),
+      },
     },
     websiteNode(),
-    universityNode(),
     labNode(members),
+    universityNode(),
     breadcrumb([
       { name: LAB.name, path: PATHS.home },
-      { name: LAB.university, path: PATHS.university },
+      { name: "Research", path: PATHS.research },
     ]),
-    faq(universityFaqs()),
+  ]);
+}
+
+export function publicationsGraph(members: Member[], projects: ProjectItem[] = []) {
+  return graph([
+    {
+      "@type": "CollectionPage",
+      "@id": `${absoluteUrl(PATHS.publications)}#page`,
+      url: absoluteUrl(PATHS.publications),
+      name: `Publications — ${LAB.name}`,
+      isPartOf: { "@id": `${SITE.origin}/#website` },
+      about: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: projects.length,
+        itemListElement: projects.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.title,
+          description: item.description,
+        })),
+      },
+    },
+    websiteNode(),
+    labNode(members),
+    universityNode(),
+    breadcrumb([
+      { name: LAB.name, path: PATHS.home },
+      { name: "Publications", path: PATHS.publications },
+    ]),
   ]);
 }
 

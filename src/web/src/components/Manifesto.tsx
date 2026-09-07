@@ -5,7 +5,7 @@ export function Manifesto() {
     <section className="manifesto section-shell">
       <div className="manifesto-card">
         <span className="section-kicker">Mission</span>
-        <blockquote className="manifesto-quote">{LAB.quote}</blockquote>
+        <blockquote className="manifesto-quote">“{LAB.quote}”</blockquote>
         <h2>
           A truly distributed operating system.
         </h2>

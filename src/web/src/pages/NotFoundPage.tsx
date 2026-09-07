@@ -14,7 +14,7 @@ export function NotFoundPage() {
       <main className="section-shell entity-body">
         <span className="section-kicker">404</span>
         <h1>This path is not in {LAB.name}.</h1>
-        <p className="entity-lead">The lab, university and people pages are listed below.</p>
+        <p className="entity-lead">The lab, research, publications and people pages are listed below.</p>
         <div className="entity-actions">
           <Link className="button button-primary" to={PATHS.home}>Home</Link>
           <Link className="button button-soft" to={PATHS.people}>People</Link>

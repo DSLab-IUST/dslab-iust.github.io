@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SITE } from "@/config";
+import { LAB, SITE } from "@/config";
 import { serializeJsonLd } from "@/lib/schema";
 import { absoluteUrl, type PageMeta } from "@/lib/site";
 
@@ -29,7 +29,7 @@ export function Seo({ meta, jsonLd }: { meta: PageMeta; jsonLd: unknown }) {
     setMeta('meta[property="og:description"]', { property: "og:description", content: meta.description });
     setMeta('meta[property="og:type"]', { property: "og:type", content: meta.type === "profile" ? "profile" : "website" });
     setMeta('meta[property="og:url"]', { property: "og:url", content: absoluteUrl(meta.path) });
-    setMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "DSLab IUST" });
+    setMeta('meta[property="og:site_name"]', { property: "og:site_name", content: LAB.name });
     setMeta('meta[property="og:locale"]', { property: "og:locale", content: "en_US" });
     setMeta('meta[property="og:locale:alternate"]', { property: "og:locale:alternate", content: SITE.localeFa });
     if (meta.image) {

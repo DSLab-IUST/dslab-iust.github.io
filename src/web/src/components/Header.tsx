@@ -1,26 +1,56 @@
+import { useEffect, useId, useRef, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Icon } from "@/components/icons";
+import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { useTheme } from "@/hooks/useTheme";
-import { Link } from "@/lib/router";
+import { Link, useRoute } from "@/lib/router";
 import { PATHS } from "@/lib/site";
 
 const NAV = [
+  { href: PATHS.home, label: "Home" },
   { href: PATHS.lab, label: "Lab" },
   { href: PATHS.people, label: "People" },
-  { href: PATHS.university, label: "University" },
-  { href: "/#research", label: "Research" },
-  { href: "/#projects", label: "Publications" },
+  { href: PATHS.research, label: "Research" },
+  { href: PATHS.publications, label: "Publications" },
 ];
 
 export function Header() {
   const { orgHref } = useLab();
   const { isLight, toggleTheme } = useTheme();
+  const { path } = useRoute();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuId = useId();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [path]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 981px)");
+    const onChange = () => {
+      if (mq.matches) setMenuOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
   return (
-    <header className="site-header" id="top">
+    <header className={`site-header${menuOpen ? " is-nav-open" : ""}`} id="top">
       <div className="site-header-inner">
-        <Link className="brand" to={PATHS.home} ariaLabel="DSLab IUST home">
+        <Link className="brand" to={PATHS.home} ariaLabel={`${LAB.name} home`}>
           <BrandLogo />
         </Link>
 
@@ -44,12 +74,51 @@ export function Header() {
             </span>
             <span className="theme-toggle-label">{isLight ? "Dark" : "Light"}</span>
           </button>
-          <a className="button button-ghost" href={orgHref} target="_blank" rel="noreferrer">
+          <a
+            className="button button-ghost header-github"
+            href={orgHref}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
             <Icon name="github" />
-            GitHub
+            <span className="header-github-label" aria-hidden="true">GitHub</span>
           </a>
+          <button
+            ref={toggleRef}
+            className="nav-toggle"
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="nav-toggle-bars" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          </button>
         </div>
       </div>
+
+      <nav
+        id={menuId}
+        className={`mobile-nav${menuOpen ? " is-open" : ""}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+      >
+        <div className="mobile-nav-inner">
+          <div className="mobile-nav-links">
+            {NAV.map((item) => (
+              <Link key={item.href} to={item.href} onClick={() => setMenuOpen(false)}>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

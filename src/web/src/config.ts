@@ -5,7 +5,6 @@ export const CONFIG = {
   currentWorkUrl: "/data/current-work.json",
   projectsUrl: "/data/projects.json",
   presentationsUrl: "/data/presentations.json",
-  commitsPerCoffee: 20,
 } as const;
 
 export const THEME_STORAGE_KEY = "dslab:theme";
@@ -18,13 +17,13 @@ export const SITE = {
 } as const;
 
 export const LAB = {
-  name: "DSLab IUST",
-  fullName: "Distributed Systems Lab",
+  name: "DSLab CE-IUST",
+  fullName: "Distributed Systems Research Lab",
   nameFa: "آزمایشگاه سیستم‌های توزیعی",
   school: "School of Computer Engineering",
   schoolFa: "دانشکده مهندسی کامپیوتر",
   university: "Iran University of Science and Technology",
-  universityShort: "IUST",
+  universityShort: "CE-IUST",
   universityFa: "دانشگاه علم و صنعت ایران",
   director: "Prof. Mohsen Sharifi",
   directorFa: "پروفسور محسن شریفی",

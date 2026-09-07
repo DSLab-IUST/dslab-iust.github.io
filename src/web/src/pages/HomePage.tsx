@@ -27,15 +27,13 @@ export function HomePage() {
     <>
       <Seo meta={meta} jsonLd={homeGraph(members)} />
       <Header />
-      <div className="chrome-band">
-        <Hero />
-      </div>
+      <Hero />
       <main>
-        <Research />
+        <Research preview />
         <People />
         <NowBuilding />
         <Presentations />
-        <Projects />
+        <Projects preview />
         <Manifesto />
         <section className="section-shell entity-home-faq">
           <FaqList items={homeFaqs()} />

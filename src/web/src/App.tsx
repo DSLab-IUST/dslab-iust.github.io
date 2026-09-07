@@ -6,13 +6,15 @@ import { LabPage } from "@/pages/LabPage";
 import { MemberPage } from "@/pages/MemberPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { PeopleIndexPage } from "@/pages/PeopleIndexPage";
-import { UniversityPage } from "@/pages/UniversityPage";
+import { PublicationsPage } from "@/pages/PublicationsPage";
+import { ResearchPage } from "@/pages/ResearchPage";
 
 function Routes() {
   const { route } = useRoute();
 
   if (route.name === "lab") return <LabPage />;
-  if (route.name === "university") return <UniversityPage />;
+  if (route.name === "research") return <ResearchPage />;
+  if (route.name === "publications") return <PublicationsPage />;
   if (route.name === "people") return <PeopleIndexPage />;
   if (route.name === "member") return <MemberPage slug={route.slug} />;
   if (route.name === "notfound") return <NotFoundPage />;

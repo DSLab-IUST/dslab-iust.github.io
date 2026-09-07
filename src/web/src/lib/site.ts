@@ -5,7 +5,8 @@ import type { Member } from "../types";
 export const PATHS = {
   home: "/",
   lab: "/lab",
-  university: "/university",
+  research: "/research",
+  publications: "/publications",
   people: "/people",
 } as const;
 
@@ -40,7 +41,7 @@ export function labSameAs() {
 }
 
 export function universitySameAs() {
-  return [LAB.universityUrl, LAB.universityWiki, LAB.universityWikiFa, LAB.schoolUrl, absoluteUrl(PATHS.university)];
+  return [LAB.universityUrl, LAB.universityWiki, LAB.universityWikiFa, LAB.schoolUrl];
 }
 
 export interface PageMeta {
@@ -55,7 +56,7 @@ export interface PageMeta {
 export function homeMeta(): PageMeta {
   return {
     title: `${LAB.name} — ${LAB.fullName} at ${LAB.universityShort}`,
-    description: `${LAB.fullName} (${LAB.nameFa}) at ${LAB.university} (${LAB.universityFa}), directed by ${LAB.director}. Research in distributed operating systems, HPC, cloud, CEP, WSAN, and computer security.`,
+    description: `${LAB.fullName} (${LAB.name}) at ${LAB.university}, directed by ${LAB.director}. Research in distributed operating systems, HPC, cloud, CEP, WSAN, and computer security.`,
     path: PATHS.home,
     image: assetUrl("assets/images/mohsen-sharifi.jpg"),
     keywords: [
@@ -68,20 +69,30 @@ export function homeMeta(): PageMeta {
 export function labMeta(): PageMeta {
   return {
     title: `${LAB.fullName} (${LAB.name}) — ${LAB.universityShort}`,
-    description: `${LAB.fullName} is the official ${LAB.nameFa} at the ${LAB.school}, ${LAB.university}. Directed by ${LAB.director} since ${LAB.foundingYear}.`,
+    description: `${LAB.fullName} is a research laboratory at the ${LAB.school}, ${LAB.university}. Directed by ${LAB.director} since ${LAB.foundingYear}.`,
     path: PATHS.lab,
     image: assetUrl("assets/images/mohsen-sharifi.jpg"),
     keywords: [LAB.name, LAB.fullName, LAB.nameFa, "DSLab", "distributed systems laboratory", LAB.director],
   };
 }
 
-export function universityMeta(): PageMeta {
+export function researchMeta(): PageMeta {
   return {
-    title: `${LAB.university} (${LAB.universityShort}) — ${LAB.name}`,
-    description: `${LAB.university} (${LAB.universityFa}) is the home of ${LAB.fullName} (${LAB.name}) in the ${LAB.school}. The lab is directed by ${LAB.director}.`,
-    path: PATHS.university,
+    title: `Research — ${LAB.name}`,
+    description: `Research areas at ${LAB.fullName} (${LAB.name}): high-performance computing, distributed systems, cloud computing, complex event processing, wireless sensor-actor networks, and computer security.`,
+    path: PATHS.research,
     image: assetUrl("assets/images/mohsen-sharifi.jpg"),
-    keywords: [LAB.university, LAB.universityFa, LAB.universityShort, LAB.school, LAB.schoolFa, LAB.name],
+    keywords: [LAB.name, LAB.fullName, "distributed systems research", "HPC", "cloud computing", "WSAN"],
+  };
+}
+
+export function publicationsMeta(): PageMeta {
+  return {
+    title: `Publications — ${LAB.name}`,
+    description: `Selected journal and conference papers from ${LAB.fullName} (${LAB.name}) at ${LAB.universityShort}, with DOIs when they are available.`,
+    path: PATHS.publications,
+    image: assetUrl("assets/images/mohsen-sharifi.jpg"),
+    keywords: [LAB.name, LAB.fullName, "publications", "research papers", "distributed systems", "HPC"],
   };
 }
 
@@ -90,14 +101,14 @@ export function peopleIndexMeta(): PageMeta {
     title: `People — ${LAB.name} researchers, students and alumni`,
     description: `Directory of ${LAB.fullName} at ${LAB.university}: ${LAB.director}, current researchers, students and alumni of ${LAB.name}.`,
     path: PATHS.people,
-    keywords: [LAB.director, LAB.directorFa, "DSLab IUST members", "distributed systems researchers IUST"],
+    keywords: [LAB.director, LAB.directorFa, "DSLab CE-IUST members", "distributed systems researchers CE-IUST"],
   };
 }
 
 export function memberMeta(member: Member): PageMeta {
   const focus = (member.focus || []).join(", ");
   const lead = member.leadership === "director"
-    ? `${member.name} (${LAB.directorFa}) is ${member.role} and director of ${LAB.fullName} at ${LAB.university}.`
+    ? `${member.name} is ${member.role} and director of ${LAB.fullName} at ${LAB.university}.`
     : `${member.name} is a ${member.role} at ${LAB.fullName} (${LAB.name}), ${LAB.university}.`;
   const extra = member.thesis || focus || member.bio || "";
   const description = extra ? `${lead} ${extra}`.slice(0, 220) : lead;
@@ -115,7 +126,7 @@ export function memberMeta(member: Member): PageMeta {
 export function notFoundMeta(): PageMeta {
   return {
     title: `Page not found — ${LAB.name}`,
-    description: `This page is not in the ${LAB.fullName} site. Browse the lab, university, or people directory.`,
+    description: `This page is not in the ${LAB.fullName} site. Browse the lab, research, publications, or people directory.`,
     path: "/404",
   };
 }
@@ -134,7 +145,7 @@ export function memberAnswer(member: Member) {
   const focus = member.focus?.length ? ` Research focus: ${member.focus.join(", ")}.` : "";
   const years = member.years ? ` Years at the lab: ${member.years}.` : "";
   const thesis = member.thesis ? ` Thesis: ${member.thesis}.` : "";
-  return `${member.name} is a ${member.role} at the ${LAB.fullName} (${LAB.name}) in the ${LAB.school}, ${LAB.university} (${LAB.universityFa}). The lab is directed by ${LAB.director}.${focus}${years}${thesis}`;
+  return `${member.name} is a ${member.role} at the ${LAB.fullName} (${LAB.name}) in the ${LAB.school}, ${LAB.university}. The lab is directed by ${LAB.director}.${focus}${years}${thesis}`;
 }
 
 export { memberPath, memberSlug };

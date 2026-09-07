@@ -99,11 +99,3 @@ export async function loadLabData() {
 
   return { members, githubStats, labWork, presentationData };
 }
-
-export function coffeeStats(totalCommits = 0, commitsPerCoffee = CONFIG.commitsPerCoffee) {
-  const coffeeRate = Math.max(1, Number(commitsPerCoffee || 20));
-  const coffees = Math.floor(totalCommits / coffeeRate);
-  const remainder = totalCommits % coffeeRate;
-  const toNextCoffee = remainder === 0 ? coffeeRate : coffeeRate - remainder;
-  return { coffeeRate, coffees, toNextCoffee };
-}

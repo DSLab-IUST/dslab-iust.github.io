@@ -97,7 +97,7 @@ export function resolveDegree(member?: Member | null): DegreeInfo | null {
     return { code: "M.Sc", label: "Master's student", stars: 2, className: "degree-msc" };
   }
   if (["phd", "doctorate", "doctoral", "doctor"].includes(key) || raw === "دکترا" || raw === "دکتری") {
-    return { code: "Ph.D", label: "PhD student", stars: 3, className: "degree-phd" };
+    return { code: "Ph.D", label: "PhD candidate", stars: 3, className: "degree-phd" };
   }
 
   return null;
@@ -106,5 +106,5 @@ export function resolveDegree(member?: Member | null): DegreeInfo | null {
 export function cardFooterLabel(member: Member) {
   return Object.prototype.hasOwnProperty.call(member, "cardFooter")
     ? String(member.cardFooter || "")
-    : (member.role || "DSLab IUST");
+    : (member.role || "DSLab CE-IUST");
 }

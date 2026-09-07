@@ -1,3 +1,4 @@
+import { LAB } from "@/config";
 import { Link } from "@/lib/router";
 import { PATHS } from "@/lib/site";
 
@@ -39,8 +40,10 @@ export function FaqList({ items }: { items: Array<{ question: string; answer: st
 export function EntityLinks() {
   return (
     <div className="entity-related">
-      <Link to={PATHS.lab}>Distributed Systems Lab</Link>
-      <Link to={PATHS.university}>Iran University of Science and Technology</Link>
+      <Link to={PATHS.lab}>{LAB.fullName}</Link>
+      <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>
+      <Link to={PATHS.research}>Research</Link>
+      <Link to={PATHS.publications}>Publications</Link>
       <Link to={PATHS.people}>People directory</Link>
     </div>
   );

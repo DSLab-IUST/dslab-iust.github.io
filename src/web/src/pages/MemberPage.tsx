@@ -43,7 +43,7 @@ export function MemberPage({ slug }: { slug: string }) {
       <Seo meta={meta} jsonLd={memberGraph(member, members)} />
       <Header />
       <main>
-        <header className="entity-hero chrome-band">
+        <header className="entity-hero">
           <div className="section-shell">
             <Breadcrumbs items={[
               { label: LAB.name, href: PATHS.home },
@@ -76,7 +76,7 @@ export function MemberPage({ slug }: { slug: string }) {
             </div>
             <div>
               <dt>University</dt>
-              <dd><Link to={PATHS.university}>{LAB.university}</Link></dd>
+              <dd><a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a></dd>
             </div>
             {member.years ? (
               <div>

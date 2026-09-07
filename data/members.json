@@ -13,19 +13,27 @@
     "homepage": "https://webpages.iust.ac.ir/msharifi/",
     "photo": "assets/images/mohsen-sharifi.jpg",
     "bio": "Professor of System Software Engineering at the School of Computer Engineering, Iran University of Science and Technology. Director of the Distributed Systems Research Laboratory since 2002, and of the Operating System and Software Engineering Laboratories since 1996. PhD in Computer Science (System Software) from the Victoria University of Manchester (1991), with an MSc in Computer Science (System Design, 1987) and a BSc in Computer Science and Accounting (1982) from the same university. Research focuses on distributed operating systems, high-performance computing, and the engineering of a truly distributed kernelware.",
-    "focus": ["Distributed Systems", "Operating Systems", "High Performance Computing", "Cloud Computing"]
+    "focus": [
+      "System Software Engineer",
+      "Distributed Systems",
+      "Operating Systems",
+      "High Performance Computing",
+      "Cloud Computing"
+    ]
   },
   {
     "name": "Arman Aghdashi",
-    "role": "PhD Student",
-    "cardFooter": "PhD Student",
+    "role": "PhD Candidate",
+    "cardFooter": "PhD Candidate",
     "leadership": "lead",
     "github": "",
     "linkedin": "https://www.linkedin.com/in/arman-aghdashi/",
     "photo": "assets/images/arman-aghdashi.jpg",
     "bio": "Add a short research bio here.",
     "degree": "phd",
-    "focus": ["Distributed Systems"]
+    "focus": [
+      "Distributed Systems"
+    ]
   },
   {
     "name": "Matin Ghanbari",
@@ -37,7 +45,9 @@
     "photo": "assets/images/matin-ghanbari.jpg",
     "bio": "Add a short research bio here.",
     "degree": "msc",
-    "focus": ["Distributed Systems"]
+    "focus": [
+      "Distributed Systems"
+    ]
   },
   {
     "name": "Amir Mohammad Kahfi",
@@ -49,77 +59,95 @@
     "photo": "assets/images/amir-kahfi.jpg",
     "bio": "Master's researcher working on self-healing mechanisms in federated learning, so distributed training can detect faults and recover without a single point of failure.",
     "degree": "msc",
-    "focus": ["Federated Learning", "Self-Healing Systems", "Distributed Systems"]
+    "focus": [
+      "Federated Learning",
+      "Self-Healing Systems",
+      "Distributed Systems"
+    ]
   },
   {
     "name": "Sina Mahmoodi",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2009 – Present",
     "leadership": "researcher",
     "years": "2009 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in high-performance computing, as listed on the official DSLab page.",
-    "focus": ["High Performance Computing"]
+    "focus": [
+      "High Performance Computing"
+    ]
   },
   {
     "name": "Esmail Asyabi",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2011 – Present",
     "leadership": "researcher",
     "years": "2011 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in cloud computing environments, as listed on the official DSLab page.",
-    "focus": ["Cloud Computing Environments"]
+    "focus": [
+      "Cloud Computing Environments"
+    ]
   },
   {
     "name": "Mehdi Talebi",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2012 – Present",
     "leadership": "researcher",
     "years": "2012 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
-    "focus": ["Complex Event Processing"]
+    "focus": [
+      "Complex Event Processing"
+    ]
   },
   {
     "name": "Zahra Jalalian",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2012 – Present",
     "leadership": "researcher",
     "years": "2012 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
-    "focus": ["Complex Event Processing"]
+    "focus": [
+      "Complex Event Processing"
+    ]
   },
   {
     "name": "Mohammad Ali Fard Bastani",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2012 – Present",
     "leadership": "researcher",
     "years": "2012 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
-    "focus": ["Complex Event Processing"]
+    "focus": [
+      "Complex Event Processing"
+    ]
   },
   {
     "name": "Majid Hajibaba",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2012 – Present",
     "leadership": "researcher",
     "years": "2012 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in cloud computing environments, as listed on the official DSLab page.",
-    "focus": ["Cloud Computing Environments"]
+    "focus": [
+      "Cloud Computing Environments"
+    ]
   },
   {
     "name": "Mohammad Ahmadi",
-    "role": "PhD Student",
+    "role": "PhD Candidate",
     "cardFooter": "2013 – Present",
     "leadership": "researcher",
     "years": "2013 – Present",
     "degree": "phd",
     "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
-    "focus": ["Complex Event Processing"]
+    "focus": [
+      "Complex Event Processing"
+    ]
   },
   {
     "name": "Abolfazl Amini",
@@ -129,7 +157,10 @@
     "years": "2017 – Present",
     "degree": "msc",
     "bio": "Master's researcher in containers and OS-level virtualization, as listed on the official DSLab page.",
-    "focus": ["Containers", "OS-Level Virtualization"]
+    "focus": [
+      "Containers",
+      "OS-Level Virtualization"
+    ]
   },
   {
     "name": "Seyed Alireza Sanaee",
@@ -139,7 +170,10 @@
     "years": "2016 – Present",
     "degree": "msc",
     "bio": "Master's researcher in operating systems and virtualized environments, as listed on the official DSLab page.",
-    "focus": ["Operating Systems", "Virtualized Environments"]
+    "focus": [
+      "Operating Systems",
+      "Virtualized Environments"
+    ]
   },
   {
     "name": "Sirus Shahini",
@@ -149,7 +183,9 @@
     "years": "2016 – Present",
     "degree": "msc",
     "bio": "Master's researcher in information security, as listed on the official DSLab page.",
-    "focus": ["Information Security"]
+    "focus": [
+      "Information Security"
+    ]
   },
   {
     "name": "Erfan Sharafzadeh",
@@ -159,7 +195,10 @@
     "years": "2016 – Present",
     "degree": "msc",
     "bio": "Master's researcher in cloud computing and operating systems, as listed on the official DSLab page.",
-    "focus": ["Cloud Computing", "Operating Systems"]
+    "focus": [
+      "Cloud Computing",
+      "Operating Systems"
+    ]
   },
   {
     "name": "Sina Nourian",
@@ -169,7 +208,10 @@
     "years": "2016 – Present",
     "degree": "msc",
     "bio": "Master's researcher in stream processing and complex event processing, as listed on the official DSLab page.",
-    "focus": ["Stream Processing", "Complex Event Processing"]
+    "focus": [
+      "Stream Processing",
+      "Complex Event Processing"
+    ]
   },
   {
     "name": "Ali Moradi Alamdarloo",
@@ -179,7 +221,10 @@
     "years": "2015 – Present",
     "degree": "msc",
     "bio": "Master's researcher in exascale and power-constrained computing, as listed on the official DSLab page.",
-    "focus": ["Exascale Computing", "Power-Constrained Computing"]
+    "focus": [
+      "Exascale Computing",
+      "Power-Constrained Computing"
+    ]
   },
   {
     "name": "Zahed Golabi",
@@ -189,7 +234,10 @@
     "years": "2015 – Present",
     "degree": "msc",
     "bio": "Master's researcher in exascale and fault-tolerant computing, as listed on the official DSLab page.",
-    "focus": ["Exascale Computing", "Fault Tolerant Computing"]
+    "focus": [
+      "Exascale Computing",
+      "Fault Tolerant Computing"
+    ]
   },
   {
     "name": "Habib Khadem Hosseini",
@@ -199,7 +247,9 @@
     "years": "2014 – Present",
     "degree": "msc",
     "bio": "Master's researcher in cloud computing, as listed on the official DSLab page.",
-    "focus": ["Cloud Computing"]
+    "focus": [
+      "Cloud Computing"
+    ]
   },
   {
     "name": "Mehdi Naghavi",
@@ -211,7 +261,10 @@
     "degree": "phd",
     "thesis": "Online Crawling of Farsi Blogs for Continuous Web Monitoring",
     "bio": "PhD dissertation: Online Crawling of Farsi Blogs for Continuous Web Monitoring.",
-    "focus": ["Web Engineering", "Computer Security"]
+    "focus": [
+      "Web Engineering",
+      "Computer Security"
+    ]
   },
   {
     "name": "Ehsan Mousavi Khaneghah",
@@ -223,7 +276,10 @@
     "degree": "phd",
     "thesis": "A Runtime System Software for General Dynamic Reconfiguration of Exascale HPC Clusters",
     "bio": "PhD dissertation: A Runtime System Software for General Dynamic Reconfiguration of Exascale HPC Clusters.",
-    "focus": ["High Performance Computing", "Exascale Computing"]
+    "focus": [
+      "High Performance Computing",
+      "Exascale Computing"
+    ]
   },
   {
     "name": "Seyedeh Leili Mirtaheri",
@@ -235,7 +291,10 @@
     "degree": "phd",
     "thesis": "A Framework for Distributed Management of Heterogeneous Compute Resources in Exascale Distributed P2P Systems",
     "bio": "PhD dissertation: A Framework for Distributed Management of Heterogeneous Compute Resources in Exascale Distributed P2P Systems.",
-    "focus": ["Exascale Computing", "Peer to Peer Computing"]
+    "focus": [
+      "Exascale Computing",
+      "Peer to Peer Computing"
+    ]
   },
   {
     "name": "Hadi Salimi",
@@ -247,7 +306,10 @@
     "degree": "phd",
     "thesis": "Power-Aware Virtual Machine Scheduling in Support of Cloud Computing Environments",
     "bio": "PhD dissertation: Power-Aware Virtual Machine Scheduling in Support of Cloud Computing Environments.",
-    "focus": ["Cloud Computing Environments", "Virtualization"]
+    "focus": [
+      "Cloud Computing Environments",
+      "Virtualization"
+    ]
   },
   {
     "name": "Hossein Momeni",
@@ -259,7 +321,10 @@
     "degree": "phd",
     "thesis": "Task Assignment and Scheduling in Wireless Sensor-Actor Network in Support of Real-Time Applications",
     "bio": "PhD dissertation: Task Assignment and Scheduling in Wireless Sensor-Actor Network in Support of Real-Time Applications.",
-    "focus": ["Wireless Sensor Actor Networks", "Real-Time Systems"]
+    "focus": [
+      "Wireless Sensor Actor Networks",
+      "Real-Time Systems"
+    ]
   },
   {
     "name": "Saeed Sedighian Kashi",
@@ -271,7 +336,9 @@
     "degree": "phd",
     "thesis": "Coordination in Weakly Connected Wireless Sensor Actor Networks",
     "bio": "PhD dissertation: Coordination in Weakly Connected Wireless Sensor Actor Networks.",
-    "focus": ["Wireless Sensor Actor Networks"]
+    "focus": [
+      "Wireless Sensor Actor Networks"
+    ]
   },
   {
     "name": "Saeed Pashazadeh",
@@ -283,7 +350,10 @@
     "degree": "phd",
     "thesis": "Priority-Based Quality of Service Support at Middleware Level for Acoustic Target Tracking in Wireless Sensor Networks",
     "bio": "PhD dissertation: Priority-Based Quality of Service Support at Middleware Level for Acoustic Target Tracking in Wireless Sensor Networks.",
-    "focus": ["Wireless Sensor Networks", "Middleware"]
+    "focus": [
+      "Wireless Sensor Networks",
+      "Middleware"
+    ]
   },
   {
     "name": "Arash Setayeshi",
@@ -295,7 +365,10 @@
     "degree": "msc",
     "thesis": "A Virtual Machine Scheduling Mechanism for I/O-Intensive Workloads in Cloud Computing Environments",
     "bio": "Master's thesis: A Virtual Machine Scheduling Mechanism for I/O-Intensive Workloads in Cloud Computing Environments.",
-    "focus": ["Cloud Computing Environments", "Virtualization"]
+    "focus": [
+      "Cloud Computing Environments",
+      "Virtualization"
+    ]
   },
   {
     "name": "Mostafa Zamani",
@@ -307,7 +380,10 @@
     "degree": "msc",
     "thesis": "A Mechanism for Organization and Execution of High Performance Virtual Clusters",
     "bio": "Master's thesis: A Mechanism for Organization and Execution of High Performance Virtual Clusters.",
-    "focus": ["High Performance Computing", "Virtualization"]
+    "focus": [
+      "High Performance Computing",
+      "Virtualization"
+    ]
   },
   {
     "name": "Arash Ghafuri",
@@ -319,7 +395,10 @@
     "degree": "msc",
     "thesis": "A Runtime Auto-Scaling Mechanism for Multi-Tenant Software",
     "bio": "Master's thesis: A Runtime Auto-Scaling Mechanism for Multi-Tenant Software.",
-    "focus": ["Cloud Computing", "Auto-Scaling"]
+    "focus": [
+      "Cloud Computing",
+      "Auto-Scaling"
+    ]
   },
   {
     "name": "Mohammad Bagher Seifollahi",
@@ -331,7 +410,9 @@
     "degree": "msc",
     "thesis": "A Technique for Time Estimation of Distributed Development of Application Software Based on Usecase Point Method",
     "bio": "Master's thesis: A Technique for Time Estimation of Distributed Development of Application Software Based on Usecase Point Method.",
-    "focus": ["Software Engineering"]
+    "focus": [
+      "Software Engineering"
+    ]
   },
   {
     "name": "Michel Gokan",
@@ -343,7 +424,10 @@
     "degree": "msc",
     "thesis": "SLA-Aware Virtual Machines CPU Scheduling in Cloud Environments",
     "bio": "Master's thesis: SLA-Aware Virtual Machines CPU Scheduling in Cloud Environments.",
-    "focus": ["Cloud Computing Environments", "Scheduling"]
+    "focus": [
+      "Cloud Computing Environments",
+      "Scheduling"
+    ]
   },
   {
     "name": "Bahman Rashidi",
@@ -355,7 +439,9 @@
     "degree": "msc",
     "thesis": "An Information Exchange for Cloud Computing Environment",
     "bio": "Master's thesis: An Information Exchange for Cloud Computing Environment.",
-    "focus": ["Cloud Computing Environments"]
+    "focus": [
+      "Cloud Computing Environments"
+    ]
   },
   {
     "name": "Amin Fallahi Khoshknab",
@@ -367,7 +453,10 @@
     "degree": "bsc",
     "thesis": "Design and Implementation of a Mechanism for Reducing I/O Delays in Xen Virtual Machine Monitor",
     "bio": "Undergraduate project: Design and Implementation of a Mechanism for Reducing I/O Delays in Xen Virtual Machine Monitor.",
-    "focus": ["Virtualization", "Operating Systems"]
+    "focus": [
+      "Virtualization",
+      "Operating Systems"
+    ]
   },
   {
     "name": "Saeed Karimi",
@@ -377,8 +466,10 @@
     "alumniGroup": "undergraduate",
     "years": "2009 – 2013",
     "degree": "bsc",
-    "bio": "Undergraduate alumnus of DSLab IUST.",
-    "focus": ["Distributed Systems"]
+    "bio": "Undergraduate alumnus of DSLab CE-IUST.",
+    "focus": [
+      "Distributed Systems"
+    ]
   },
   {
     "name": "Hamed Haghighatdoost",
@@ -388,8 +479,10 @@
     "alumniGroup": "undergraduate",
     "years": "2009 – 2013",
     "degree": "bsc",
-    "bio": "Undergraduate alumnus of DSLab IUST.",
-    "focus": ["Distributed Systems"]
+    "bio": "Undergraduate alumnus of DSLab CE-IUST.",
+    "focus": [
+      "Distributed Systems"
+    ]
   },
   {
     "name": "Ali Beidaghi",
@@ -399,7 +492,9 @@
     "alumniGroup": "undergraduate",
     "years": "2009 – 2013",
     "degree": "bsc",
-    "bio": "Undergraduate alumnus of DSLab IUST.",
-    "focus": ["Distributed Systems"]
+    "bio": "Undergraduate alumnus of DSLab CE-IUST.",
+    "focus": [
+      "Distributed Systems"
+    ]
   }
 ]

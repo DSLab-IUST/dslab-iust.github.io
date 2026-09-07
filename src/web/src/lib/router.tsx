@@ -4,7 +4,8 @@ import { PATHS } from "@/lib/site";
 export type Route =
   | { name: "home" }
   | { name: "lab" }
-  | { name: "university" }
+  | { name: "research" }
+  | { name: "publications" }
   | { name: "people" }
   | { name: "member"; slug: string }
   | { name: "notfound" };
@@ -13,7 +14,8 @@ export function parsePath(pathname: string): Route {
   const path = pathname.replace(/\/+$/, "") || "/";
   if (path === PATHS.home) return { name: "home" };
   if (path === PATHS.lab) return { name: "lab" };
-  if (path === PATHS.university) return { name: "university" };
+  if (path === PATHS.research) return { name: "research" };
+  if (path === PATHS.publications) return { name: "publications" };
   if (path === PATHS.people) return { name: "people" };
   const match = path.match(/^\/people\/([^/]+)$/);
   if (match) return { name: "member", slug: decodeURIComponent(match[1]) };

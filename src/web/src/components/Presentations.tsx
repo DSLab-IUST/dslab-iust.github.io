@@ -22,7 +22,7 @@ function Speaker({ member, fallbackName }: { member: Member | null; fallbackName
     >
       <span className="presentation-speaker-copy">
         <strong>{display.name}</strong>
-        <small>{display.role || "DSLab IUST"}</small>
+        <small>{display.role || "DSLab CE-IUST"}</small>
       </span>
       <MemberPhoto member={display} className="presentation-avatar" />
       {member ? <Icon name="arrow-up-right" /> : null}
@@ -96,7 +96,7 @@ export function Presentations() {
                   <div className="presentation-schedule">
                     <Meta icon="calendar-days" label="Date" value={item.date} fallback="Add date" mono />
                     <Meta icon="clock-3" label="Time" value={item.time} fallback="Add time" mono />
-                    <Meta icon="map-pin" label="Location" value={item.location} fallback="DSLab IUST / Online" />
+                    <Meta icon="map-pin" label="Location" value={item.location} fallback="DSLab CE-IUST / Online" />
                   </div>
                   <div className="presentation-action">
                     {href ? (

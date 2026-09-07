@@ -2,6 +2,10 @@ import { Icon } from "@/components/icons";
 import { WorkTags, WorkTeam } from "@/components/WorkTeam";
 import { useLab } from "@/context/LabContext";
 import { safeUrl, statusKind } from "@/lib/format";
+import { Link } from "@/lib/router";
+import { PATHS } from "@/lib/site";
+
+const PREVIEW_COUNT = 3;
 
 export function NowBuilding() {
   const { labWork, loading } = useLab();
@@ -49,19 +53,23 @@ export function NowBuilding() {
   );
 }
 
-export function Projects() {
+export function Projects({ preview = false }: { preview?: boolean }) {
   const { labWork, loading } = useLab();
-  const items = labWork.projects ?? [];
+  const all = labWork.projects ?? [];
+  const items = preview ? all.slice(0, PREVIEW_COUNT) : all;
+  const showMore = preview && (loading || all.length > PREVIEW_COUNT);
 
   return (
-    <section className="projects section-shell" id="projects">
-      <div className="section-heading">
-        <div>
-          <span className="section-kicker">Publications</span>
-          <h2>Selected papers from the lab.</h2>
+    <section className={`projects section-shell${preview ? "" : " projects-page"}`} id="projects">
+      {preview ? (
+        <div className="section-heading">
+          <div>
+            <span className="section-kicker">Publications</span>
+            <h2>Selected papers from the lab.</h2>
+          </div>
+          <p>Recent journal and conference papers listed on Prof. Sharifi’s faculty page, with DOIs when they are available.</p>
         </div>
-        <p>Recent journal and conference papers listed on Prof. Sharifi’s faculty page, with DOIs when they are available.</p>
-      </div>
+      ) : null}
       <div className="project-grid">
         {loading ? (
           <>
@@ -111,6 +119,13 @@ export function Projects() {
           </article>
         )}
       </div>
+      {showMore ? (
+        <div className="projects-more">
+          <Link className="button button-soft" to={PATHS.publications}>
+            More <Icon name="arrow-up-right" />
+          </Link>
+        </div>
+      ) : null}
     </section>
   );
 }

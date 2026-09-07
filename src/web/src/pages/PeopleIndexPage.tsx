@@ -33,7 +33,7 @@ export function PeopleIndexPage() {
       <Seo meta={meta} jsonLd={peopleIndexGraph(members)} />
       <Header />
       <main>
-        <header className="entity-hero chrome-band">
+        <header className="entity-hero">
           <div className="section-shell">
             <Breadcrumbs items={[
               { label: LAB.name, href: PATHS.home },
@@ -45,7 +45,7 @@ export function PeopleIndexPage() {
               Researchers, students and alumni of the {" "}
               <Link to={PATHS.lab}>{LAB.fullName}</Link>
               {" at "}
-              <Link to={PATHS.university}>{LAB.university}</Link>
+              <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>
               {", directed by "}
               {director[0]
                 ? <Link to={memberPath(director[0].name)}>{director[0].name}</Link>

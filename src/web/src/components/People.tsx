@@ -3,6 +3,7 @@ import { DegreeBadge } from "@/components/DegreeBadge";
 import { Icon } from "@/components/icons";
 import { MemberPhoto } from "@/components/MemberPhoto";
 import { ProfileLinks } from "@/components/ProfileLinks";
+import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { cardFooterLabel, memberBio, memberPath, profileFor } from "@/lib/members";
 import { Link } from "@/lib/router";
@@ -70,6 +71,9 @@ function MemberCard({ member, isLead = false }: { member: Member; isLead?: boole
             <div className="member-title">{member.role}</div>
           </div>
         </div>
+        {member.thesis ? (
+          <p className="member-card-thesis">{member.thesis}</p>
+        ) : null}
         <div className="member-tags">
           {(member.focus || []).slice(0, 1).map((tag) => <span key={tag}>{tag}</span>)}
         </div>
@@ -80,41 +84,6 @@ function MemberCard({ member, isLead = false }: { member: Member; isLead?: boole
           </div>
           <ProfileLinks member={member} mini />
         </div>
-      </div>
-    </article>
-  );
-}
-
-function RosterRow({ member }: { member: Member }) {
-  const { openMember } = useLab();
-  const detail = member.thesis || member.bio;
-
-  return (
-    <article
-      className="roster-row"
-      tabIndex={0}
-      role="button"
-      aria-label={`Open profile for ${member.name}`}
-      onClick={() => openMember(member)}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openMember(member);
-        }
-      }}
-    >
-      <div className="roster-identity">
-        <strong>
-          <Link to={memberPath(member.name)} onClick={(event) => event.stopPropagation()}>
-            {member.name}
-          </Link>
-        </strong>
-        <span>{member.role}</span>
-      </div>
-      <p>{detail}</p>
-      <div className="roster-meta">
-        <span dir="ltr">{member.years || member.cardFooter}</span>
-        {(member.focus || []).slice(0, 2).map((tag) => <span key={tag}>{tag}</span>)}
       </div>
     </article>
   );
@@ -155,7 +124,7 @@ export function MemberModal() {
               <span className="member-role">{member.role}</span>
               <h3>{member.name}</h3>
               <span className="t-mono" style={{ color: "var(--muted)" }}>
-                {member.years || profile.company || "DSLab IUST"}
+                {member.years || profile.company || LAB.name}
               </span>
             </div>
           </div>
@@ -217,9 +186,9 @@ export function People() {
         </div>
         <p>
           Director, current members and alumni of the {" "}
-          <Link to={PATHS.lab}>Distributed Systems Lab</Link>
+          <Link to={PATHS.lab}>{LAB.fullName}</Link>
           {" at "}
-          <Link to={PATHS.university}>Iran University of Science and Technology</Link>
+          <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>
           . Open a card for a quick view, or follow a name to the dedicated profile.
         </p>
       </div>
@@ -254,8 +223,8 @@ export function People() {
             <h3>Current members</h3>
             <span>As listed on the official DSLab page.</span>
           </div>
-          <div className="roster-list">
-            {researchers.map((member) => <RosterRow key={member.name} member={member} />)}
+          <div className="member-grid">
+            {researchers.map((member) => <MemberCard key={member.name} member={member} />)}
           </div>
         </>
       ) : null}
@@ -275,8 +244,8 @@ export function People() {
                   <h4>{group.heading}</h4>
                   <span>{group.note}</span>
                 </div>
-                <div className="roster-list">
-                  {groupMembers.map((member) => <RosterRow key={member.name} member={member} />)}
+                <div className="member-grid">
+                  {groupMembers.map((member) => <MemberCard key={member.name} member={member} />)}
                 </div>
               </div>
             );

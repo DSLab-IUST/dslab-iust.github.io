@@ -21,7 +21,9 @@ export function Footer() {
         </address>
         <div className="footer-right">
           <Link to={PATHS.lab}>{LAB.fullName}</Link>
-          <Link to={PATHS.university}>{LAB.universityShort}</Link>
+          <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.universityShort}</a>
+          <Link to={PATHS.research}>Research</Link>
+          <Link to={PATHS.publications}>Publications</Link>
           <Link to={PATHS.people}>People</Link>
           {director ? <Link to={memberPath(director.name)}>{director.name}</Link> : null}
           <a href={`mailto:${LAB.email}`}>{LAB.email}</a>

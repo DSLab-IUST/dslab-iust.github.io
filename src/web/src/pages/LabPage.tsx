@@ -20,20 +20,20 @@ export function LabPage() {
       <Seo meta={meta} jsonLd={labGraph(members)} />
       <Header />
       <main>
-        <header className="entity-hero chrome-band">
+        <header className="entity-hero">
           <div className="section-shell">
             <Breadcrumbs items={[
               { label: LAB.name, href: PATHS.home },
               { label: LAB.fullName },
             ]} />
-            <span className="eyebrow"><span className="pulse-dot" /> Research laboratory · IUST</span>
+            <span className="eyebrow"><span className="pulse-dot" /> Research laboratory · {LAB.universityShort}</span>
             <h1>{LAB.fullName}</h1>
             <p className="entity-lead">
               <strong>{LAB.name}</strong>
-              {" — "}
-              {LAB.nameFa}
-              {" — is the Distributed Systems Research Laboratory at the "}
-              <Link to={PATHS.university}>{LAB.school}, {LAB.university}</Link>
+              {" is the Distributed Systems Research Laboratory at the "}
+              <a href={LAB.schoolUrl} target="_blank" rel="noreferrer">{LAB.school}</a>
+              {", "}
+              <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>
               {". Directed by "}
               {director
                 ? <Link to={memberPath(director.name)}>{director.name}</Link>
@@ -47,7 +47,7 @@ export function LabPage() {
           <dl className="entity-facts">
             <div>
               <dt>Official names</dt>
-              <dd>{LAB.fullName}; {LAB.name}; {LAB.nameFa}</dd>
+              <dd>{LAB.fullName}; {LAB.name}</dd>
             </div>
             <div>
               <dt>Director</dt>
@@ -55,16 +55,14 @@ export function LabPage() {
                 {director
                   ? <Link to={memberPath(director.name)}>{director.name}</Link>
                   : LAB.director}
-                {" · "}
-                {LAB.directorFa}
               </dd>
             </div>
             <div>
               <dt>Home university</dt>
               <dd>
-                <Link to={PATHS.university}>{LAB.university}</Link>
+                <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>
                 {" · "}
-                {LAB.universityFa}
+                {LAB.universityShort}
               </dd>
             </div>
             <div>
@@ -89,6 +87,9 @@ export function LabPage() {
                 </article>
               ))}
             </div>
+            <Link className="button button-soft" to={PATHS.research}>
+              Full research page <Icon name="arrow-up-right" />
+            </Link>
           </section>
 
           <section>
