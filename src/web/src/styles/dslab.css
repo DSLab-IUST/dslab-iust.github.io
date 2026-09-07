@@ -2512,7 +2512,7 @@ html[data-theme="light"] .hero-quote {
   }
   .hero h1 { margin-bottom: 8px; }
   .hero-quote { margin-bottom: 0; }
-  .hero-description { font-size: 15px; line-height: 24px; }
+  .hero-description { display: none; }
   .hero-actions,
   .micro-line { margin-top: 14px; }
   .hero .stats-ribbon {
