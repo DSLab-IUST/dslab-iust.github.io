@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: dslab-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -55,11 +55,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new placeholder avatars to commit."
           else
-            git commit -m "$(cat <<'EOF'
-chore: add generated member placeholder avatars
-
-EOF
-)"
+            git commit -m "chore: add generated member placeholder avatars"
             git push
           fi
 
