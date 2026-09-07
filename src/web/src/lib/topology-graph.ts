@@ -371,15 +371,18 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
     return clamp(0.38 + (z + 1.1) * 0.32, 0.28, 1);
   }
 
+  function hitRadius(node: GraphNode, p: Projected) {
+    const pad = coarseQuery.matches ? 22 : 10;
+    return (node.hub ? 20 : 13) * p.s + pad;
+  }
+
   function hitTest(x: number, y: number) {
     let best: GraphNode | null = null;
     let bestZ = -Infinity;
     for (const node of nodes) {
       const p = projected.get(node);
       if (!p) continue;
-      const pad = coarseQuery.matches ? 22 : 10;
-      const radius = (node.hub ? 20 : 13) * p.s + pad;
-      if (Math.hypot(p.x - x, p.y - y) <= radius && p.z >= bestZ) {
+      if (Math.hypot(p.x - x, p.y - y) <= hitRadius(node, p) && p.z >= bestZ) {
         best = node;
         bestZ = p.z;
       }
@@ -390,6 +393,32 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
   function syncCursor() {
     canvas.classList.toggle("is-grabbing", drag.kind === "orbit" || drag.kind === "tug");
     canvas.classList.toggle("is-node", drag.kind === "tug" || (drag.kind === "none" && Boolean(hoverNode)));
+  }
+
+  const hits = document.createElement("div");
+  hits.className = "topo-hits";
+  hits.setAttribute("aria-hidden", "true");
+  const hitEls = nodes.map(() => {
+    const el = document.createElement("span");
+    el.className = "topo-hit";
+    el.style.touchAction = "none";
+    hits.appendChild(el);
+    return el;
+  });
+  canvas.insertAdjacentElement("afterend", hits);
+
+  function syncHits() {
+    for (let i = 0; i < nodes.length; i += 1) {
+      const node = nodes[i];
+      const el = hitEls[i];
+      const p = node ? projected.get(node) : undefined;
+      if (!node || !el || !p) continue;
+      const size = Math.max(44, hitRadius(node, p) * 2);
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.zIndex = String(Math.round((p.z + 2) * 100));
+      el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
+    }
   }
 
   function projectAll() {
@@ -502,6 +531,7 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
       );
     }
     ctx.globalAlpha = 1;
+    syncHits();
   }
 
   function frame(ts: number) {
@@ -529,11 +559,26 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
     ensureLoop();
   }
 
+  function capturePointer(event: PointerEvent) {
+    try {
+      canvas.setPointerCapture(event.pointerId);
+    } catch {
+      /* pointer already released */
+    }
+  }
+
+  function nodeFromTarget(event: PointerEvent) {
+    const target = event.target;
+    if (!(target instanceof HTMLElement) || !target.classList.contains("topo-hit")) return null;
+    const index = hitEls.indexOf(target as HTMLSpanElement);
+    return index >= 0 ? nodes[index] ?? null : null;
+  }
+
   function onPointerDown(event: PointerEvent) {
     if (event.button !== 0 && event.pointerType === "mouse") return;
     const { x, y } = pointerXY(canvas, event);
     projectAll();
-    const node = hitTest(x, y);
+    const node = nodeFromTarget(event) ?? hitTest(x, y);
     if (node) {
       const bob = worldPoint(node, time, reduced);
       node.heldBob = {
@@ -553,7 +598,7 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
         origin: copy(node.offset),
         depthZ: projected.get(node)?.z ?? 0,
       };
-      canvas.setPointerCapture(event.pointerId);
+      capturePointer(event);
       event.preventDefault();
       syncCursor();
       ensureLoop();
@@ -583,7 +628,7 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
       yawVel = 0;
       pitchVel = 0;
       drag = { kind: "orbit", pointerId: event.pointerId, x, y, lastT: performance.now() };
-      canvas.setPointerCapture(event.pointerId);
+      capturePointer(event);
       event.preventDefault();
       syncCursor();
       ensureLoop();
@@ -675,12 +720,25 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
   const themeObs = new MutationObserver(onTheme);
   themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-  canvas.addEventListener("pointerdown", onPointerDown, { passive: false });
-  canvas.addEventListener("pointermove", onPointerMove, { passive: false });
-  canvas.addEventListener("pointerup", onPointerUp);
-  canvas.addEventListener("pointercancel", onPointerUp);
+  function bindPointer(el: HTMLElement) {
+    el.addEventListener("pointerdown", onPointerDown, { passive: false });
+    el.addEventListener("pointermove", onPointerMove, { passive: false });
+    el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerUp);
+    el.addEventListener("lostpointercapture", onPointerUp);
+  }
+
+  function unbindPointer(el: HTMLElement) {
+    el.removeEventListener("pointerdown", onPointerDown);
+    el.removeEventListener("pointermove", onPointerMove);
+    el.removeEventListener("pointerup", onPointerUp);
+    el.removeEventListener("pointercancel", onPointerUp);
+    el.removeEventListener("lostpointercapture", onPointerUp);
+  }
+
+  bindPointer(canvas);
+  bindPointer(hits);
   canvas.addEventListener("pointerleave", onPointerLeave);
-  canvas.addEventListener("lostpointercapture", onPointerUp);
   window.addEventListener("pointerup", onPointerUp);
   window.addEventListener("pointercancel", onPointerUp);
   reducedQuery.addEventListener("change", onReduced);
@@ -692,15 +750,13 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
     ro.disconnect();
     io.disconnect();
     themeObs.disconnect();
-    canvas.removeEventListener("pointerdown", onPointerDown);
-    canvas.removeEventListener("pointermove", onPointerMove);
-    canvas.removeEventListener("pointerup", onPointerUp);
-    canvas.removeEventListener("pointercancel", onPointerUp);
+    unbindPointer(canvas);
+    unbindPointer(hits);
     canvas.removeEventListener("pointerleave", onPointerLeave);
-    canvas.removeEventListener("lostpointercapture", onPointerUp);
     window.removeEventListener("pointerup", onPointerUp);
     window.removeEventListener("pointercancel", onPointerUp);
     reducedQuery.removeEventListener("change", onReduced);
     document.removeEventListener("visibilitychange", onVisibility);
+    hits.remove();
   };
 }

@@ -730,6 +730,25 @@ html[data-theme="light"] .hero-quote {
   touch-action: none;
 }
 
+.topo-hits {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.topo-hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 .topo-guide {
   stroke: var(--topo-guide);
 }
