@@ -148,16 +148,12 @@ agent-transcripts/
 # --- Graphify (local knowledge graph) ---
 graphify-out/
 .graphify/
-.graphifyignore
 .graphify_python
 .graphify_learning.json
 .githooks/
-.gitattributes
 /graph.json
 /graph.html
 /GRAPH_REPORT.md
-
-DESIGN.md
 
 # Copied site data (generated into the Vite public dir)
 src/web/public/data/
