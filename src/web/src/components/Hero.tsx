@@ -41,36 +41,31 @@ export function Hero() {
       <div className="hero-grid">
         <TopologyGraph />
         <div className="hero-copy">
-          <h1>{LAB.fullName}</h1>
-          <p className="hero-quote">
-            “{LAB.quote}”
-          </p>
-          <p className="hero-description">
-            The lab engineers system software for distributed computing, wireless sensor-actor networks, cloud environments, and computer security — with special focus on distributed operating systems and high-performance computing, at the{" "}
-            <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="/#research">
-              View research <Icon name="arrow-down-right" />
-            </a>
-            <a className="button button-soft" href={LAB.github} target="_blank" rel="noreferrer">
-              GitHub <Icon name="github" />
-            </a>
+          <div className="hero-lead">
+            <h1>{LAB.fullName}</h1>
+            <p className="hero-quote">
+              “{LAB.quote}”
+            </p>
           </div>
-          <div className="micro-line">
-            <span>
-              Directed by{" "}
-              <Link to={memberPath(LAB.director)}><strong>{LAB.director}</strong></Link>
-              {" "}
-              {/* <a className="button button-soft button-inline" href={LAB.homepage} target="_blank" rel="noreferrer">
-                Faculty page <Icon name="external-link" />
-              </a> */}
-            </span>
-            {/* <span>
-              <a href={LAB.schoolUrl} target="_blank" rel="noreferrer">
-                {LAB.school}, {LAB.universityShort}
+          <div className="hero-follow">
+            <p className="hero-description">
+              The lab engineers system software for distributed computing, wireless sensor-actor networks, cloud environments, and computer security — with special focus on distributed operating systems and high-performance computing, at the{" "}
+              <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="/#research">
+                View research <Icon name="arrow-down-right" />
               </a>
-            </span> */}
+              <a className="button button-soft" href={LAB.github} target="_blank" rel="noreferrer">
+                GitHub <Icon name="github" />
+              </a>
+            </div>
+            <div className="micro-line">
+              <span>
+                Directed by{" "}
+                <Link to={memberPath(LAB.director)}><strong>{LAB.director}</strong></Link>
+              </span>
+            </div>
           </div>
         </div>
       </div>
