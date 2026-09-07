@@ -80,7 +80,12 @@ function copyRepoStatic(): Plugin {
 export default defineConfig({
   base: "/",
   appType: "spa",
-  plugins: [copyRepoStatic(), react(), tailwindcss(), seoPrerender()],
+  plugins: [
+    copyRepoStatic(),
+    react(),
+    tailwindcss(),
+    seoPrerender(),
+  ],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),

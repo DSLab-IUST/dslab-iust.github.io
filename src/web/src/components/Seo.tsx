@@ -23,6 +23,19 @@ export function Seo({ meta, jsonLd }: { meta: PageMeta; jsonLd: unknown }) {
     setMeta('meta[name="description"]', { name: "description", content: meta.description });
     setMeta('meta[name="keywords"]', { name: "keywords", content: (meta.keywords || []).join(", ") });
     setMeta('meta[name="robots"]', { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" });
+    setMeta('link[rel="robots"]', { rel: "robots", href: `${SITE.origin}/robots.txt` });
+    setMeta('link[rel="sitemap"][type="application/xml"]', {
+      rel: "sitemap",
+      type: "application/xml",
+      title: "Sitemap",
+      href: `${SITE.origin}/sitemap.xml`,
+    });
+    setMeta('link[rel="sitemap"][type="text/plain"]', {
+      rel: "sitemap",
+      type: "text/plain",
+      title: "Text Sitemap",
+      href: `${SITE.origin}/sitemap.txt`,
+    });
     setMeta('link[rel="canonical"]', { rel: "canonical", href: absoluteUrl(meta.path) });
 
     setMeta('meta[property="og:title"]', { property: "og:title", content: meta.title });
