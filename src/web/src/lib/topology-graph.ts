@@ -44,18 +44,12 @@ const DAMPING = 9.2;
 const BOB = 0.036;
 const PITCH_MIN = -0.58;
 const PITCH_MAX = 0.66;
-
-function satelliteSlots(count: number): Vec3[] {
-  return Array.from({ length: count }, (_, index) => {
-    const azimuth = (index / count) * Math.PI * 2 + 0.18;
-    const elevation = Math.sin(index * 1.82 + 0.4) * 0.46;
-    return {
-      x: Math.cos(elevation) * Math.cos(azimuth),
-      y: Math.sin(elevation),
-      z: Math.cos(elevation) * Math.sin(azimuth),
-    };
-  });
-}
+const REST_YAW = 0.62;
+const REST_PITCH = 0.36;
+const SHELL_MIN = 0.88;
+const SHELL_MAX = 1.34;
+const MIN_SEPARATION = 0.7;
+const MIN_AXIS_SPAN = 0.78;
 
 function hexRgb(hex: string): [number, number, number] {
   const n = Number.parseInt(hex.slice(1), 16);
@@ -95,14 +89,64 @@ function copy(v: Vec3): Vec3 {
   return { x: v.x, y: v.y, z: v.z };
 }
 
-function normalize(v: Vec3, radius: number): Vec3 {
-  const len = Math.hypot(v.x, v.y, v.z) || 1;
-  const s = radius / len;
-  return { x: v.x * s, y: v.y * s, z: v.z * s };
+function randomInShell(): Vec3 {
+  const azimuth = Math.random() * Math.PI * 2;
+  const elevation = Math.asin(Math.random() * 2 - 1);
+  const t = Math.random();
+  const radius = Math.cbrt(SHELL_MIN ** 3 + t * (SHELL_MAX ** 3 - SHELL_MIN ** 3));
+  return {
+    x: Math.cos(elevation) * Math.cos(azimuth) * radius,
+    y: Math.sin(elevation) * radius,
+    z: Math.cos(elevation) * Math.sin(azimuth) * radius,
+  };
+}
+
+function separated(p: Vec3, others: Vec3[]) {
+  return others.every((q) => Math.hypot(p.x - q.x, p.y - q.y, p.z - q.z) >= MIN_SEPARATION);
+}
+
+function axisSpan(points: Vec3[], axis: keyof Vec3) {
+  let min = Infinity;
+  let max = -Infinity;
+  for (const p of points) {
+    if (p[axis] < min) min = p[axis];
+    if (p[axis] > max) max = p[axis];
+  }
+  return max - min;
+}
+
+function isVolumetric(points: Vec3[]) {
+  return axisSpan(points, "x") >= MIN_AXIS_SPAN
+    && axisSpan(points, "y") >= MIN_AXIS_SPAN
+    && axisSpan(points, "z") >= MIN_AXIS_SPAN;
+}
+
+function restSatellites(count: number): Vec3[] {
+  let fallback: Vec3[] = [];
+  for (let layout = 0; layout < 28; layout += 1) {
+    const points: Vec3[] = [];
+    for (let i = 0; i < count; i += 1) {
+      let placed: Vec3 | null = null;
+      for (let attempt = 0; attempt < 48; attempt += 1) {
+        const candidate = randomInShell();
+        if (separated(candidate, points)) {
+          placed = candidate;
+          break;
+        }
+      }
+      if (!placed) break;
+      points.push(placed);
+    }
+    if (points.length !== count) continue;
+    fallback = points;
+    if (isVolumetric(points)) return points;
+  }
+  return fallback.length === count
+    ? fallback
+    : Array.from({ length: count }, () => randomInShell());
 }
 
 function createNodes(): GraphNode[] {
-  const slots = satelliteSlots(RESEARCH.length);
   const nodes: GraphNode[] = [
     {
       id: HUB_SHORT,
@@ -115,13 +159,13 @@ function createNodes(): GraphNode[] {
       heldBob: null,
     },
   ];
+  const rests = restSatellites(RESEARCH.length);
 
   RESEARCH.forEach((item, index) => {
-    const slot = slots[index] ?? { x: 1, y: 0, z: 0 };
     nodes.push({
       id: item.short,
       hub: false,
-      rest: normalize(slot, 1.08 + (index % 2) * 0.06),
+      rest: rests[index] ?? { x: 0, y: 0, z: 0 },
       offset: { x: 0, y: 0, z: 0 },
       vel: { x: 0, y: 0, z: 0 },
       phase: index * 1.17,
@@ -252,8 +296,8 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement) {
   let colors = palette();
   let reduced = reducedQuery.matches;
   let drag: Drag = { kind: "none" };
-  let yaw = 0.62;
-  let pitchBase = 0.36;
+  let yaw = REST_YAW;
+  let pitchBase = REST_PITCH;
   let yawVel = reduced ? 0 : AUTO_SPIN;
   let pitchVel = 0;
   let time = 0;

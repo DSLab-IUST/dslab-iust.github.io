@@ -1,5 +1,7 @@
 export const CONFIG = {
   githubOrg: "DSLab-IUST",
+  githubRepo: "dslab-iust.github.io",
+  githubBranch: "main",
   statsUrl: "/data/github-stats.json",
   membersUrl: "/data/members.json",
   currentWorkUrl: "/data/current-work.json",

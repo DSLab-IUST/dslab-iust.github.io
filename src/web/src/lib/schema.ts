@@ -9,7 +9,7 @@ import {
   sameAsFor,
   universitySameAs,
 } from "./site";
-import { memberPath } from "./members";
+import { memberPath, memberPhotoPath } from "./members";
 import type { Member, ProjectItem } from "../types";
 
 function labAddress() {
@@ -92,7 +92,7 @@ function personNode(member: Member) {
     jobTitle: isDirector ? `${member.role}; Lab Director` : member.role,
     description: memberAnswer(member),
     url,
-    image: assetUrl(member.photo) || undefined,
+    image: assetUrl(memberPhotoPath(member)) || undefined,
     email: member.email || undefined,
     affiliation: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
     worksFor: member.leadership === "alumni" ? undefined : { "@id": `${absoluteUrl(PATHS.lab)}#lab` },

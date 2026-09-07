@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { LAB, SITE } from "./src/config";
-import { memberPath, memberSlug } from "./src/lib/members";
+import { memberPath, memberPhotoPath, memberSlug } from "./src/lib/members";
 import {
   homeGraph,
   labGraph,
@@ -25,7 +25,7 @@ import {
   researchMeta,
   type PageMeta,
 } from "./src/lib/site";
-import type { Member, ProjectItem } from "./src/types";
+import type { GithubStats, Member, ProjectItem } from "./src/types";
 
 const repoRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
 
@@ -198,7 +198,7 @@ function robotsTxt() {
   ].join("\n");
 }
 
-function buildSitemapEntries(members: Member[]): SitemapEntry[] {
+function buildSitemapEntries(members: Member[], githubStats?: GithubStats | null): SitemapEntry[] {
   const homeLastmod = gitLastmod(
     "data/members.json",
     "data/projects.json",
@@ -224,8 +224,9 @@ function buildSitemapEntries(members: Member[]): SitemapEntry[] {
     { path: "/publications", lastmod: publicationsLastmod },
     { path: "/people", lastmod: peopleLastmod },
     ...members.map((member) => {
-      const images = member.photo
-        ? [{ loc: assetUrl(member.photo), title: member.name }]
+      const photoPath = memberPhotoPath(member, githubStats);
+      const images = photoPath
+        ? [{ loc: assetUrl(photoPath), title: member.name }]
         : undefined;
       return {
         path: memberPath(member.name),
@@ -270,6 +271,14 @@ export function seoPrerender(): Plugin {
       const projects = JSON.parse(
         readFileSync(resolve(__dirname, "../../data/projects.json"), "utf8"),
       ) as ProjectItem[];
+      let githubStats: GithubStats | null = null;
+      try {
+        githubStats = JSON.parse(
+          readFileSync(resolve(__dirname, "../../data/github-stats.json"), "utf8"),
+        ) as GithubStats;
+      } catch {
+        githubStats = null;
+      }
       const template = readFileSync(resolve(dist, "index.html"), "utf8");
 
       const pages: Array<{ file: string; meta: PageMeta; jsonLd: unknown; article: string }> = [
@@ -330,9 +339,9 @@ export function seoPrerender(): Plugin {
         },
         ...members.map((member) => ({
           file: `people/${memberSlug(member.name)}/index.html`,
-          meta: memberMeta(member),
+          meta: memberMeta(member, githubStats),
           jsonLd: memberGraph(member, members),
-          article: article(memberMeta(member).title, memberMeta(member).description, [
+          article: article(memberMeta(member, githubStats).title, memberMeta(member, githubStats).description, [
             { href: "/lab", label: LAB.fullName },
             { href: "/research", label: "Research" },
             { href: "/publications", label: "Publications" },
@@ -349,7 +358,7 @@ export function seoPrerender(): Plugin {
       writeFileSync(resolve(dist, ".nojekyll"), "");
       writeFileSync(resolve(dist, "robots.txt"), robotsTxt());
 
-      const sitemapEntries = buildSitemapEntries(members);
+      const sitemapEntries = buildSitemapEntries(members, githubStats);
       // UTF-8 without BOM — required by the sitemaps protocol / Google.
       writeFileSync(resolve(dist, "sitemap.xml"), sitemapXml(sitemapEntries), "utf8");
       writeFileSync(resolve(dist, "sitemap.txt"), sitemapTxt(sitemapEntries), "utf8");

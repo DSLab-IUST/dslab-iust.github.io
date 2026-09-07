@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-hidden="true">
+<rect width="256" height="256" fill="#10141F" />
+<line x1="173.1" y1="193.3" x2="21.2" y2="198.2" stroke="#5B6478" stroke-opacity="0.22" stroke-width="2.7" />
+<line x1="172.6" y1="22.3" x2="179.3" y2="204.7" stroke="#5B6478" stroke-opacity="0.25" stroke-width="2.1" />
+<line x1="26.9" y1="49.3" x2="152.5" y2="217.3" stroke="#5B6478" stroke-opacity="0.12" stroke-width="2.3" />
+<line x1="149.0" y1="42.8" x2="144.9" y2="102.4" stroke="#5B6478" stroke-opacity="0.21" stroke-width="1.8" />
+<line x1="100.2" y1="199.9" x2="216.6" y2="224.4" stroke="#5B6478" stroke-opacity="0.14" stroke-width="2.5" />
+<polygon points="40.7,51.9 12.1,40.7 23.3,12.1 51.9,23.3" fill="#5B6478" opacity="0.68" />
+<rect x="198" y="6" width="52" height="52" fill="#5B6478" opacity="0.68" />
+<rect x="70" y="6" width="52" height="52" fill="#5B6478" opacity="0.44" />
+<rect x="134" y="6" width="52" height="52" fill="#5B6478" opacity="0.44" />
+<polygon points="26.6,117.1 10.9,90.6 37.4,74.9 53.1,101.4" fill="#C0533E" opacity="0.63" />
+<rect x="198" y="70" width="52" height="52" fill="#C0533E" opacity="0.63" />
+<rect x="70" y="70" width="52" height="52" fill="#C0533E" opacity="0.37" />
+<polygon points="157.4,117.6 138.4,93.4 162.6,74.4 181.6,98.6" fill="#C0533E" opacity="0.37" />
+<polygon points="29.5,181.6 10.4,157.5 34.5,138.4 53.6,162.5" fill="#C0533E" opacity="0.82" />
+<rect x="198" y="134" width="52" height="52" fill="#C0533E" opacity="0.82" />
+<polygon points="109.9,143.2 112.8,173.9 82.1,176.8 79.2,146.1" fill="#C0533E" opacity="0.50" />
+<rect x="134" y="134" width="52" height="52" fill="#C0533E" opacity="0.50" />
+<polygon points="52.4,216.5 39.5,244.4 11.6,231.5 24.5,203.6" fill="#5B6478" opacity="0.59" />
+<polygon points="243.7,214.9 233.1,243.7 204.3,233.1 214.9,204.3" fill="#5B6478" opacity="0.59" />
+<circle cx="122.1" cy="148.9" r="30.1" fill="#5B6478" opacity="0.33" />
+<polygon points="160.7,186.1 177.0,123.7 222.9,169.0" fill="#5B6478" opacity="0.22" />
+<circle cx="151.6" cy="207.1" r="28.6" fill="#C0533E" opacity="0.39" />
+</svg>

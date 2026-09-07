@@ -1,6 +1,6 @@
 import { LAB, SITE } from "../config";
-import { memberPath, memberSlug } from "./members";
-import type { Member } from "../types";
+import { memberPath, memberPhotoPath, memberSlug } from "./members";
+import type { Member, GithubStats } from "../types";
 
 export const PATHS = {
   home: "/",
@@ -105,7 +105,7 @@ export function peopleIndexMeta(): PageMeta {
   };
 }
 
-export function memberMeta(member: Member): PageMeta {
+export function memberMeta(member: Member, githubStats?: GithubStats | null): PageMeta {
   const focus = (member.focus || []).join(", ");
   const lead = member.leadership === "director"
     ? `${member.name} is ${member.role} and director of ${LAB.fullName} at ${LAB.university}.`
@@ -117,7 +117,7 @@ export function memberMeta(member: Member): PageMeta {
     title: `${member.name} — ${member.role} | ${LAB.name}`,
     description,
     path: memberPath(member.name),
-    image: assetUrl(member.photo),
+    image: assetUrl(memberPhotoPath(member, githubStats)) || undefined,
     type: "profile",
     keywords: [member.name, member.role, LAB.name, LAB.university, LAB.universityShort, ...focus.split(", ").filter(Boolean)],
   };

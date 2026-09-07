@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-hidden="true">
+<rect width="256" height="256" fill="#5B6478" />
+<line x1="234.1" y1="145.2" x2="172.3" y2="17.8" stroke="#10141F" stroke-opacity="0.18" stroke-width="2.8" />
+<line x1="233.2" y1="73.7" x2="165.9" y2="8.5" stroke="#10141F" stroke-opacity="0.20" stroke-width="1.6" />
+<line x1="86.1" y1="4.6" x2="54.3" y2="103.9" stroke="#10141F" stroke-opacity="0.14" stroke-width="2.9" />
+<rect x="6" y="6" width="52" height="52" fill="#10141F" opacity="0.35" />
+<rect x="198" y="6" width="52" height="52" fill="#10141F" opacity="0.35" />
+<rect x="70" y="6" width="52" height="52" fill="#10141F" opacity="0.77" />
+<polygon points="169.7,51.5 140.5,41.7 150.3,12.5 179.5,22.3" fill="#10141F" opacity="0.77" />
+<polygon points="20.2,77.7 50.3,84.2 43.8,114.3 13.7,107.8" fill="#10141F" opacity="0.49" />
+<polygon points="242.9,85.2 234.8,114.9 205.1,106.8 213.2,77.1" fill="#10141F" opacity="0.49" />
+<polygon points="21.3,141.0 51.0,149.3 42.7,179.0 13.0,170.7" fill="#2FA6A6" opacity="0.67" />
+<polygon points="231.2,139.5 244.5,167.2 216.8,180.5 203.5,152.8" fill="#2FA6A6" opacity="0.67" />
+<polygon points="74.3,161.3 94.7,138.3 117.7,158.7 97.3,181.7" fill="#10141F" opacity="0.75" />
+<polygon points="181.3,155.6 164.4,181.3 138.7,164.4 155.6,138.7" fill="#10141F" opacity="0.75" />
+<circle cx="87.1" cy="48.9" r="73.0" fill="#2FA6A6" opacity="0.27" />
+<polygon points="128.0,92.5 92.1,152.8 57.9,91.5" fill="#C0533E" opacity="0.33" />
+<polygon points="136.8,180.8 138.6,230.3 94.8,207.1" fill="#C0533E" opacity="0.44" />
+</svg>

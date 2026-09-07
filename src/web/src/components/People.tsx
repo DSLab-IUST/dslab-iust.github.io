@@ -185,7 +185,7 @@ export function People() {
           <h2>The research group.</h2>
         </div>
         <p>
-          Director, current members and alumni of the {" "}
+          Director, members and alumni of the {" "}
           <Link to={PATHS.lab}>{LAB.fullName}</Link>
           {" at "}
           <a href={LAB.universityUrl} target="_blank" rel="noreferrer">{LAB.university}</a>

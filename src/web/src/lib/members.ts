@@ -74,9 +74,21 @@ export function publicAssetSrc(path?: string) {
   return src.startsWith("/") ? src : `/${src}`;
 }
 
-export function memberPhoto(member?: MemberIdentity | null, githubStats?: GithubStats | null) {
+export function memberPlaceholderPath(name?: string) {
+  const slug = memberSlug(name || "");
+  return slug ? `assets/images/placeholders/${slug}.svg` : "";
+}
+
+export function memberPhotoPath(
+  member?: (MemberIdentity & { name?: string }) | null,
+  githubStats?: GithubStats | null,
+) {
   const profile = profileFor(member, githubStats);
-  return publicAssetSrc(member?.photo || profile.avatar_url || "");
+  return String(member?.photo || profile.avatar_url || memberPlaceholderPath(member?.name) || "").trim();
+}
+
+export function memberPhoto(member?: (MemberIdentity & { name?: string }) | null, githubStats?: GithubStats | null) {
+  return publicAssetSrc(memberPhotoPath(member, githubStats));
 }
 
 export function memberBio(member?: MemberIdentity | null, githubStats?: GithubStats | null, fallback = "No bio yet.") {

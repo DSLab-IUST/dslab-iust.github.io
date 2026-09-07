@@ -4,8 +4,14 @@ import { Icon } from "@/components/icons";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { useTheme } from "@/hooks/useTheme";
-import { Link, useRoute } from "@/lib/router";
+import { Link, useRoute, type Route } from "@/lib/router";
 import { PATHS } from "@/lib/site";
+
+function isNavActive(href: string, route: Route): boolean {
+  if (href === PATHS.home) return route.name === "home";
+  if (href === PATHS.people) return route.name === "people" || route.name === "member";
+  return route.name === href.slice(1);
+}
 
 const NAV = [
   { href: PATHS.home, label: "Home" },
@@ -103,9 +109,19 @@ export function Header() {
         </Link>
 
         <nav className="nav-links" aria-label="Primary navigation">
-          {NAV.map((item) => (
-            <Link key={item.href} to={item.href}>{item.label}</Link>
-          ))}
+          {NAV.map((item) => {
+            const active = isNavActive(item.href, route);
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={active ? "is-active" : undefined}
+                ariaCurrent={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="header-actions">
@@ -159,11 +175,20 @@ export function Header() {
       >
         <div className="mobile-nav-inner">
           <div className="mobile-nav-links">
-            {NAV.map((item) => (
-              <Link key={item.href} to={item.href} onClick={() => setMenuOpen(false)}>
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const active = isNavActive(item.href, route);
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={active ? "is-active" : undefined}
+                  ariaCurrent={active ? "page" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>

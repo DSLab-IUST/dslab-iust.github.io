@@ -76,12 +76,14 @@ export function Link({
   children,
   className,
   ariaLabel,
+  ariaCurrent,
   onClick,
 }: {
   to: string;
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  ariaCurrent?: "page";
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
@@ -89,6 +91,7 @@ export function Link({
       href={to}
       className={className}
       aria-label={ariaLabel}
+      aria-current={ariaCurrent}
       onClick={(event) => {
         onClick?.(event);
         if (event.defaultPrevented) return;

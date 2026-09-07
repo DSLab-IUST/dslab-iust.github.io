@@ -66,189 +66,94 @@
     ]
   },
   {
-    "name": "Sina Mahmoodi",
-    "role": "PhD Candidate",
-    "cardFooter": "2009 – Present",
-    "leadership": "researcher",
-    "years": "2009 – Present",
+    "name": "Mohammad Ahmadi",
+    "role": "PhD Alumnus",
+    "cardFooter": "2013 – 2019",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2013 – 2019",
     "degree": "phd",
-    "bio": "Doctoral researcher in high-performance computing, as listed on the official DSLab page.",
-    "focus": [
-      "High Performance Computing"
-    ]
-  },
-  {
-    "name": "Esmail Asyabi",
-    "role": "PhD Candidate",
-    "cardFooter": "2011 – Present",
-    "leadership": "researcher",
-    "years": "2011 – Present",
-    "degree": "phd",
-    "bio": "Doctoral researcher in cloud computing environments, as listed on the official DSLab page.",
-    "focus": [
-      "Cloud Computing Environments"
-    ]
-  },
-  {
-    "name": "Mehdi Talebi",
-    "role": "PhD Candidate",
-    "cardFooter": "2012 – Present",
-    "leadership": "researcher",
-    "years": "2012 – Present",
-    "degree": "phd",
-    "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
+    "bio": "PhD alumnus in complex event processing at DSLab CE-IUST.",
     "focus": [
       "Complex Event Processing"
     ]
   },
   {
-    "name": "Zahra Jalalian",
-    "role": "PhD Candidate",
-    "cardFooter": "2012 – Present",
-    "leadership": "researcher",
-    "years": "2012 – Present",
+    "name": "Mehdi Talebi",
+    "role": "PhD Alumnus",
+    "cardFooter": "2012 – 2018",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2012 – 2018",
     "degree": "phd",
-    "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
+    "bio": "PhD alumnus in complex event processing at DSLab CE-IUST.",
     "focus": [
       "Complex Event Processing"
     ]
   },
   {
     "name": "Mohammad Ali Fard Bastani",
-    "role": "PhD Candidate",
-    "cardFooter": "2012 – Present",
-    "leadership": "researcher",
-    "years": "2012 – Present",
+    "role": "PhD Alumnus",
+    "cardFooter": "2012 – 2018",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2012 – 2018",
     "degree": "phd",
-    "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
+    "bio": "PhD alumnus in complex event processing at DSLab CE-IUST.",
+    "focus": [
+      "Complex Event Processing"
+    ]
+  },
+  {
+    "name": "Esmail Asyabi",
+    "role": "PhD Alumnus",
+    "cardFooter": "2011 – 2017",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2011 – 2017",
+    "degree": "phd",
+    "bio": "PhD alumnus in cloud computing environments at DSLab CE-IUST.",
+    "focus": [
+      "Cloud Computing Environments"
+    ]
+  },
+  {
+    "name": "Zahra Jalalian",
+    "role": "PhD Alumna",
+    "cardFooter": "2012 – 2017",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2012 – 2017",
+    "degree": "phd",
+    "bio": "PhD alumna in complex event processing at DSLab CE-IUST.",
     "focus": [
       "Complex Event Processing"
     ]
   },
   {
     "name": "Majid Hajibaba",
-    "role": "PhD Candidate",
-    "cardFooter": "2012 – Present",
-    "leadership": "researcher",
-    "years": "2012 – Present",
+    "role": "PhD Alumnus",
+    "cardFooter": "2012 – 2017",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2012 – 2017",
     "degree": "phd",
-    "bio": "Doctoral researcher in cloud computing environments, as listed on the official DSLab page.",
+    "bio": "PhD alumnus in cloud computing environments at DSLab CE-IUST.",
     "focus": [
       "Cloud Computing Environments"
     ]
   },
   {
-    "name": "Mohammad Ahmadi",
-    "role": "PhD Candidate",
-    "cardFooter": "2013 – Present",
-    "leadership": "researcher",
-    "years": "2013 – Present",
+    "name": "Sina Mahmoodi",
+    "role": "PhD Alumnus",
+    "cardFooter": "2009 – 2016",
+    "leadership": "alumni",
+    "alumniGroup": "phd",
+    "years": "2009 – 2016",
     "degree": "phd",
-    "bio": "Doctoral researcher in complex event processing, as listed on the official DSLab page.",
+    "bio": "PhD alumnus in high-performance computing at DSLab CE-IUST.",
     "focus": [
-      "Complex Event Processing"
-    ]
-  },
-  {
-    "name": "Abolfazl Amini",
-    "role": "Master Student",
-    "cardFooter": "2017 – Present",
-    "leadership": "researcher",
-    "years": "2017 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in containers and OS-level virtualization, as listed on the official DSLab page.",
-    "focus": [
-      "Containers",
-      "OS-Level Virtualization"
-    ]
-  },
-  {
-    "name": "Seyed Alireza Sanaee",
-    "role": "Master Student",
-    "cardFooter": "2016 – Present",
-    "leadership": "researcher",
-    "years": "2016 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in operating systems and virtualized environments, as listed on the official DSLab page.",
-    "focus": [
-      "Operating Systems",
-      "Virtualized Environments"
-    ]
-  },
-  {
-    "name": "Sirus Shahini",
-    "role": "Master Student",
-    "cardFooter": "2016 – Present",
-    "leadership": "researcher",
-    "years": "2016 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in information security, as listed on the official DSLab page.",
-    "focus": [
-      "Information Security"
-    ]
-  },
-  {
-    "name": "Erfan Sharafzadeh",
-    "role": "Master Student",
-    "cardFooter": "2016 – Present",
-    "leadership": "researcher",
-    "years": "2016 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in cloud computing and operating systems, as listed on the official DSLab page.",
-    "focus": [
-      "Cloud Computing",
-      "Operating Systems"
-    ]
-  },
-  {
-    "name": "Sina Nourian",
-    "role": "Master Student",
-    "cardFooter": "2016 – Present",
-    "leadership": "researcher",
-    "years": "2016 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in stream processing and complex event processing, as listed on the official DSLab page.",
-    "focus": [
-      "Stream Processing",
-      "Complex Event Processing"
-    ]
-  },
-  {
-    "name": "Ali Moradi Alamdarloo",
-    "role": "Master Student",
-    "cardFooter": "2015 – Present",
-    "leadership": "researcher",
-    "years": "2015 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in exascale and power-constrained computing, as listed on the official DSLab page.",
-    "focus": [
-      "Exascale Computing",
-      "Power-Constrained Computing"
-    ]
-  },
-  {
-    "name": "Zahed Golabi",
-    "role": "Master Student",
-    "cardFooter": "2015 – Present",
-    "leadership": "researcher",
-    "years": "2015 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in exascale and fault-tolerant computing, as listed on the official DSLab page.",
-    "focus": [
-      "Exascale Computing",
-      "Fault Tolerant Computing"
-    ]
-  },
-  {
-    "name": "Habib Khadem Hosseini",
-    "role": "Master Student",
-    "cardFooter": "2014 – Present",
-    "leadership": "researcher",
-    "years": "2014 – Present",
-    "degree": "msc",
-    "bio": "Master's researcher in cloud computing, as listed on the official DSLab page.",
-    "focus": [
-      "Cloud Computing"
+      "High Performance Computing"
     ]
   },
   {
@@ -353,6 +258,116 @@
     "focus": [
       "Wireless Sensor Networks",
       "Middleware"
+    ]
+  },
+  {
+    "name": "Abolfazl Amini",
+    "role": "Master Alumnus",
+    "cardFooter": "2017 – 2020",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2017 – 2020",
+    "degree": "msc",
+    "bio": "Master alumnus in containers and OS-level virtualization at DSLab CE-IUST.",
+    "focus": [
+      "Containers",
+      "OS-Level Virtualization"
+    ]
+  },
+  {
+    "name": "Sirus Shahini",
+    "role": "Master Alumnus",
+    "cardFooter": "2016 – 2019",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2016 – 2019",
+    "degree": "msc",
+    "bio": "Master alumnus in information security at DSLab CE-IUST.",
+    "focus": [
+      "Information Security"
+    ]
+  },
+  {
+    "name": "Sina Nourian",
+    "role": "Master Alumnus",
+    "cardFooter": "2016 – 2019",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2016 – 2019",
+    "degree": "msc",
+    "bio": "Master alumnus in stream processing and complex event processing at DSLab CE-IUST.",
+    "focus": [
+      "Stream Processing",
+      "Complex Event Processing"
+    ]
+  },
+  {
+    "name": "Seyed Alireza Sanaee",
+    "role": "Master Alumnus",
+    "cardFooter": "2016 – 2018",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2016 – 2018",
+    "degree": "msc",
+    "bio": "Master alumnus in operating systems and virtualized environments at DSLab CE-IUST.",
+    "focus": [
+      "Operating Systems",
+      "Virtualized Environments"
+    ]
+  },
+  {
+    "name": "Erfan Sharafzadeh",
+    "role": "Master Alumnus",
+    "cardFooter": "2016 – 2018",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2016 – 2018",
+    "degree": "msc",
+    "bio": "Master alumnus in cloud computing and operating systems at DSLab CE-IUST.",
+    "focus": [
+      "Cloud Computing",
+      "Operating Systems"
+    ]
+  },
+  {
+    "name": "Zahed Golabi",
+    "role": "Master Alumnus",
+    "cardFooter": "2015 – 2018",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2015 – 2018",
+    "degree": "msc",
+    "bio": "Master alumnus in exascale and fault-tolerant computing at DSLab CE-IUST.",
+    "focus": [
+      "Exascale Computing",
+      "Fault Tolerant Computing"
+    ]
+  },
+  {
+    "name": "Habib Khadem Hosseini",
+    "role": "Master Alumnus",
+    "cardFooter": "2014 – 2017",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2014 – 2017",
+    "degree": "msc",
+    "bio": "Master alumnus in cloud computing at DSLab CE-IUST.",
+    "focus": [
+      "Cloud Computing"
+    ]
+  },
+  {
+    "name": "Ali Moradi Alamdarloo",
+    "role": "Master Alumnus",
+    "cardFooter": "2015 – 2017",
+    "leadership": "alumni",
+    "alumniGroup": "master",
+    "years": "2015 – 2017",
+    "degree": "msc",
+    "bio": "Master alumnus in exascale and power-constrained computing at DSLab CE-IUST.",
+    "focus": [
+      "Exascale Computing",
+      "Power-Constrained Computing"
     ]
   },
   {

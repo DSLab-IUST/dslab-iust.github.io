@@ -1,7 +1,7 @@
 import { GoogleMeetIcon, Icon } from "@/components/icons";
 import { MemberPhoto } from "@/components/MemberPhoto";
 import { useLab } from "@/context/LabContext";
-import { safeUrl } from "@/lib/format";
+import { githubEditHref, safeUrl } from "@/lib/format";
 import { resolveMember } from "@/lib/members";
 import { enterDelay } from "@/lib/motion";
 import type { Member } from "@/types";
@@ -119,11 +119,22 @@ export function Presentations() {
           );
         }) : (
           <article className="empty-work-card presentation-empty">
-            <Icon name="presentation" />
-            <div>
-              <strong>Add next week's presentations</strong>
-              <span>Edit <code>data/presentations.json</code>; member details and photos are matched automatically.</span>
+            <div className="presentation-empty-copy">
+              <Icon name="presentation" />
+              <div>
+                <strong>Add next week's presentations</strong>
+                <span>Open <code>data/presentations.json</code> on GitHub to schedule talks. Member details and photos are matched automatically.</span>
+              </div>
             </div>
+            <a
+              className="button button-primary"
+              href={githubEditHref("data/presentations.json")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Edit on GitHub
+              <Icon name="github" />
+            </a>
           </article>
         )}
       </div>

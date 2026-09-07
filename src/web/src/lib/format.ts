@@ -1,3 +1,5 @@
+import { CONFIG } from "@/config";
+
 export function formatNumber(n: number) {
   return new Intl.NumberFormat("en", {
     notation: n > 9999 ? "compact" : "standard",
@@ -24,9 +26,14 @@ export function safeUrl(value = "") {
   }
 }
 
-export function githubOrgHref(org?: string, fallback = "DSLab-IUST") {
-  const name = (org || fallback || "DSLab-IUST").trim();
+export function githubOrgHref(org?: string, fallback = CONFIG.githubOrg) {
+  const name = (org || fallback || CONFIG.githubOrg).trim();
   return `https://github.com/${encodeURIComponent(name)}`;
+}
+
+export function githubEditHref(filePath: string, branch = CONFIG.githubBranch) {
+  const path = filePath.replace(/^\/+/, "").split("/").filter(Boolean).map(encodeURIComponent).join("/");
+  return `${githubOrgHref()}/${encodeURIComponent(CONFIG.githubRepo)}/edit/${encodeURIComponent(branch)}/${path}`;
 }
 
 export function classNames(...parts: Array<string | false | null | undefined>) {

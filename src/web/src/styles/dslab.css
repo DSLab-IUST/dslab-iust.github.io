@@ -204,12 +204,22 @@ html[data-theme="light"] .brand-logo:not([data-on]) .brand-logo-mark-on-light {
 
 .nav-links a { transition: color 200ms ease; }
 .nav-links a:hover { color: var(--chrome-fg); }
+.nav-links a.is-active,
+.nav-links a[aria-current="page"] {
+  color: var(--chrome-fg);
+  font-weight: 600;
+}
 
 .site-header.is-landing:not(.is-detached) .nav-links {
   color: var(--muted);
 }
 
 .site-header.is-landing:not(.is-detached) .nav-links a:hover {
+  color: var(--fg);
+}
+
+.site-header.is-landing:not(.is-detached) .nav-links a.is-active,
+.site-header.is-landing:not(.is-detached) .nav-links a[aria-current="page"] {
   color: var(--fg);
 }
 
@@ -301,6 +311,11 @@ html[data-theme="light"] .brand-logo:not([data-on]) .brand-logo-mark-on-light {
 
 .mobile-nav-links a:last-child { border-bottom: none; }
 .mobile-nav-links a:hover { color: var(--chrome-fg); }
+.mobile-nav-links a.is-active,
+.mobile-nav-links a[aria-current="page"] {
+  color: var(--chrome-fg);
+  font-weight: 600;
+}
 
 .button {
   display: inline-flex;
@@ -402,6 +417,11 @@ html[data-theme="light"] .brand-logo:not([data-on]) .brand-logo-mark-on-light {
 }
 
 .site-header.is-landing:not(.is-detached) .mobile-nav-links a:hover {
+  color: var(--fg);
+}
+
+.site-header.is-landing:not(.is-detached) .mobile-nav-links a.is-active,
+.site-header.is-landing:not(.is-detached) .mobile-nav-links a[aria-current="page"] {
   color: var(--fg);
 }
 
@@ -764,7 +784,43 @@ html[data-theme="light"] .hero-quote {
   background: color-mix(in srgb, var(--fg) 2.5%, transparent);
 }
 
-.research-row:last-child { border-bottom: 0; }
+.research-list > .research-row:last-child,
+.research-extra-inner > .research-row:last-child {
+  border-bottom: 0;
+}
+
+.research-list:has(.research-extra:not(.is-open)) > .research-row:last-of-type {
+  border-bottom: 0;
+}
+
+.research-extra {
+  overflow: hidden;
+  height: 0;
+  transition: height 720ms var(--fx-ease-out);
+}
+
+.research-extra.is-open {
+  height: var(--research-extra-height, auto);
+}
+
+.research-extra-inner {
+  overflow: hidden;
+}
+
+.research-extra .research-row {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms var(--fx-ease-out),
+    transform 640ms var(--fx-ease-out),
+    background-color 220ms ease;
+}
+
+.research-extra.is-open .research-row {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--research-stagger, 0ms);
+}
 
 .research-row::before {
   content: "";
@@ -804,6 +860,33 @@ html[data-theme="light"] .hero-quote {
 .research-more,
 .projects-more {
   margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.research-toggle svg {
+  transition: transform 520ms var(--fx-ease-out);
+}
+
+.research-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.research-full-detail {
+  animation: research-full-in 560ms var(--fx-ease-out) both;
+}
+
+@keyframes research-full-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .director-stage {
@@ -1381,7 +1464,8 @@ html[data-theme="light"] .hero-quote {
   color: var(--muted);
 }
 
-.empty-work-card svg { width: 22px; color: var(--color-link); }
+.empty-work-card > svg,
+.presentation-empty-copy > svg { width: 22px; color: var(--color-link); flex-shrink: 0; }
 .empty-work-card strong { display: block; color: var(--fg); font-weight: 600; }
 .empty-work-card code {
   color: var(--accent-text);
@@ -1542,7 +1626,23 @@ html[data-theme="light"] .hero-quote {
 }
 .presentation-link-pending { color: var(--muted); }
 .google-meet-icon { width: 16px; height: 16px; }
-.presentation-empty { border: 1px solid var(--border); padding: 24px; }
+.presentation-empty {
+  border: 1px solid var(--border);
+  padding: 24px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 20px;
+}
+
+.presentation-empty-copy {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: min(100%, 280px);
+  flex: 1;
+}
+
+.presentation-empty .button { flex-shrink: 0; }
 
 .manifesto { padding: 96px 0 72px; }
 
@@ -2078,6 +2178,8 @@ html[data-theme="light"] .hero-quote {
   .presentation-card { grid-template-columns: 1fr; }
   .presentation-card-grid { grid-template-columns: 1fr; }
   .presentation-schedule { display: grid; grid-template-columns: 1fr 1fr; }
+  .presentation-empty { align-items: stretch; }
+  .presentation-empty .button { width: 100%; }
   .footer { grid-template-columns: 1fr; }
   .member-modal:modal {
     inset: auto 0 0;

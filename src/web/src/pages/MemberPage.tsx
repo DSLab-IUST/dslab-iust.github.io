@@ -36,7 +36,7 @@ export function MemberPage({ slug }: { slug: string }) {
 
   const profile = profileFor(member, githubStats);
   const body = memberBio(member, githubStats);
-  const meta = memberMeta(member);
+  const meta = memberMeta(member, githubStats);
 
   return (
     <>
