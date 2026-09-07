@@ -27,6 +27,13 @@ function fileSlug(username) {
     .replace(/^-+|-+$/g, "");
 }
 
+function samePhotoMap(left = {}, right = {}) {
+  const keysLeft = Object.keys(left).sort();
+  const keysRight = Object.keys(right).sort();
+  if (keysLeft.length !== keysRight.length) return false;
+  return keysLeft.every((key, index) => key === keysRight[index] && left[key] === right[key]);
+}
+
 function isRealLinkedinPhoto(url = "") {
   const value = String(url || "").toLowerCase();
   if (!value) return false;
@@ -172,6 +179,11 @@ async function main() {
     }
 
     await sleep(1200);
+  }
+
+  if (samePhotoMap(previous.photos, photos)) {
+    console.log(`Done: ${Object.keys(photos).length} alumni LinkedIn photos cached (no changes).`);
+    return;
   }
 
   const output = {
