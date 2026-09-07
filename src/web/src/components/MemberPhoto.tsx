@@ -16,7 +16,10 @@ export function InitialsMark({ name }: { name: string }) {
 
 export function useMemberPhoto(member: PhotoMember) {
   const { githubStats } = useLab();
-  const sources = useMemo(() => memberPhotoSources(member, githubStats), [member, githubStats]);
+  const sources = useMemo(
+    () => memberPhotoSources(member, githubStats),
+    [githubStats, member.github, member.leadership, member.linkedin, member.linkedinPhoto, member.photo],
+  );
   const sourceKey = sources.join("\n");
   const [index, setIndex] = useState(0);
 

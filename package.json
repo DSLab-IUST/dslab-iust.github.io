@@ -8,6 +8,7 @@
     "preview": "turbo preview",
     "lint": "turbo lint",
     "stats": "node scripts/update-github-stats.mjs",
+    "linkedin-photos": "node scripts/update-linkedin-photos.mjs",
     "placeholders": "node scripts/generate-member-placeholders.mjs"
   },
   "devDependencies": {

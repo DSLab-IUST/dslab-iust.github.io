@@ -4,6 +4,7 @@ const MEMBERS_PATH = "data/members.json";
 const INDEX_PATH = "data/linkedin-photos.json";
 const PHOTO_DIR = "assets/images/linkedin";
 const UNAVATAR = "https://unavatar.io";
+const MIN_PHOTO_BYTES = 3500;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function linkedinUsername(url = "") {
@@ -50,39 +51,67 @@ async function readPreviousIndex() {
   }
 }
 
-async function fetchJson(username) {
-  const url = `${UNAVATAR}/linkedin/user:${encodeURIComponent(username)}?json`;
-  const response = await fetch(url, {
-    headers: { Accept: "application/json", "User-Agent": "DSLab-IUST-linkedin-photos" },
-  });
-  if (response.status === 404) return { found: false, url: "" };
-  if (!response.ok) {
-    const err = new Error(`unavatar JSON HTTP ${response.status}`);
-    err.status = response.status;
-    throw err;
+async function withRetry(task) {
+  const waits = [0, 5000, 12000, 25000];
+  let lastError;
+  for (const wait of waits) {
+    if (wait) await sleep(wait);
+    try {
+      return await task();
+    } catch (error) {
+      lastError = error;
+      if (error.status !== 429 && error.status !== 503) throw error;
+    }
   }
-  const data = await response.json();
-  return { found: Boolean(data?.url), url: String(data?.url || "") };
+  throw lastError;
+}
+
+async function fileLooksReal(filePath) {
+  try {
+    const stat = await fs.stat(filePath);
+    return stat.size >= MIN_PHOTO_BYTES;
+  } catch {
+    return false;
+  }
+}
+
+async function fetchJson(username) {
+  return withRetry(async () => {
+    const url = `${UNAVATAR}/linkedin/user:${encodeURIComponent(username)}?json`;
+    const response = await fetch(url, {
+      headers: { Accept: "application/json", "User-Agent": "DSLab-IUST-linkedin-photos" },
+    });
+    if (response.status === 404) return { found: false, url: "" };
+    if (!response.ok) {
+      const err = new Error(`unavatar JSON HTTP ${response.status}`);
+      err.status = response.status;
+      throw err;
+    }
+    const data = await response.json();
+    return { found: Boolean(data?.url), url: String(data?.url || "") };
+  });
 }
 
 async function downloadPhoto(username) {
-  const url = `${UNAVATAR}/linkedin/user:${encodeURIComponent(username)}?fallback=false`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "DSLab-IUST-linkedin-photos" },
-    redirect: "follow",
+  return withRetry(async () => {
+    const url = `${UNAVATAR}/linkedin/user:${encodeURIComponent(username)}?fallback=false`;
+    const response = await fetch(url, {
+      headers: { "User-Agent": "DSLab-IUST-linkedin-photos" },
+      redirect: "follow",
+    });
+    if (response.status === 404) return null;
+    if (!response.ok) {
+      const err = new Error(`unavatar image HTTP ${response.status}`);
+      err.status = response.status;
+      throw err;
+    }
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < MIN_PHOTO_BYTES) return null;
+    return {
+      buffer,
+      ext: extensionFor(response.headers.get("content-type"), buffer),
+    };
   });
-  if (response.status === 404) return null;
-  if (!response.ok) {
-    const err = new Error(`unavatar image HTTP ${response.status}`);
-    err.status = response.status;
-    throw err;
-  }
-  const buffer = Buffer.from(await response.arrayBuffer());
-  if (buffer.length < 800) return null;
-  return {
-    buffer,
-    ext: extensionFor(response.headers.get("content-type"), buffer),
-  };
 }
 
 async function main() {
@@ -102,7 +131,20 @@ async function main() {
     const member = alumni[i];
     const username = linkedinUsername(member.linkedin);
     const slug = fileSlug(username);
+    const existingPath = photos[username];
     process.stdout.write(`[${i + 1}/${alumni.length}] ${member.name} (@${username}) ... `);
+
+    if (existingPath && await fileLooksReal(existingPath)) {
+      console.log(`keep ${existingPath}`);
+      continue;
+    }
+
+    if (existingPath) {
+      delete photos[username];
+      await fs.unlink(existingPath).catch(() => {});
+      console.log("dropped placeholder avatar");
+      continue;
+    }
 
     try {
       const meta = await fetchJson(username);
@@ -113,7 +155,7 @@ async function main() {
         const image = await downloadPhoto(username);
         if (!image) {
           delete photos[username];
-          console.log("empty image");
+          console.log("placeholder / no real photo");
         } else {
           const publicPath = `${PHOTO_DIR}/${slug}.${image.ext}`;
           await fs.writeFile(publicPath, image.buffer);
@@ -129,7 +171,7 @@ async function main() {
       }
     }
 
-    await sleep(250);
+    await sleep(1200);
   }
 
   const output = {

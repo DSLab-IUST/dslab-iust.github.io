@@ -63,6 +63,10 @@ EOF
             git push
           fi
 
+      - name: Cache alumni LinkedIn profile photos
+        continue-on-error: true
+        run: node scripts/update-linkedin-photos.mjs
+
       - name: Refresh public organization stats
         env:
           GITHUB_ORG: ${{ vars.DSLAB_GITHUB_ORG }}

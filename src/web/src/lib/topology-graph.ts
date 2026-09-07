@@ -360,9 +360,11 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
     const nextSafe = measureSafe();
     if (nextSafe.w >= 8 && nextSafe.h >= 8) safe = nextSafe;
     else safe = { x: 0, y: 0, w: cssW, h: cssH };
+    const span = Math.min(safe.w, safe.h);
+    const compact = span / Math.max(safe.w, safe.h) > 0.78;
     cx = safe.x + safe.w * 0.5;
-    cy = safe.y + safe.h * 0.52;
-    zoom = Math.min(safe.w, safe.h) * 0.36;
+    cy = safe.y + safe.h * (compact ? 0.5 : 0.52);
+    zoom = span * (compact ? 0.3 : 0.36);
   }
 
   function depthAlpha(z: number) {
@@ -375,7 +377,8 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
     for (const node of nodes) {
       const p = projected.get(node);
       if (!p) continue;
-      const radius = (node.hub ? 20 : 13) * p.s + 10;
+      const pad = coarseQuery.matches ? 22 : 10;
+      const radius = (node.hub ? 20 : 13) * p.s + pad;
       if (Math.hypot(p.x - x, p.y - y) <= radius && p.z >= bestZ) {
         best = node;
         bestZ = p.z;
@@ -487,7 +490,8 @@ export function attachTopologyGraph(canvas: HTMLCanvasElement, safeArea: HTMLEle
       const dy = p.y - cy;
       const dist = Math.hypot(dx, dy) || 1;
       const outward = node.hub ? 22 * p.s : 16 * p.s;
-      ctx.font = `500 ${Math.max(11, (node.hub ? 13.5 : 12.5) * Math.min(p.s, 1.25))}px "JetBrains Mono", ui-monospace, monospace`;
+      const minPx = coarseQuery.matches ? 12 : 11;
+      ctx.font = `500 ${Math.max(minPx, (node.hub ? 13.5 : 12.5) * Math.min(p.s, 1.25))}px "JetBrains Mono", ui-monospace, monospace`;
       ctx.fillStyle = rgba(colors.muted, clamp(alpha + 0.15, 0.45, 1));
       ctx.textAlign = node.hub ? "center" : dx < 0 ? "end" : "start";
       ctx.textBaseline = "middle";
