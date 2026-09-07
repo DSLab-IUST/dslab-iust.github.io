@@ -1,10 +1,23 @@
 {
   "organization": "DSLab-IUST",
-  "generatedAt": "2026-09-07T18:10:50.336Z",
+  "generatedAt": "2026-09-07T18:19:15.181Z",
   "windowDays": 90,
   "repoCount": 1,
-  "totalCommits": 12,
-  "activeContributors": [],
+  "totalCommits": 52,
+  "activeContributors": [
+    {
+      "login": "MatinGhanbari",
+      "name": "Matin Ghanbari",
+      "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
+      "commits": 46
+    },
+    {
+      "login": "SArshiaK",
+      "name": "SArshiaK",
+      "avatar_url": "assets/images/avatars/SArshiaK.jpg",
+      "commits": 4
+    }
+  ],
   "repositories": [],
   "profiles": {
     "MatinGhanbari": {
@@ -158,8 +171,8 @@
     "repositoriesWithStats": 1
   },
   "notes": {
-    "totalCommits": "Sum of GitHub contributor-stat totals across included public repositories. GitHub repository statistics exclude merge commits; contributor statistics also exclude empty commits.",
-    "activeContributors": "Configured DSLab members with contributor-stat activity in weekly buckets overlapping the last 90 days.",
+    "totalCommits": "Sum of default-branch commit counts across included public repositories, matching GitHub's repository commit listing (includes merge commits).",
+    "activeContributors": "Configured DSLab members with at least one default-branch commit in the last 90 days.",
     "repositories": "Repository names, URLs, descriptions and source contents are not written to the public JSON output."
   }
 }

@@ -25,16 +25,27 @@ const headers = {
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-async function request(path, { allow202 = false, allow204 = false } = {}) {
+async function request(path, { allow202 = false, allow204 = false, allow409 = false } = {}) {
   const response = await fetch(`${API}${path}`, { headers });
   if (allow202 && response.status === 202) return { status: 202, data: null, headers: response.headers };
   if (allow204 && response.status === 204) return { status: 204, data: null, headers: response.headers };
+  if (allow409 && response.status === 409) return { status: 409, data: null, headers: response.headers };
   if (!response.ok) {
     const err = new Error(`GitHub API returned HTTP ${response.status}`);
     err.status = response.status;
     throw err;
   }
   return { status: response.status, data: await response.json(), headers: response.headers };
+}
+
+function lastPageFromLink(linkHeader) {
+  const match = String(linkHeader || "").match(/<([^>]+)>;\s*rel="last"/);
+  if (!match) return 0;
+  try {
+    return Number(new URL(match[1]).searchParams.get("page") || 0);
+  } catch {
+    return 0;
+  }
 }
 
 async function paginate(path) {
@@ -128,26 +139,33 @@ async function fetchProfiles(members) {
   return profiles;
 }
 
-async function contributorStats(repoName) {
-  const path = `/repos/${encodeURIComponent(ORG)}/${encodeURIComponent(repoName)}/stats/contributors`;
-  const waits = [0, 1200, 2500, 4500, 7000];
-
-  for (const wait of waits) {
-    if (wait) await sleep(wait);
-    const result = await request(path, { allow202: true, allow204: true });
-    if (result.status === 200) return Array.isArray(result.data) ? result.data : [];
-    if (result.status === 204) return [];
-  }
-
-  return [];
+async function repoCommitCount(repoName, defaultBranch) {
+  const sha = defaultBranch ? `&sha=${encodeURIComponent(defaultBranch)}` : "";
+  const path = `/repos/${encodeURIComponent(ORG)}/${encodeURIComponent(repoName)}/commits?per_page=1${sha}`;
+  const result = await request(path, { allow409: true });
+  if (result.status === 409) return 0;
+  const lastPage = lastPageFromLink(result.headers.get("link"));
+  if (lastPage > 0) return lastPage;
+  return Array.isArray(result.data) ? result.data.length : 0;
 }
 
-function commitsInsideWindow(weeks = [], cutoffMs) {
-  return weeks.reduce((sum, week) => {
-    const start = Number(week.w || 0) * 1000;
-    const end = start + 7 * 86400000;
-    return end >= cutoffMs ? sum + Number(week.c || 0) : sum;
-  }, 0);
+async function repoCommitCountFromContributors(repoName) {
+  const contributors = await paginate(
+    `/repos/${encodeURIComponent(ORG)}/${encodeURIComponent(repoName)}/contributors?anon=1`
+  );
+  return contributors.reduce((sum, contributor) => sum + Number(contributor.contributions || 0), 0);
+}
+
+async function repoCommitsSince(repoName, defaultBranch, sinceIso) {
+  const sha = defaultBranch ? `&sha=${encodeURIComponent(defaultBranch)}` : "";
+  try {
+    return await paginate(
+      `/repos/${encodeURIComponent(ORG)}/${encodeURIComponent(repoName)}/commits?since=${encodeURIComponent(sinceIso)}${sha}`
+    );
+  } catch (error) {
+    if (error.status === 409) return [];
+    throw error;
+  }
 }
 
 async function main() {
@@ -164,32 +182,39 @@ async function main() {
   const members = await readMembers();
   const configuredUsers = new Set(members.map(m => String(m.github || "").toLowerCase()).filter(Boolean));
   const profiles = await fetchProfiles(members);
-  const cutoffMs = Date.now() - WINDOW_DAYS * 86400000;
+  const sinceIso = new Date(Date.now() - WINDOW_DAYS * 86400000).toISOString();
   const activity = new Map();
   let totalCommits = 0;
+  let countedRepos = 0;
   let reposWithStats = 0;
 
   for (let i = 0; i < repos.length; i += 1) {
-    console.log(`[${i + 1}/${repos.length}] Reading statistics for ${repos[i].name} ...`);
+    const repo = repos[i];
+    console.log(`[${i + 1}/${repos.length}] Reading statistics for ${repo.name} ...`);
 
-    let stats = [];
     try {
-      stats = await contributorStats(repos[i].name);
-      reposWithStats += 1;
+      totalCommits += await repoCommitCount(repo.name, repo.default_branch);
+      countedRepos += 1;
     } catch (error) {
-      console.warn(`[${i + 1}/${repos.length}] Statistics unavailable (HTTP ${error.status || "error"}).`);
-      continue;
+      try {
+        totalCommits += await repoCommitCountFromContributors(repo.name);
+        countedRepos += 1;
+      } catch {
+        console.warn(`[${i + 1}/${repos.length}] Commit count unavailable (HTTP ${error.status || "error"}).`);
+      }
     }
 
-    for (const contributor of stats) {
-      const contributorTotal = Number(contributor.total || 0);
-      totalCommits += contributorTotal;
+    let recentCommits = [];
+    try {
+      recentCommits = await repoCommitsSince(repo.name, repo.default_branch, sinceIso);
+      reposWithStats += 1;
+    } catch (error) {
+      console.warn(`[${i + 1}/${repos.length}] Recent commit activity unavailable (HTTP ${error.status || "error"}).`);
+    }
 
-      const login = String(contributor.author?.login || "");
+    for (const commit of recentCommits) {
+      const login = String(commit.author?.login || "");
       if (!login || !configuredUsers.has(login.toLowerCase())) continue;
-
-      const recent = commitsInsideWindow(contributor.weeks || [], cutoffMs);
-      if (recent <= 0) continue;
 
       const existing = activity.get(login.toLowerCase()) || {
         login,
@@ -197,10 +222,10 @@ async function main() {
         avatar_url: profiles[login]?.avatar_url || "",
         commits: 0,
       };
-      if (!existing.avatar_url && contributor.author?.avatar_url) {
-        existing.avatar_url = await cacheAvatar(login, contributor.author.avatar_url);
+      if (!existing.avatar_url && commit.author?.avatar_url) {
+        existing.avatar_url = await cacheAvatar(login, commit.author.avatar_url);
       }
-      existing.commits += recent;
+      existing.commits += 1;
       activity.set(login.toLowerCase(), existing);
     }
   }
@@ -212,8 +237,8 @@ async function main() {
   if (repos.length === 0 && previousRepoCount > 0) {
     throw new Error("GitHub returned zero public repositories; refusing to overwrite the last good statistics snapshot.");
   }
-  if (totalCommits === 0 && previousCommitTotal > 0) {
-    console.warn("Contributor statistics were temporarily empty; preserving the last known commit total.");
+  if (countedRepos === 0 && previousCommitTotal > 0) {
+    console.warn("Commit counts were unavailable; preserving the last known commit total.");
     totalCommits = previousCommitTotal;
   }
 
@@ -233,8 +258,8 @@ async function main() {
       repositoriesWithStats: reposWithStats,
     },
     notes: {
-      totalCommits: "Sum of GitHub contributor-stat totals across included public repositories. GitHub repository statistics exclude merge commits; contributor statistics also exclude empty commits.",
-      activeContributors: `Configured DSLab members with contributor-stat activity in weekly buckets overlapping the last ${WINDOW_DAYS} days.`,
+      totalCommits: "Sum of default-branch commit counts across included public repositories, matching GitHub's repository commit listing (includes merge commits).",
+      activeContributors: `Configured DSLab members with at least one default-branch commit in the last ${WINDOW_DAYS} days.`,
       repositories: "Repository names, URLs, descriptions and source contents are not written to the public JSON output.",
     },
   };
