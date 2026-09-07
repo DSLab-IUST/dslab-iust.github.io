@@ -314,7 +314,7 @@ Typography: **Vazirmatn** for UI and body, **JetBrains Mono** for real data (dat
 
 ## Special thanks
 
-Thanks to [Ali Ahmadi (@AliAhmadi-Software)](https://github.com/AliAhmadi-Software) for the original idea and code contributions that helped shape this project.
+Thanks to [Ali Ahmadi](https://github.com/AliAhmadi-Software) for the original idea that helped shape this project.
 
 ---
 
