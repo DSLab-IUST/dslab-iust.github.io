@@ -1,17 +1,10 @@
 {
   "organization": "DSLab-IUST",
-  "generatedAt": "2026-09-04T00:12:11.841Z",
+  "generatedAt": "2026-09-07T18:10:50.336Z",
   "windowDays": 90,
   "repoCount": 1,
   "totalCommits": 12,
-  "activeContributors": [
-    {
-      "login": "MatinGhanbari",
-      "name": "Matin Ghanbari",
-      "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
-      "commits": 12
-    }
-  ],
+  "activeContributors": [],
   "repositories": [],
   "profiles": {
     "MatinGhanbari": {
@@ -24,6 +17,138 @@
       "location": "Tehran, Iran",
       "blog": "",
       "public_repos": 31
+    },
+    "SArshiaK": {
+      "login": "SArshiaK",
+      "name": null,
+      "avatar_url": "assets/images/avatars/SArshiaK.jpg",
+      "html_url": "https://github.com/SArshiaK",
+      "bio": null,
+      "company": null,
+      "location": null,
+      "blog": "",
+      "public_repos": 12
+    },
+    "showanasyabi": {
+      "login": "showanasyabi",
+      "name": "Showan Asyabi",
+      "avatar_url": "assets/images/avatars/showanasyabi.jpg",
+      "html_url": "https://github.com/showanasyabi",
+      "bio": null,
+      "company": "Boston University",
+      "location": "Boston, US",
+      "blog": "https://showanasyabi.github.io/",
+      "public_repos": 15
+    },
+    "mhajibaba": {
+      "login": "mhajibaba",
+      "name": "Majid Hajibaba",
+      "avatar_url": "assets/images/avatars/mhajibaba.jpg",
+      "html_url": "https://github.com/mhajibaba",
+      "bio": null,
+      "company": null,
+      "location": null,
+      "blog": "",
+      "public_repos": 3
+    },
+    "abolfazlamini": {
+      "login": "abolfazlamini",
+      "name": "Abolfazl Amini",
+      "avatar_url": "assets/images/avatars/abolfazlamini.jpg",
+      "html_url": "https://github.com/abolfazlamini",
+      "bio": null,
+      "company": null,
+      "location": null,
+      "blog": "",
+      "public_repos": 11
+    },
+    "0xsirus": {
+      "login": "0xsirus",
+      "name": "Sirus Shahini",
+      "avatar_url": "assets/images/avatars/0xsirus.jpg",
+      "html_url": "https://github.com/0xsirus",
+      "bio": null,
+      "company": null,
+      "location": "United States",
+      "blog": "",
+      "public_repos": 12
+    },
+    "nrsina": {
+      "login": "nrsina",
+      "name": "Sina Nourian",
+      "avatar_url": "assets/images/avatars/nrsina.jpg",
+      "html_url": "https://github.com/nrsina",
+      "bio": null,
+      "company": null,
+      "location": "Netherlands",
+      "blog": "https://snourian.com",
+      "public_repos": 10
+    },
+    "sarsanaee": {
+      "login": "sarsanaee",
+      "name": "Ryan Sana",
+      "avatar_url": "assets/images/avatars/sarsanaee.jpg",
+      "html_url": "https://github.com/sarsanaee",
+      "bio": "Building high-performance systems for modern datacenters — AI/ML efficiency across networking, memory & runtime. Visiting researcher @ Cambridge Computer Lab.",
+      "company": "University of Cambridge",
+      "location": "Cambridge, UK",
+      "blog": "https://sarsanaee.github.io",
+      "public_repos": 51
+    },
+    "erfan111": {
+      "login": "erfan111",
+      "name": "Erfan Sharafzadeh",
+      "avatar_url": "assets/images/avatars/erfan111.jpg",
+      "html_url": "https://github.com/erfan111",
+      "bio": "Congestion controller",
+      "company": null,
+      "location": "Princeton, NJ",
+      "blog": "",
+      "public_repos": 36
+    },
+    "timndus": {
+      "login": "timndus",
+      "name": "Ali Moradi Alamdarloo",
+      "avatar_url": "assets/images/avatars/timndus.jpg",
+      "html_url": "https://github.com/timndus",
+      "bio": "Just Keep Swimming",
+      "company": null,
+      "location": null,
+      "blog": "",
+      "public_repos": 4
+    },
+    "mbs220": {
+      "login": "mbs220",
+      "name": "mb seifollahi",
+      "avatar_url": "assets/images/avatars/mbs220.jpg",
+      "html_url": "https://github.com/mbs220",
+      "bio": "Project Manager - Software Architecture - Senior Web Developer & ...",
+      "company": "MRA",
+      "location": "Tehran",
+      "blog": "http://www.mb-seifollahi.ir",
+      "public_repos": 5
+    },
+    "michelgokan": {
+      "login": "michelgokan",
+      "name": "Michel Gokan Khan",
+      "avatar_url": "assets/images/avatars/michelgokan.jpg",
+      "html_url": "https://github.com/michelgokan",
+      "bio": "CTO, Technologist, Chairman, Founder, Entrepreneur - Ex. Postdoc Fellow at KTH in collab with AstraZeneca, PhD in ML-Driven Optimization of Cloud Native Systems",
+      "company": "CTO@Co-Cart, Founder/CEO/CTPO@Softwarify",
+      "location": "Stockholm, Sweden",
+      "blog": "https://michelgokan.github.io/",
+      "public_repos": 36
+    },
+    "aminfallahi": {
+      "login": "aminfallahi",
+      "name": "Amin Fallahi",
+      "avatar_url": "assets/images/avatars/aminfallahi.jpg",
+      "html_url": "https://github.com/aminfallahi",
+      "bio": null,
+      "company": "Syracuse University",
+      "location": "Syracuse, NY",
+      "blog": "https://aminfallahi.com",
+      "public_repos": 23
     }
   },
   "privacy": {
