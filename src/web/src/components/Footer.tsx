@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="footer section-shell">
         <div className="footer-brand">
-          <BrandLogo className="brand-logo footer-logo" />
+          <BrandLogo className="brand-logo footer-logo" on="dark" />
         </div>
         <address className="footer-contact">
           {LAB.address.map((line) => <span key={line}>{line}</span>)}

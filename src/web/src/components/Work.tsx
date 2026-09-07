@@ -13,14 +13,14 @@ export function NowBuilding() {
 
   return (
     <section className="activity-section section-shell" id="activity">
-      <div className="section-heading">
+      <div className="section-heading enter">
         <div>
           <span className="section-kicker">Now building</span>
           <h2>Active research threads.</h2>
         </div>
         <p>Directions the lab is pursuing, drawn from the official DSLab research agenda: kernelware, ExaScale middleware, distributed CEP, and cloud virtualization.</p>
       </div>
-      <div className="now-building-grid">
+      <div className="now-building-grid enter">
         {loading ? (
           <>
             <div className="work-loading-card" />
@@ -62,7 +62,7 @@ export function Projects({ preview = false }: { preview?: boolean }) {
   return (
     <section className={`projects section-shell${preview ? "" : " projects-page"}`} id="projects">
       {preview ? (
-        <div className="section-heading">
+        <div className="section-heading enter">
           <div>
             <span className="section-kicker">Publications</span>
             <h2>Selected papers from the lab.</h2>
@@ -70,7 +70,7 @@ export function Projects({ preview = false }: { preview?: boolean }) {
           <p>Recent journal and conference papers listed on Prof. Sharifi’s faculty page, with DOIs when they are available.</p>
         </div>
       ) : null}
-      <div className="project-grid">
+      <div className="project-grid enter">
         {loading ? (
           <>
             <div className="work-loading-card" />

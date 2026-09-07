@@ -179,7 +179,7 @@ export function People() {
 
   return (
     <section className="people section-shell" id="people">
-      <div className="section-heading">
+      <div className="section-heading enter">
         <div>
           <span className="section-kicker">People</span>
           <h2>The research group.</h2>
@@ -193,25 +193,25 @@ export function People() {
         </p>
       </div>
 
-      <div className="director-stage">
+      <div className="director-stage enter">
         {director ? <DirectorCard member={director} /> : null}
       </div>
 
-      <div className="subheading-row">
+      <div className="subheading-row enter">
         <h3>Core leads</h3>
         <span>Lab-wide research leadership.</span>
       </div>
-      <div className="lead-grid">
+      <div className="lead-grid enter">
         {leads.length
           ? leads.map((member) => <MemberCard key={member.name} member={member} isLead />)
           : <div className="panel">Add lead members in data/members.json</div>}
       </div>
 
-      <div className="subheading-row">
+      <div className="subheading-row enter">
         <h3>Members</h3>
         <span>Open a profile for focus areas and links.</span>
       </div>
-      <div className="member-grid">
+      <div className="member-grid enter">
         {regular.length
           ? regular.map((member) => <MemberCard key={member.name} member={member} />)
           : <div className="panel">Add members in data/members.json</div>}
@@ -219,11 +219,11 @@ export function People() {
 
       {researchers.length ? (
         <>
-          <div className="subheading-row">
+          <div className="subheading-row enter">
             <h3>Current members</h3>
             <span>As listed on the official DSLab page.</span>
           </div>
-          <div className="member-grid">
+          <div className="member-grid enter">
             {researchers.map((member) => <MemberCard key={member.name} member={member} />)}
           </div>
         </>
@@ -231,7 +231,7 @@ export function People() {
 
       {alumni.length ? (
         <>
-          <div className="subheading-row">
+          <div className="subheading-row enter">
             <h3>Alumni</h3>
             <span>PhD, master’s and undergraduate graduates.</span>
           </div>
@@ -240,11 +240,11 @@ export function People() {
             if (!groupMembers.length) return null;
             return (
               <div key={group.id} className="alumni-group">
-                <div className="alumni-group-heading">
+                <div className="alumni-group-heading enter">
                   <h4>{group.heading}</h4>
                   <span>{group.note}</span>
                 </div>
-                <div className="member-grid">
+                <div className="member-grid enter">
                   {groupMembers.map((member) => <MemberCard key={member.name} member={member} />)}
                 </div>
               </div>

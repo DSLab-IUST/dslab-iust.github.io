@@ -3,7 +3,7 @@ import { LAB } from "@/config";
 export function Manifesto() {
   return (
     <section className="manifesto section-shell">
-      <div className="manifesto-card">
+      <div className="manifesto-card enter">
         <span className="section-kicker">Mission</span>
         <blockquote className="manifesto-quote">“{LAB.quote}”</blockquote>
         <h2>

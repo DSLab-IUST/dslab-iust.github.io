@@ -1,4 +1,5 @@
 import { LAB } from "@/config";
+import { enterDelay } from "@/lib/motion";
 import { Link } from "@/lib/router";
 import { PATHS } from "@/lib/site";
 
@@ -21,13 +22,13 @@ export function Breadcrumbs({ items }: { items: Array<{ label: string; href?: st
 export function FaqList({ items }: { items: Array<{ question: string; answer: string }> }) {
   return (
     <section className="entity-faq" aria-labelledby="faq-heading">
-      <div className="subheading-row">
+      <div className="subheading-row enter">
         <h2 id="faq-heading">Questions people ask</h2>
         <span>Short answers for search and assistants.</span>
       </div>
       <dl>
-        {items.map((item) => (
-          <div key={item.question} className="faq-item">
+        {items.map((item, index) => (
+          <div key={item.question} className="faq-item enter" style={enterDelay(index, "rows")}>
             <dt>{item.question}</dt>
             <dd>{item.answer}</dd>
           </div>

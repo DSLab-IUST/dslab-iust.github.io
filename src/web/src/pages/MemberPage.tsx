@@ -69,7 +69,7 @@ export function MemberPage({ slug }: { slug: string }) {
         </header>
 
         <div className="section-shell entity-body">
-          <dl className="entity-facts">
+          <dl className="entity-facts enter">
             <div>
               <dt>Laboratory</dt>
               <dd><Link to={PATHS.lab}>{LAB.fullName} ({LAB.name})</Link></dd>
@@ -98,7 +98,7 @@ export function MemberPage({ slug }: { slug: string }) {
             ) : null}
           </dl>
 
-          <section>
+          <section className="enter">
             <h2>About {member.name}</h2>
             <p>{body}</p>
             {(member.focus || []).length ? (

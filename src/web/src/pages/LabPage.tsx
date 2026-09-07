@@ -6,6 +6,7 @@ import { Breadcrumbs, EntityLinks, FaqList } from "@/components/EntityPage";
 import { LAB, RESEARCH } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { memberPath } from "@/lib/members";
+import { enterDelay } from "@/lib/motion";
 import { Link } from "@/lib/router";
 import { labFaqs, labGraph } from "@/lib/schema";
 import { PATHS, labMeta } from "@/lib/site";
@@ -44,7 +45,7 @@ export function LabPage() {
         </header>
 
         <div className="section-shell entity-body">
-          <dl className="entity-facts">
+          <dl className="entity-facts enter">
             <div>
               <dt>Official names</dt>
               <dd>{LAB.fullName}; {LAB.name}</dd>
@@ -72,13 +73,13 @@ export function LabPage() {
           </dl>
 
           <section>
-            <div className="subheading-row">
+            <div className="subheading-row enter">
               <h2>What the lab studies</h2>
               <span>Six connected problem spaces.</span>
             </div>
             <div className="research-list">
-              {RESEARCH.map((item) => (
-                <article key={item.short} className="research-row">
+              {RESEARCH.map((item, index) => (
+                <article key={item.short} className="research-row enter" style={enterDelay(index, "rows")}>
                   <span className="research-code" dir="ltr">{item.short}</span>
                   <div>
                     <h3>{item.name}</h3>
@@ -93,13 +94,13 @@ export function LabPage() {
           </section>
 
           <section>
-            <div className="subheading-row">
+            <div className="subheading-row enter">
               <h2>People</h2>
               <span>{members.length} named researchers on this site.</span>
             </div>
             <ul className="entity-name-list">
-              {members.map((member) => (
-                <li key={member.name}>
+              {members.map((member, index) => (
+                <li key={member.name} className="enter" style={enterDelay(index, "dense")}>
                   <Link to={memberPath(member.name)}>{member.name}</Link>
                   <span>{member.role}</span>
                 </li>

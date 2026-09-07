@@ -1,5 +1,6 @@
 import { MemberModal } from "@/components/People";
 import { LabProvider } from "@/context/LabContext";
+import { useEnterOnScroll } from "@/hooks/useEnterOnScroll";
 import { Router, useRoute } from "@/lib/router";
 import { HomePage } from "@/pages/HomePage";
 import { LabPage } from "@/pages/LabPage";
@@ -21,12 +22,22 @@ function Routes() {
   return <HomePage />;
 }
 
+function AppShell() {
+  useEnterOnScroll();
+
+  return (
+    <>
+      <Routes />
+      <MemberModal />
+    </>
+  );
+}
+
 export default function App() {
   return (
     <LabProvider>
       <Router>
-        <Routes />
-        <MemberModal />
+        <AppShell />
       </Router>
     </LabProvider>
   );

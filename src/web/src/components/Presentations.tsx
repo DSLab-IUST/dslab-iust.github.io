@@ -3,6 +3,7 @@ import { MemberPhoto } from "@/components/MemberPhoto";
 import { useLab } from "@/context/LabContext";
 import { safeUrl } from "@/lib/format";
 import { resolveMember } from "@/lib/members";
+import { enterDelay } from "@/lib/motion";
 import type { Member } from "@/types";
 
 function Speaker({ member, fallbackName }: { member: Member | null; fallbackName?: string }) {
@@ -56,7 +57,7 @@ export function Presentations() {
 
   return (
     <section className="presentations section-shell" id="presentations">
-      <div className="section-heading">
+      <div className="section-heading enter">
         <div>
           <span className="section-kicker">Talks</span>
           <h2>Upcoming lab presentations.</h2>
@@ -79,7 +80,8 @@ export function Presentations() {
           return (
             <article
               key={`${item.member}-${item.title}-${index}`}
-              className="presentation-card"
+              className="presentation-card enter"
+              style={enterDelay(index, "rows")}
             >
               <span className="presentation-card-number" dir="ltr">{String(index + 1).padStart(2, "0")}</span>
               <div className="presentation-card-body">

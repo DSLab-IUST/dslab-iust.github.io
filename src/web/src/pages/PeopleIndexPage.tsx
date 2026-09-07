@@ -5,14 +5,15 @@ import { Breadcrumbs, EntityLinks } from "@/components/EntityPage";
 import { LAB } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { memberPath } from "@/lib/members";
+import { enterDelay } from "@/lib/motion";
 import { Link } from "@/lib/router";
 import { peopleIndexGraph } from "@/lib/schema";
 import { PATHS, peopleIndexMeta } from "@/lib/site";
 import type { Member } from "@/types";
 
-function NameRow({ member }: { member: Member }) {
+function NameRow({ member, index }: { member: Member; index: number }) {
   return (
-    <li>
+    <li className="enter" style={enterDelay(index, "dense")}>
       <Link to={memberPath(member.name)}>{member.name}</Link>
       <span>{member.role}</span>
     </li>
@@ -58,32 +59,32 @@ export function PeopleIndexPage() {
         <div className="section-shell entity-body">
           {director.length ? (
             <section>
-              <h2>Director</h2>
-              <ul className="entity-name-list">{director.map((member) => <NameRow key={member.name} member={member} />)}</ul>
+              <h2 className="enter">Director</h2>
+              <ul className="entity-name-list">{director.map((member, index) => <NameRow key={member.name} member={member} index={index} />)}</ul>
             </section>
           ) : null}
           {leads.length ? (
             <section>
-              <h2>Core leads</h2>
-              <ul className="entity-name-list">{leads.map((member) => <NameRow key={member.name} member={member} />)}</ul>
+              <h2 className="enter">Core leads</h2>
+              <ul className="entity-name-list">{leads.map((member, index) => <NameRow key={member.name} member={member} index={index} />)}</ul>
             </section>
           ) : null}
           {regular.length ? (
             <section>
-              <h2>Members</h2>
-              <ul className="entity-name-list">{regular.map((member) => <NameRow key={member.name} member={member} />)}</ul>
+              <h2 className="enter">Members</h2>
+              <ul className="entity-name-list">{regular.map((member, index) => <NameRow key={member.name} member={member} index={index} />)}</ul>
             </section>
           ) : null}
           {researchers.length ? (
             <section>
-              <h2>Current researchers</h2>
-              <ul className="entity-name-list">{researchers.map((member) => <NameRow key={member.name} member={member} />)}</ul>
+              <h2 className="enter">Current researchers</h2>
+              <ul className="entity-name-list">{researchers.map((member, index) => <NameRow key={member.name} member={member} index={index} />)}</ul>
             </section>
           ) : null}
           {alumni.length ? (
             <section>
-              <h2>Alumni</h2>
-              <ul className="entity-name-list">{alumni.map((member) => <NameRow key={member.name} member={member} />)}</ul>
+              <h2 className="enter">Alumni</h2>
+              <ul className="entity-name-list">{alumni.map((member, index) => <NameRow key={member.name} member={member} index={index} />)}</ul>
             </section>
           ) : null}
           <EntityLinks />

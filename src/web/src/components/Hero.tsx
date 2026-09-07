@@ -4,6 +4,7 @@ import { LAB, RESEARCH } from "@/config";
 import { useLab } from "@/context/LabContext";
 import { formatNumber } from "@/lib/format";
 import { memberPath } from "@/lib/members";
+import { enterDelay } from "@/lib/motion";
 import { Link } from "@/lib/router";
 
 function StatsRibbon() {
@@ -14,19 +15,19 @@ function StatsRibbon() {
 
   return (
     <div className="stats-ribbon">
-      <article className="stat-card">
+      <article className="stat-card enter" style={enterDelay(0, "dense")}>
         <strong dir="ltr">{members.length ? formatNumber(students) : "—"}</strong>
         <span>Students</span>
       </article>
-      <article className="stat-card">
+      <article className="stat-card enter" style={enterDelay(1, "dense")}>
         <strong dir="ltr">{formatNumber(RESEARCH.length)}</strong>
         <span>Research areas</span>
       </article>
-      <article className="stat-card">
+      <article className="stat-card enter" style={enterDelay(2, "dense")}>
         <strong dir="ltr">{githubStats ? formatNumber(projects) : "—"}</strong>
         <span>Projects</span>
       </article>
-      <article className="stat-card">
+      <article className="stat-card enter" style={enterDelay(3, "dense")}>
         <strong dir="ltr">{githubStats ? formatNumber(commits) : "—"}</strong>
         <span>Commits</span>
       </article>

@@ -18,10 +18,49 @@ const NAV = [
 export function Header() {
   const { orgHref } = useLab();
   const { isLight, toggleTheme } = useTheme();
-  const { path } = useRoute();
+  const { path, route } = useRoute();
+  const isLanding = route.name === "home";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [detached, setDetached] = useState(
+    () => typeof window !== "undefined" && window.scrollY > 8,
+  );
+  const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const inner = header?.querySelector<HTMLElement>(".site-header-inner");
+    if (!header || !inner) return;
+
+    const apply = () => {
+      const border = Number.parseFloat(getComputedStyle(header).borderBottomWidth) || 0;
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${inner.getBoundingClientRect().height + border}px`,
+      );
+    };
+
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(inner);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--header-height");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isLanding) {
+      setDetached(false);
+      return;
+    }
+
+    const sync = () => setDetached(window.scrollY > 8);
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    return () => window.removeEventListener("scroll", sync);
+  }, [isLanding]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -48,10 +87,19 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header${menuOpen ? " is-nav-open" : ""}`} id="top">
+    <header
+      ref={headerRef}
+      className={[
+        "site-header",
+        isLanding ? "is-landing" : "",
+        isLanding && detached ? "is-detached" : "",
+        menuOpen ? "is-nav-open" : "",
+      ].filter(Boolean).join(" ")}
+      id="top"
+    >
       <div className="site-header-inner">
         <Link className="brand" to={PATHS.home} ariaLabel={`${LAB.name} home`}>
-          <BrandLogo />
+          <BrandLogo on={isLanding && !detached && isLight ? "light" : "dark"} />
         </Link>
 
         <nav className="nav-links" aria-label="Primary navigation">
