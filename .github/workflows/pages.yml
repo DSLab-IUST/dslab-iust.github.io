@@ -114,8 +114,24 @@ jobs:
           if git diff --staged --quiet; then
             echo "No generated GitHub stats changes to commit."
           else
-            git commit -m "chore: update generated GitHub stats [skip ci]"
-            git push
+            avatars_changed=false
+            stats_meaningful=true
+            if ! git diff --staged --quiet -- assets/images/avatars/; then
+              avatars_changed=true
+            fi
+            if git show HEAD:data/github-stats.json >/tmp/github-stats.prev.json 2>/dev/null \
+              && diff -q \
+                <(jq -S 'del(.generatedAt, .totalCommits)' /tmp/github-stats.prev.json) \
+                <(jq -S 'del(.generatedAt, .totalCommits)' data/github-stats.json) >/dev/null; then
+              stats_meaningful=false
+            fi
+            if [ "$avatars_changed" = false ] && [ "$stats_meaningful" = false ]; then
+              echo "Only generatedAt and totalCommits changed; skipping commit."
+              git restore --staged data/github-stats.json
+            else
+              git commit -m "chore: update generated GitHub stats [skip ci]"
+              git push
+            fi
           fi
 
       - name: Build site
