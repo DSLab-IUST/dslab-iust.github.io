@@ -1,9 +1,10 @@
-import { createReadStream, cpSync, existsSync, mkdirSync, statSync } from "node:fs";
+import { createReadStream, cpSync, existsSync, mkdirSync, statSync, writeFileSync } from "node:fs";
 import { extname, relative, resolve, sep } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { seoPrerender } from "./seo-prerender";
+import { webAppManifestJson } from "./src/lib/manifest";
 
 const repoRoot = resolve(__dirname, "../..");
 
@@ -16,6 +17,7 @@ const MIME: Record<string, string> = {
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
+  ".webmanifest": "application/manifest+json",
 };
 
 function isInside(root: string, file: string) {
@@ -64,6 +66,7 @@ function copyRepoStatic(): Plugin {
     if (existsSync(assetsDir)) {
       cpSync(assetsDir, resolve(publicDir, "assets"), { recursive: true });
     }
+    writeFileSync(resolve(publicDir, "manifest.webmanifest"), webAppManifestJson(), "utf8");
   };
 
   return {

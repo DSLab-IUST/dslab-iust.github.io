@@ -1,4 +1,4 @@
-import { LAB, SITE } from "../config";
+import { BRAND, LAB, SITE, SITE_NAME } from "../config";
 import { isAlumni, memberNowLine, memberPath, memberPhotoPath, memberSlug } from "./members";
 import type { Member, GithubStats } from "../types";
 
@@ -53,12 +53,14 @@ export interface PageMeta {
   keywords?: string[];
 }
 
+export const BRAND_LOGO_URL = assetUrl(BRAND.logo);
+
 export function homeMeta(): PageMeta {
   return {
-    title: `${LAB.name} — ${LAB.fullName} at ${LAB.universityShort}`,
+    title: SITE_NAME,
     description: `${LAB.fullName} (${LAB.name}) at ${LAB.university}, directed by ${LAB.director}. Research in distributed operating systems, HPC, cloud, CEP, WSAN, and computer security.`,
     path: PATHS.home,
-    image: assetUrl("assets/images/mohsen-sharifi.jpg"),
+    image: BRAND_LOGO_URL,
     keywords: [
       LAB.name, LAB.fullName, LAB.nameFa, LAB.university, LAB.universityFa, LAB.universityShort,
       LAB.director, LAB.directorFa, "distributed systems lab", "distributed operating systems",
@@ -71,7 +73,7 @@ export function labMeta(): PageMeta {
     title: `${LAB.fullName} (${LAB.name}) — ${LAB.universityShort}`,
     description: `${LAB.fullName} is a research laboratory at the ${LAB.school}, ${LAB.university}. Directed by ${LAB.director} since ${LAB.foundingYear}.`,
     path: PATHS.lab,
-    image: assetUrl("assets/images/mohsen-sharifi.jpg"),
+    image: BRAND_LOGO_URL,
     keywords: [LAB.name, LAB.fullName, LAB.nameFa, "DSLab", "distributed systems laboratory", LAB.director],
   };
 }
@@ -81,7 +83,7 @@ export function researchMeta(): PageMeta {
     title: `Research — ${LAB.name}`,
     description: `Research areas at ${LAB.fullName} (${LAB.name}): high-performance computing, distributed systems, cloud computing, complex event processing, wireless sensor-actor networks, and computer security.`,
     path: PATHS.research,
-    image: assetUrl("assets/images/mohsen-sharifi.jpg"),
+    image: BRAND_LOGO_URL,
     keywords: [LAB.name, LAB.fullName, "distributed systems research", "HPC", "cloud computing", "WSAN"],
   };
 }
@@ -91,7 +93,7 @@ export function publicationsMeta(): PageMeta {
     title: `Publications — ${LAB.name}`,
     description: `Selected journal and conference papers from ${LAB.fullName} (${LAB.name}) at ${LAB.universityShort}, with DOIs when they are available.`,
     path: PATHS.publications,
-    image: assetUrl("assets/images/mohsen-sharifi.jpg"),
+    image: BRAND_LOGO_URL,
     keywords: [LAB.name, LAB.fullName, "publications", "research papers", "distributed systems", "HPC"],
   };
 }
@@ -101,6 +103,7 @@ export function peopleIndexMeta(): PageMeta {
     title: `People — ${LAB.name} researchers, students and alumni`,
     description: `Directory of ${LAB.fullName} at ${LAB.university}: ${LAB.director}, current researchers, students and alumni of ${LAB.name}.`,
     path: PATHS.people,
+    image: BRAND_LOGO_URL,
     keywords: [LAB.director, LAB.directorFa, "DSLab CE-IUST members", "distributed systems researchers CE-IUST"],
   };
 }

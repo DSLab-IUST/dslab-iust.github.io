@@ -1,4 +1,4 @@
-import { LAB, RESEARCH, SITE } from "../config";
+import { BRAND, LAB, RESEARCH, SITE, SITE_NAME } from "../config";
 import {
   PATHS,
   absoluteUrl,
@@ -45,6 +45,15 @@ function labNode(members: Member[] = []) {
     name: LAB.fullName,
     alternateName: [LAB.name, LAB.nameFa, "DSLab", "Distributed Systems Research Laboratory"],
     url: absoluteUrl(PATHS.lab),
+    logo: {
+      "@type": "ImageObject",
+      url: assetUrl(BRAND.logo),
+      contentUrl: assetUrl(BRAND.logo),
+      width: 800,
+      height: 800,
+      caption: SITE_NAME,
+    },
+    image: assetUrl(BRAND.logo),
     parentOrganization: { "@id": universityId },
     department: LAB.school,
     email: LAB.email,
@@ -69,8 +78,8 @@ function websiteNode() {
   return {
     "@type": "WebSite",
     "@id": `${SITE.origin}/#website`,
-    name: LAB.name,
-    alternateName: [LAB.fullName, LAB.nameFa],
+    name: SITE_NAME,
+    alternateName: [LAB.fullName, LAB.name, LAB.nameFa, "DSLab"],
     url: SITE.origin,
     inLanguage: ["en", "fa"],
     publisher: { "@id": `${absoluteUrl(PATHS.lab)}#lab` },
@@ -204,7 +213,7 @@ export function homeGraph(members: Member[]) {
     labNode(members),
     universityNode(),
     ...members.filter((member) => member.leadership === "director").map(personNode),
-    breadcrumb([{ name: LAB.name, path: PATHS.home }]),
+    breadcrumb([{ name: SITE_NAME, path: PATHS.home }]),
     faq(homeFaqs()),
   ]);
 }

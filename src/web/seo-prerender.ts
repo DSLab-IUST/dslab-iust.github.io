@@ -3,8 +3,9 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
-import { LAB, SITE } from "./src/config";
+import { LAB, SITE, SITE_NAME } from "./src/config";
 import { memberPath, memberPhotoPath, memberSlug, applyAlumniLinkedinPhotos } from "./src/lib/members";
+import { webAppManifestJson } from "./src/lib/manifest";
 import {
   homeGraph,
   labGraph,
@@ -17,6 +18,7 @@ import {
 import {
   absoluteUrl,
   assetUrl,
+  BRAND_LOGO_URL,
   homeMeta,
   labMeta,
   memberMeta,
@@ -97,13 +99,15 @@ function injectHead(html: string, meta: PageMeta, jsonLd: unknown, article: stri
     `<meta property="og:description" content="${escapeHtml(meta.description)}" />`,
     `<meta property="og:type" content="${meta.type === "profile" ? "profile" : "website"}" />`,
     `<meta property="og:url" content="${canonical}" />`,
-    `<meta property="og:site_name" content="${LAB.name}" />`,
+    `<meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />`,
     `<meta property="og:locale" content="en_US" />`,
     `<meta property="og:locale:alternate" content="${SITE.localeFa}" />`,
     meta.image ? `<meta property="og:image" content="${escapeHtml(meta.image)}" />` : "",
+    meta.image ? `<meta property="og:image:alt" content="${escapeHtml(meta.title)}" />` : "",
     `<meta name="twitter:card" content="summary" />`,
     `<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
+    meta.image ? `<meta name="twitter:image" content="${escapeHtml(meta.image)}" />` : "",
     `<script type="application/ld+json" id="json-ld-graph">${serializeJsonLd(jsonLd)}</script>`,
   ].filter(Boolean).join("\n    ");
 
@@ -312,13 +316,14 @@ function buildSitemapEntries(members: Member[], githubStats?: GithubStats | null
   const peopleLastmod = gitLastmod("data/members.json", "src/web/src/pages/PeopleIndexPage.tsx", "src/web/src/pages/MemberPage.tsx") ?? pushedAt;
 
   const director = members.find((member) => member.leadership === "director");
-  const homeImage = director?.photo
-    ? [{ loc: assetUrl(director.photo), title: director.name }]
-    : undefined;
+  const homeImages = [
+    { loc: BRAND_LOGO_URL, title: SITE_NAME },
+    ...(director?.photo ? [{ loc: assetUrl(director.photo), title: director.name }] : []),
+  ];
 
   return [
-    { path: "/", lastmod: homeLastmod, images: homeImage },
-    { path: "/lab", lastmod: labLastmod, images: homeImage },
+    { path: "/", lastmod: homeLastmod, images: homeImages },
+    { path: "/lab", lastmod: labLastmod, images: homeImages },
     { path: "/research", lastmod: researchLastmod },
     { path: "/publications", lastmod: publicationsLastmod },
     { path: "/people", lastmod: peopleLastmod },
@@ -367,6 +372,7 @@ function writeCrawlerFiles(outDir: string, members: Member[], githubStats?: Gith
   writeFileSync(resolve(outDir, "sitemap-people.xml"), files.sitemapPeople, "utf8");
   writeFileSync(resolve(outDir, "sitemap.txt"), files.sitemapTxt, "utf8");
   writeFileSync(resolve(outDir, "llms.txt"), files.llms, "utf8");
+  writeFileSync(resolve(outDir, "manifest.webmanifest"), webAppManifestJson(), "utf8");
 }
 
 export function seoPrerender(): Plugin {
@@ -387,6 +393,7 @@ export function seoPrerender(): Plugin {
         ["sitemap-people.xml", files.sitemapPeople],
         ["sitemap.txt", files.sitemapTxt],
         ["llms.txt", files.llms],
+        ["manifest.webmanifest", webAppManifestJson()],
       ];
       for (const [fileName, source] of assets) {
         this.emitFile({ type: "asset", fileName, source });

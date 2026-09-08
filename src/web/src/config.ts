@@ -54,6 +54,22 @@ export const LAB = {
   schoolUrl: "https://ce.iust.ac.ir/",
 } as const;
 
+/** Homepage title and Google site name. */
+export const SITE_NAME = `${LAB.fullName} | ${LAB.universityShort}` as const;
+
+export const BRAND = {
+  logo: "/assets/images/logo/logo.png",
+  favicon: "/assets/favicon.png",
+  appleTouchIcon: "/assets/apple-touch-icon.png",
+  icon48: "/assets/icons/icon-48.png",
+  icon96: "/assets/icons/icon-96.png",
+  icon192: "/assets/icons/icon-192.png",
+  icon512: "/assets/icons/icon-512.png",
+  maskable192: "/assets/icons/icon-maskable-192.png",
+  maskable512: "/assets/icons/icon-maskable-512.png",
+  manifest: "/manifest.webmanifest",
+} as const;
+
 export const RESEARCH = [
   {
     name: "High Performance Computing",
