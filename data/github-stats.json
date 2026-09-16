@@ -1,21 +1,27 @@
 {
   "organization": "DSLab-IUST",
-  "generatedAt": "2026-09-08T10:12:52.465Z",
+  "generatedAt": "2026-09-16T11:37:07.636Z",
   "windowDays": 90,
   "repoCount": 1,
-  "totalCommits": 62,
+  "totalCommits": 67,
   "activeContributors": [
     {
       "login": "MatinGhanbari",
       "name": "Matin Ghanbari",
       "avatar_url": "assets/images/avatars/MatinGhanbari.jpg",
-      "commits": 50
+      "commits": 51
     },
     {
       "login": "SArshiaK",
       "name": "SArshiaK",
       "avatar_url": "assets/images/avatars/SArshiaK.jpg",
       "commits": 4
+    },
+    {
+      "login": "SinaMah",
+      "name": "Sina Mahboobipour",
+      "avatar_url": "assets/images/avatars/SinaMah.jpg",
+      "commits": 2
     }
   ],
   "repositories": [],
@@ -30,6 +36,17 @@
       "location": "Tehran, Iran",
       "blog": "",
       "public_repos": 31
+    },
+    "SinaMah": {
+      "login": "SinaMah",
+      "name": "Sina Mahboobipour",
+      "avatar_url": "assets/images/avatars/SinaMah.jpg",
+      "html_url": "https://github.com/SinaMah",
+      "bio": null,
+      "company": null,
+      "location": "Tehran",
+      "blog": "sinamah.github.io",
+      "public_repos": 2
     },
     "SArshiaK": {
       "login": "SArshiaK",
