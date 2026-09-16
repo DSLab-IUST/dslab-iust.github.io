@@ -1,16 +1,4 @@
-/* =========================================================
-   DSLab IUST — v7 · 2026
-   Instrument Serif + Inter Tight · layered glass cards
-   Richer palette · 68px brand · enhanced dark
-   PERF PASS: no per-card backdrop-filter, no fixed bg,
-   no blur() on orbs, transform/opacity-only motion.
-   ========================================================= */
-
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap");
-
-/* =========================================================
-   1. Tokens
-   ========================================================= */
 
 :root,
 html[data-theme="light"] {
