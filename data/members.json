@@ -50,6 +50,20 @@
     ]
   },
   {
+    "name": "Sina Mahboobipour",
+    "role": "Researcher",
+    "cardFooter": "Researcher",
+    "leadership": "member",
+    "github": "SinaMah",
+    "linkedin": "https://www.linkedin.com/in/SinaMahp/",
+    "photo": "",
+    "bio": "Add a short research bio here.",
+    "degree": "msc",
+    "focus": [
+      "Distributed Systems, Cloud Computing"
+    ]
+  },
+  {
     "name": "Amir Mohammad Kahfi",
     "role": "Researcher",
     "cardFooter": "Researcher",
